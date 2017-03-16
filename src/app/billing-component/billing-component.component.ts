@@ -18,6 +18,7 @@ import {Test} from './../providers/test.service';
 })
 export class BillingComponentComponent implements OnInit {
 title='Billing';
+result:any;
 weg:Weg[];
 userID:any;
 
@@ -57,14 +58,32 @@ getUserID(key)
       {
 
 
-      var hai= this.provider.firebase().subscribe(
-data=> {console.log(data);
-      },
-      err=>{
-      console.log(err);
-      },
-() => { console.log("done") }
-      );
+        var hai= this.provider.firebase()
+        .map(
+        res=>
+        {
+        console.log("1 -"+res.text());
+        this.result=res.text();
+        }
+        )
+        .subscribe
+        (
+          data=> 
+          {
+            console.log(data);
+            //this.result=data;
+
+
+          },
+          err=>
+          {
+            console.log(err);
+          },
+          () => 
+          { 
+          console.log("done") 
+          }
+        );
      
     
       }
