@@ -18,7 +18,8 @@ export class RegComponent {
   register(event, name, email, password) {
     event.preventDefault();
     this.afService.registerUser(email, password).then((user) => {
-    this.submitID('user-key',user.uid);
+    //this.submitID('user-key',user.uid);
+    this.setFlag();
     console.log(user.uid);
       this.afService.saveUserInfoFromForm(user.uid, name, email).then(() => {
 
@@ -35,8 +36,15 @@ export class RegComponent {
   }
 
 
-  submitID(key, val) 
+  /*submitID(key, val) 
       {
           return this.localStorageService.set(key, val);
+      } */
+
+      setFlag() 
+      {
+          return this.localStorageService.set("flag", 1);
       }
+
+
 }
