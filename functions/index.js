@@ -33,7 +33,7 @@ const express = require('express');
 const cors = require('cors')({origin: true});
 const app = express();
 var num=1;
-var userID = ["c2N0mLPV8gfzkgxC1qHwuQuE1w63"];
+var userID = [];
 var validUser=0;
 
 
