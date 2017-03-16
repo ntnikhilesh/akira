@@ -1,4 +1,4 @@
-/*
+
 * {
     box-sizing: border-box;
 }
@@ -12,12 +12,12 @@
     padding: 15px;
 }
 
-/* For mobile phones: */ /*
+/* For mobile phones: */ 
 [class*="col-"] {
     width: 100%;
 }
 @media only screen and (min-width: 600px) {
-    /* For tablets: */ /*
+    /* For tablets: */ 
     .col-m-1 {width: 8.33%;}
     .col-m-2 {width: 16.66%;}
     .col-m-3 {width: 25%;}
@@ -32,7 +32,7 @@
     .col-m-12 {width: 100%;}
 }
 @media only screen and (min-width: 768px) {
-    /* For desktop: */ /*
+    /* For desktop: */ 
     .col-1 {width: 8.33%;}
     .col-2 {width: 16.66%;}
     .col-3 {width: 25%;}
@@ -80,9 +80,9 @@
   font-size: 16px;
 } 
 
-*/
 
 
+/*
 
 .registermodal-container {
   padding: 30px;
@@ -101,3 +101,4 @@
   font-family: roboto;
 }
 
+*/

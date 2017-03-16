@@ -38,6 +38,7 @@ import { StoreInfoComponent } from './store-info/store-info.component';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
 import { DeviceStatusComponent } from './device-status/device-status.component';
 import { ContactComponent } from './contact/contact.component';
+import { Test } from './providers/test.service';
 
 import {FirebaseService} from './services/firebase.service';
 

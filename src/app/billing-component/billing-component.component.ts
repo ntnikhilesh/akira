@@ -7,17 +7,21 @@ import {AngularFire} from 'angularfire2';
 
 import { LocalStorageService } from 'angular-2-local-storage';
 
+import { Http, Response } from '@angular/http';
+import {Test} from './../providers/test.service';
+
 @Component({
   selector: 'app-billing-component',
   templateUrl: './billing-component.component.html',
-  styleUrls: ['./billing-component.component.css']
+  styleUrls: ['./billing-component.component.css'],
+  providers: [Test]
 })
 export class BillingComponentComponent implements OnInit {
 title='Billing';
 weg:Weg[];
 userID:any;
 
-  constructor(private wegService:WegService,public af:AngularFire,private localStorageService: LocalStorageService) { }
+  constructor(private wegService:WegService,public af:AngularFire,private localStorageService: LocalStorageService,private http: Http,public provider:Test) { }
 
   ngOnInit() {
   this.userID=this.getUserID('user-key');
@@ -47,6 +51,22 @@ getUserID(key)
       {
           console.log('User ID='+this.localStorageService.get(key));
           return this.localStorageService.get(key);
+      }
+
+      executeURL()
+      {
+
+
+      var hai= this.provider.firebase().subscribe(
+data=> {console.log(data);
+      },
+      err=>{
+      console.log(err);
+      },
+() => { console.log("done") }
+      );
+     
+    
       }
 
 }
