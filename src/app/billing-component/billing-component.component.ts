@@ -29,13 +29,21 @@ flag:any;
 
   ngOnInit() {
   this.userID=firebase.auth().currentUser.uid;
-  this.flag=this.getFlag();
-  this.checkBrowser();
-  this.getWeg();
-  this.executeCF(this.userID,this.flag);
+  //this.flag=this.getFlag();
+  //this.checkBrowser();
+  //this.getWeg();
+  //this.executeCF(this.userID,this.flag);
   }
 
-  getWeg():void {
+
+
+
+
+
+
+
+  getWeg():void 
+  {
  this.wegService.getWeg().then(weg=>this.weg=weg);
  }
 
@@ -73,7 +81,30 @@ checkBrowser()
 
 
 
-      executeCF(uid,flag)
+
+      executeURL()
+      {
+         var hai= this.provider.firebase()
+        .map(
+        res=>
+        {
+            console.log("Result = "+res.text());
+            this.result=res.text();
+        }
+        )
+         .subscribe
+         (
+            data => console.log(data),
+            err => console.log(err),
+            () => console.log('Done')
+         );
+          
+
+      }
+
+
+
+      /*executeCF(uid,flag)
       {
         console.log(uid+"------"+flag);
         var hai= this.provider.firebase1(uid,flag)
@@ -102,11 +133,11 @@ checkBrowser()
           console.log("done") 
           }
         );
-      }
+      }*/
 
 
 
-      executeURL()
+     /* executeURL()
       {
 
 
@@ -138,7 +169,7 @@ checkBrowser()
         );
      
     
-      }
+      } */
 
      
 

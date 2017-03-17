@@ -27,7 +27,41 @@ flag:any;
 
 
 
-firebase(){
+firebase()
+{
+
+	let authHeader = new Headers();
+	this.userID=firebase.auth().currentUser.uid;
+	console.log('UID form srvice = '+this.userID);
+
+	authHeader.append('Authorization', 'Bearer ' + this.userID);
+
+	 return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/helloWorld', {
+    headers: authHeader
+  })
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/*
 
 	this.userID=firebase.auth().currentUser.uid;
 
@@ -40,6 +74,8 @@ firebase(){
 	//return this.http.get("https://us-central1-td-demo-df34d.cloudfunctions.net/authorizedHello");
 
 	return this.http.get("https://us-central1-td-demo-df34d.cloudfunctions.net/helloWorld?id="+this.userID);
+
+	*/
 
 
 }
