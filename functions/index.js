@@ -46,8 +46,9 @@ var flag=request.query.flag
 
 if(flag==1)
 {
+
 	userID.push(param);
-	response.send("Total user="+userID.length);
+	//response.send("Total user="+userID.length);
 }
 
 if(flag==2)

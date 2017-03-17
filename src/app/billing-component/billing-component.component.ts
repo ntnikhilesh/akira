@@ -41,9 +41,15 @@ flag:any;
 
  logout()
 {
+        this.setFlag();
         this.af.auth.logout();
         console.log('Logout succ..');
 }
+
+setFlag() 
+      {
+          return this.localStorageService.set("flag", 1);
+      }
 
 checkBrowser()
 {
