@@ -34,9 +34,9 @@ firebase()
 	this.userID=firebase.auth().currentUser.uid;
 	console.log('UID form srvice = '+this.userID);
 
-	authHeader.append('Authorization', 'Bearer ' + this.userID);
+	authHeader.append('Authorization',this.userID);
 
-	 return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/helloWorld', {
+	 return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/test', {
     headers: authHeader
   })
   

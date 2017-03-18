@@ -48,9 +48,9 @@ let result;
 //   })
 
 exports.test=functions.https.onRequest((request, response) => {
-const idToken = request.headers.authorization.split('Bearer ')[1];
-console.log("UID from CF="+idToken)
-response.send("UID from CF="+idToken);
+//const idToken = request.headers.authorization.split('Bearer ')[1];
+console.log("UID from CF1="+request.headers.authorization)
+response.send("UID from CF2="+request.headers.authorization);
 // admin.auth()
 //   .then(function() {
 //   response.send(request.user);
