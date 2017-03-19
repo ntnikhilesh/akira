@@ -13,7 +13,7 @@ import {WegService} from './services/weg.service';
 //import { WegComponent } from './weg/weg.component';
 
 
-import { MainTabDetailComponent } from './main-tab-detail/main-tab-detail.component';
+
 
 import {RoutingModule} from './routing.module';
 
@@ -35,14 +35,14 @@ import { AngularFireOfflineModule } from 'angularfire2-offline';
 //Auth
 
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
-import { ObillingComponentComponent } from './obilling-component/obilling-component.component';
-import { OmainTabDetailComponent } from './omain-tab-detail/omain-tab-detail.component';
+
 
 
 //Local storage
 
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { RegComponent } from './reg/reg.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 const firebaseAuthConfig = {
@@ -67,16 +67,17 @@ export const firebaseConfig = {
     
     
     
-    MainTabDetailComponent,
+    
     
     
     BillingComponentComponent,
     LoginComponent,
     
-    ObillingComponentComponent,
-    OmainTabDetailComponent,
+    
     
     RegComponent,
+    
+    DashboardComponent,
     
     
   ],

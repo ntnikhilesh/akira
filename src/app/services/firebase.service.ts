@@ -27,26 +27,13 @@ export class FirebaseService
    
 
 
-    getafoListings()
-    {
-       this.olistings=this.afo.database.list('/listings') as AfoListObservable<Listing[]>
-        return this.olistings
-
-    }
+    
 
 
 
 
 
-    getoListingDetails(id)
-    {
-
-        this.olisting=this.afo.database.object('/listings/'+id) as AfoObjectObservable<Listing>
-
-
-        return this.olisting;
-
-    }
+    
 
 
 
@@ -55,45 +42,11 @@ export class FirebaseService
 
   
 
-    updateOffImageURL(id,url)
-    {
-      //console.log(id+"and "+url);
-      const itemObservable = this.af.database.object('/listings/'+id);
-      itemObservable.update({ imageUrl: url });
-    }
+    
 
    
 
-   oaddListing(listing)
-    {
-
-    
-    
-    //this.num=this.num+1;
-
-      //Create root ref
-
-      let storageRef=firebase.storage().ref();
-
-      for(let selectedFile of [(<HTMLInputElement>document.getElementById('image')).files[0]])
-      {
-
-
-        let path='/TD-images/'+Math.random();
-        let iRef=storageRef.child(path);
-        iRef.put(selectedFile).then((snapshot)=>
-        {
-           listing.image=selectedFile.name;
-           listing.path=path;
-           listing.imageUrl='CC';
-           console.log('offline adding');
-           return this.olistings.push(listing);
-
-        }); 
-
-      } 
-
-  }
+  
 
 
 
@@ -165,15 +118,3 @@ export class FirebaseService
 
 }
 
-interface Listing
-{
-	$key?:string;
-	name?:string;
-	category?:string;
-	unit?:string;
-	image?:string;
-	printname?:string;
-	
-	price?:string;
-
-}

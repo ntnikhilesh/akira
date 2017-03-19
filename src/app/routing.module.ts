@@ -4,7 +4,7 @@
 
  
 
- import {MainTabDetailComponent} from './main-tab-detail/main-tab-detail.component';
+ 
  
 
  import {BillingComponentComponent} from './billing-component/billing-component.component';
@@ -20,10 +20,12 @@ const routes:Routes=[
 {path:'',redirectTo:'/login',pathMatch:'full'},
 {path:'login',component:LoginComponent},
 
-{path:'mainTab',component:MainTabDetailComponent},
+
 
 {path:'billing',component:BillingComponentComponent},
 {path:'register',component:RegComponent},
+
+   
 
 
 	
