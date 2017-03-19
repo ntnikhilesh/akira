@@ -19,17 +19,17 @@ console.log("UID from CF1="+request.headers.authorization)
 
 
 
- response.send("Valid User");
+ response.send("Please check your log");
 
 
 this.mresult =admin.auth().verifyIdToken(request.headers.authorization).then(decodedIdToken => {
     console.log('ID Token correctly decoded', decodedIdToken);
     request.user = decodedIdToken;
-    console.log("result form cf decoded done")
+    console.log("Valid User")
    return 'Valid user';
   }).catch(error => {
     console.error('Error while verifying Firebase ID token:', error);
-    response.status(403).send('Unauthorized456');
+    response.status(403).send('Unauthorized User');
     return 'Invalid user'
   });
 
