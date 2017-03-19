@@ -51,6 +51,18 @@ exports.test=functions.https.onRequest((request, response) => {
 //const idToken = request.headers.authorization.split('Bearer ')[1];
 console.log("UID from CF1="+request.headers.authorization)
 response.send("UID from CF2="+request.headers.authorization);
+
+
+admin.auth().verifyIdToken(request.headers.authorization).then(decodedIdToken => {
+    console.log('ID Token correctly decoded', decodedIdToken);
+    request.user = decodedIdToken;
+    console.log("result form cf decoded done")
+    //response.send(request.user);
+  }).catch(error => {
+    console.error('Error while verifying Firebase ID token:', error);
+    response.status(403).send('Unauthorized456');
+  });
+
 // admin.auth()
 //   .then(function() {
 //   response.send(request.user);

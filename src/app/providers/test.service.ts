@@ -6,6 +6,8 @@ import { Headers, RequestOptions } from '@angular/http';
 import * as firebase from 'firebase';
 
 import { LocalStorageService } from 'angular-2-local-storage';
+
+import * as admin from "firebase-admin";
 declare var $:any;
 //declare var userID:any;
 
@@ -27,14 +29,18 @@ flag:any;
 
 
 
-firebase()
+firebase(mtoken)
 {
 
-	let authHeader = new Headers();
-	this.userID=firebase.auth().currentUser.uid;
-	console.log('UID form srvice = '+this.userID);
+	//this.initializeSDK();
+	//this.getJWTToken();
 
-	authHeader.append('Authorization',this.userID);
+
+	 let authHeader = new Headers();
+	//this.userID=firebase.auth().currentUser.getToken(true);
+	console.log( 'token form srvice = '+mtoken);
+
+	authHeader.append('Authorization',mtoken);
 
 	 return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/test', {
     headers: authHeader
@@ -79,6 +85,51 @@ firebase()
 
 
 }
+
+// initialzeSDK()
+// {
+// 	var serviceAccount = require("path/to/serviceAccountKey.json");
+
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+//   databaseURL: "https://td-demo-df34d.firebaseio.com"
+// });
+// }
+
+// getJWTToken()
+// {
+
+
+// 	this.af.auth.subscribe(auth => {
+//         if(auth) {
+//             console.log('You are authenticated', auth)
+//         } else {
+//             console.log('You are not authenticated')
+//         }
+
+//     });
+		
+// 		// firebase.auth().currentUser.getToken().then(function(token) {
+//   //   console.log('Sending request to', this.helloFunctionUrl, 'with ID token', token);
+
+
+// // 	firebase.auth().currentUser.getToken.then(function(idToken) 
+// // 	{
+// // 		this.userId=idToken;
+
+// // 	console.log("Token in service="+idToken);	
+
+// //   // Send token to your backend via HTTPS
+// //   // ...
+
+
+// // }).catch(function(error) {
+	
+// // 	console.log("JWT error"+error)
+
+// //   // Handle error
+// // });
+// }
 
 
 firebase1(uid,flag){

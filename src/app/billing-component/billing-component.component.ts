@@ -24,11 +24,24 @@ result:any;
 weg:Weg[];
 userID:any;
 flag:any;
+error:any;
 
   constructor(private wegService:WegService,public af:AngularFire,private localStorageService: LocalStorageService,private http: Http,public provider:Test) { }
 
   ngOnInit() {
-  this.userID=firebase.auth().currentUser.uid;
+  firebase.auth().currentUser.getToken(true).then((idToken) => {
+    
+    console.log("id token in BC1"+idToken);
+    this.userID=idToken;
+    
+    })
+      .catch((error) => {
+        this.error = error;
+        console.log(this.error);
+      });
+
+  //this.userID=this.getToken();
+
   //this.flag=this.getFlag();
   //this.checkBrowser();
   //this.getWeg();
@@ -36,7 +49,19 @@ flag:any;
   }
 
 
+getToken()
+{
 
+
+  // this.af.auth.subscribe(auth => {
+  //       if(auth) {
+  //           console.log('You are authenticated'+auth)
+  //       } else {
+  //           console.log('You are not authenticated')
+  //       }
+
+  //   });
+}
 
 
 
@@ -84,11 +109,11 @@ checkBrowser()
 
       executeURL()
       {
-         var hai= this.provider.firebase()
+         var hai= this.provider.firebase(this.userID)
         .map(
         res=>
         {
-            console.log("Result = "+res.text());
+            console.log("Result in BC= "+res.text());
             this.result=res.text();
         }
         )
