@@ -15,24 +15,50 @@ exports.test = functions.https.onRequest((request, response) =>
 
   cors(request, response, () => 
   {
-    console.log('inside cors')
 
 
-    //verify token
+    var MongoClient = require('mongodb').MongoClient
+  , assert = require('assert');
 
-      admin.auth().verifyIdToken(request.headers.authorization).then(decodedIdToken => 
-      {
-          console.log('ID Token correctly decoded', decodedIdToken);
-          request.user = decodedIdToken;
-          console.log("Valid User")
-          response.send("Valid user")
-      }).catch(error => 
-      {
-        console.error('Error while verifying Firebase ID token:', error);
+// Connection URL
+var url = 'mongodb://cc:cc123@ds135800.mlab.com:35800/mydb';
+
+// Use connect method to connect to the server
+MongoClient.connect(url, function(err, db) {
+  assert.equal(null, err);
+  console.log("Connected successfully to server");
+
+  db.close();
+  response.send("Connected successfully to server")
+});
+
+
     
-        response.send("Invalid user")
+
+
+
+
+    // console.log('inside cors')
+
+
+    // //verify token
+
+    //   admin.auth().verifyIdToken(request.headers.authorization).then(decodedIdToken => 
+    //   {
+    //       console.log('ID Token correctly decoded', decodedIdToken);
+    //       request.user = decodedIdToken;
+    //       console.log("Valid User")
+
+          
+
+    //       response.send("Valid user")
+    //   }).catch(error => 
+    //   {
+    //     console.error('Error while verifying Firebase ID token:', error);
     
-      });
+    //     response.send("Invalid user")
+    
+    //   });
 
   });
 
