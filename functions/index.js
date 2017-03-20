@@ -96,33 +96,68 @@ exports.test = functions.https.onRequest((request, response) =>
 cors(request, response, () => 
   {
 
-    console.log("hi form c2")
-
-    //response.send("2 fun executed...")
 
 
-    var MongoClient = require('mongodb').MongoClient
-  , assert = require('assert');
+    //verify token
 
-// Connection URL
-var url = 'mongodb://cc:cc123@ds135800.mlab.com:35800/mydb';
-// Use connect method to connect to the server
-MongoClient.connect(url, function(err, db) {
-  assert.equal(null, err);
-  console.log("Connected successfully to server");
+      admin.auth().verifyIdToken(request.headers.authorization).then(decodedIdToken => 
+      {
+          console.log('ID Token correctly decoded', decodedIdToken);
+          request.user = decodedIdToken;
+          console.log("Valid User")
 
-insertDocuments(db,function(err,docs){
-  if(err)
-    response.send(err)
-  else
-    response.send(docs)
-})
+          
+          setConnection(function(result)
+          {
+            response.send(result);
+          })
 
 
+          //response.send("Valid user")
+      }).catch(error => 
+      {
+        console.error('Error while verifying Firebase ID token:', error);
+    
+        response.send("Invalid user")
+    
+      });
+
+ 
+
+
+    // setConnection(function(result)
+    // {
+    //   response.send(result);
+    // })
 
 
 
-});
+
+  //   console.log("hi form c2")
+
+  //   //response.send("2 fun executed...")
+
+
+  //   var MongoClient = require('mongodb').MongoClient
+  // , assert = require('assert');
+
+  //   // Connection URL
+  //   var url = 'mongodb://cc:cc123@ds135800.mlab.com:35800/mydb';
+  //   // Use connect method to connect to the server
+  //   MongoClient.connect(url, function(err, db) 
+  //   {
+  //       assert.equal(null, err);
+  //       console.log("Connected successfully to server");
+
+  //       insertDocuments(db,function(err,docs)
+  //       {
+  //           if(err)
+  //             response.send(err)
+  //           else
+  //             response.send(docs)
+  //       })
+
+  //   });
 
 
 
@@ -135,13 +170,49 @@ insertDocuments(db,function(err,docs){
 })
 
 
+function setConnection(callback)
+{
+
+
+    console.log("hi form c2")
+
+    //response.send("2 fun executed...")
+
+
+    var MongoClient = require('mongodb').MongoClient
+  , assert = require('assert');
+
+    // Connection URL
+    var url = 'mongodb://cc:cc123@ds135800.mlab.com:35800/mydb';
+    // Use connect method to connect to the server
+    MongoClient.connect(url, function(err, db) 
+    {
+        assert.equal(null, err);
+        console.log("Connected successfully to server");
+
+        insertDocuments(db,function(err,docs)
+        {
+            if(err)
+              callback(err)
+              //response.send(err)
+            else
+              callback(docs)
+              //response.send(docs)
+        })
+
+    });
+
+
+}
+
+
 
 function insertDocuments(db, callback) {
   // Get the documents collection
   var collection = db.collection('documents');
   // Insert some documents
   collection.insertMany([
-    {a : 1}, {a : 2}, {a : 3}
+    {d : 1}, {e : 2}, {f : 3}
   ], function(err, result) {
     if(err)
       callback(err);
