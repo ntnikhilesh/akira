@@ -118,4 +118,65 @@ checkBrowser()
 
 
 
+   
+
+   updateDB()
+   {
+     var hai= this.provider.firebaseUpdateDB(this.userToken)
+        .map(
+        res=>
+        {
+            console.log("Result in BC= "+res.text());
+            this.result=res.text();
+        }
+        )
+         .subscribe
+         (
+            data => console.log(data),
+            err => console.log(err),
+            () => console.log('Done')
+         );
+   }
+
+
+   deleteDB()
+   {
+     var hai= this.provider.firebaseDeleteDB(this.userToken)
+        .map(
+        res=>
+        {
+            console.log("Result in BC= "+res.text());
+            this.result=res.text();
+        }
+        )
+         .subscribe
+         (
+            data => console.log(data),
+            err => console.log(err),
+            () => console.log('Done')
+         );
+   }
+
+
+
+   findAll()
+   {
+     var hai= this.provider.firebaseFindAll(this.userToken)
+        .map(
+        res=>
+        {
+            console.log("Result in BC= "+res.text());
+            this.result=res.text();
+        }
+        )
+         .subscribe
+         (
+            data => console.log(data),
+            err => console.log(err),
+            () => console.log('Done')
+         );
+   }
+
+
+
 }
