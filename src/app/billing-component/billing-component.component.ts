@@ -11,6 +11,7 @@ import { Http, Response } from '@angular/http';
 import {Test} from './../providers/test.service';
 
 import * as firebase from 'firebase';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-billing-component',
@@ -27,7 +28,7 @@ export class BillingComponentComponent implements OnInit
   flag:any;
   error:any;
 
-  constructor(private wegService:WegService,public af:AngularFire,private localStorageService: LocalStorageService,private http: Http,public provider:Test) { }
+  constructor(private wegService:WegService,public af:AngularFire,private localStorageService: LocalStorageService,private http: Http,public provider:Test,public router: Router) { }
 
   ngOnInit() 
   {
@@ -38,6 +39,16 @@ export class BillingComponentComponent implements OnInit
 
   getUserToken()
   {
+  
+      var user = firebase.auth().currentUser;
+
+if (user) {
+  // User is signed in.
+
+   console.log("Sign in")
+    // User is signed in.
+    
+
     firebase.auth().currentUser.getToken(true).then((idToken) => 
     {
     
@@ -50,8 +61,53 @@ export class BillingComponentComponent implements OnInit
         this.error = error;
         console.log(this.error);
     });
-  }
+} else {
+  // No user is signed in.
+  console.log("User is not login")
+ this.router.navigate(['login']);
+}
 
+
+//     firebase.auth().onAuthStateChanged(function(user) {
+//   if (user) {
+//     console.log("Sign in")
+//     // User is signed in.
+    
+
+//     firebase.auth().currentUser.getToken(true).then((idToken) => 
+//     {
+    
+//       console.log("id token in BC1"+idToken);
+//       this.userToken=idToken;
+    
+//     })
+//     .catch((error) => 
+//     {
+//         this.error = error;
+//         console.log(this.error);
+//     });
+//   } else {
+//     console.log("User is not login")
+//     this.router.navigate(['login']);
+//     // No user is signed in.
+//   }
+// });
+
+    
+    // firebase.auth().currentUser.getToken(true).then((idToken) => 
+    // {
+    
+    //   console.log("id token in BC1"+idToken);
+    //   this.userToken=idToken;
+    
+    // })
+    // .catch((error) => 
+    // {
+    //     this.error = error;
+    //     console.log(this.error);
+    // });
+  
+  }
  logout()
   { 
         //this.setFlag();
