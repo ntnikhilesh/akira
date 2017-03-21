@@ -15,32 +15,6 @@ export class LoginComponent  {
 
 
 
-/*
-
-    constructor(public af:AngularFire) { }
-
-  ngOnInit() {
-  }
-
-login()
-{
-        this.af.auth.login();
-}
-
-loginFB()
-{
-		console.log('FB login');
-        //this.af.auth.login();
-}
-
-logout()
-{
-        this.af.auth.logout();
-        console.log('Logout succ..');
-}  
-
-*/
-
 
 
 
@@ -55,31 +29,35 @@ public error: any;
 
   checkAuth()
   {
-       this.af.auth.subscribe(auth => {
-      if(auth) 
-      {
-        //console.log('logged in');
-         this.router.navigate(['billing']);
+       this.af.auth.subscribe(auth => 
+       {
+        if(auth) 
+        {
+          //console.log('logged in');
+           this.router.navigate(['billing']);
       
 
-      } else 
-      {
-        console.log('not logged in');
-        
-      }
-    });
+        } else 
+        {
+          console.log('not logged in');
+        }
+      });
   }
  
 
 
 
-  loginWithEmail(event, email, password){
+  loginWithEmail(event, email, password)
+  {
     event.preventDefault();
-    this.afService.loginWithEmail(email, password).then(() => {
+    this.afService.loginWithEmail(email, password).then(() => 
+    {
       this.router.navigate(['billing']);
     })
-      .catch((error: any) => {
-        if (error) {
+      .catch((error: any) => 
+      {
+        if (error) 
+        {
           this.error = error;
           console.log(this.error);
         }
