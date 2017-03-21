@@ -13,6 +13,8 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent  {
 
+
+
 /*
 
     constructor(public af:AngularFire) { }
@@ -43,8 +45,34 @@ logout()
 
 
 public error: any;
-  constructor(public afService: FirebaseService, private router: Router) {}
+  constructor(public af:AngularFire,public afService: FirebaseService, private router: Router) {}
+
+  ngOnInit() 
+  {
+    this.checkAuth();
+  }
+
+
+  checkAuth()
+  {
+       this.af.auth.subscribe(auth => {
+      if(auth) 
+      {
+        //console.log('logged in');
+         this.router.navigate(['billing']);
+      
+
+      } else 
+      {
+        console.log('not logged in');
+        
+      }
+    });
+  }
  
+
+
+
   loginWithEmail(event, email, password){
     event.preventDefault();
     this.afService.loginWithEmail(email, password).then(() => {
