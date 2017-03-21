@@ -39,73 +39,40 @@ export class BillingComponentComponent implements OnInit
 
   getUserToken()
   {
-  
-      var user = firebase.auth().currentUser;
 
-if (user) {
-  // User is signed in.
 
-   console.log("Sign in")
-    // User is signed in.
-    
 
-    firebase.auth().currentUser.getToken(true).then((idToken) => 
-    {
+
+
+
+      this.af.auth.subscribe(auth => {
+      if(auth) 
+      {
+        //console.log('logged in');
+
+        firebase.auth().currentUser.getToken(true).then((idToken) => 
+        {
     
-      console.log("id token in BC1"+idToken);
-      this.userToken=idToken;
+          //console.log("id token in BC1"+idToken);
+          this.userToken=idToken;
     
-    })
-    .catch((error) => 
-    {
-        this.error = error;
-        console.log(this.error);
+        })
+        .catch((error) => 
+        {  
+            this.error = error;
+            console.log(this.error);
+        });
+
+      } else 
+      {
+        console.log('not logged in');
+        this.router.navigate(['login']);
+      }
     });
-} else {
-  // No user is signed in.
-  console.log("User is not login")
- this.router.navigate(['login']);
-}
 
 
-//     firebase.auth().onAuthStateChanged(function(user) {
-//   if (user) {
-//     console.log("Sign in")
-//     // User is signed in.
-    
 
-//     firebase.auth().currentUser.getToken(true).then((idToken) => 
-//     {
-    
-//       console.log("id token in BC1"+idToken);
-//       this.userToken=idToken;
-    
-//     })
-//     .catch((error) => 
-//     {
-//         this.error = error;
-//         console.log(this.error);
-//     });
-//   } else {
-//     console.log("User is not login")
-//     this.router.navigate(['login']);
-//     // No user is signed in.
-//   }
-// });
 
-    
-    // firebase.auth().currentUser.getToken(true).then((idToken) => 
-    // {
-    
-    //   console.log("id token in BC1"+idToken);
-    //   this.userToken=idToken;
-    
-    // })
-    // .catch((error) => 
-    // {
-    //     this.error = error;
-    //     console.log(this.error);
-    // });
   
   }
  logout()
