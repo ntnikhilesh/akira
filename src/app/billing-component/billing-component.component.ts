@@ -68,9 +68,10 @@ checkBrowser()
     //...
    }
 }
- executeURL()
+ executeURL(event,midToken)
   {
-         var hai= this.provider.firebase(this.userToken)
+      event.preventDefault();
+         var hai= this.provider.firebase(midToken)
         .map(
         res=>
         {

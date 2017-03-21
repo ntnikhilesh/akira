@@ -68,8 +68,73 @@
      <!-- <app-main-tab-detail></app-main-tab-detail> -->
       <!--<app-omain-tab-detail></app-omain-tab-detail> -->
 
+       <!--<md-input-container class="example-full-width">
+                    <input  mdInput type="text" id="idToken" class="form-control" placeholder="ID Token" value={{this.userToken}}>
+                </md-input-container>
+                <br>
+                <br>
+
       <button md-button class="bottom-btn" (click)="executeURL()">Execute Cloud Function.</button>
-      {{result}}
+      {{result}}-->
+
+
+
+
+
+
+       <div class="login-form" align="center">
+        <form class="example-form" (submit)="executeURL($event, idToken.value)">
+
+          <table class="example-full-width" cellspacing="0">
+            <tr>
+              <td align="center">
+                
+                    <!--<input #email type="email" id="email" class="form-control" placeholder="Email address">-->
+                    <md-input-container class="example-full-width">
+                    <input  mdInput #email type="email" id="email" class="form-control" placeholder="ID Token" value={{this.userToken}}>
+                </md-input-container>
+                
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                
+<!--input #password type="password" id="password" class="form-control" placeholder="Password" required=""> -->
+
+                    <md-input-container class="example-full-width">
+                    <input  mdInput  type="text" id="result" class="form-control" placeholder="Result form CF" value={{this.result}}>
+                </md-input-container>
+                
+              </td>
+            </tr>
+            <tr>
+              <td align="center ">
+
+                 <!--<button class="btn btn-md btn-primary btn-block" type="submit">Sign in</button> -->
+
+                 <a md-raised-button   (click)="executeURL($event,email.value)">Execute CF</a>
+                 <br><br><br>
+
+               
+
+                
+                
+              </td>
+            </tr>
+            <tr>
+              <td>
+                 <ul > 
+           
+            
+           
+          </ul>
+              </td>
+            </tr>
+          </table>
+        </form>
+        
+
+      </div> 
 
 
      
