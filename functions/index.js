@@ -112,3 +112,12 @@ function insertDocuments(db, callback)
 
 
 
+
+exports.test1 = functions.https.onRequest((request, response) => 
+{
+  //response.send("File uploaded successfully")
+  console.log("File uploaded successfully")
+})
+
+
+

@@ -34,4 +34,17 @@ export class Test
   		})
 	}
 
+
+	firebase1()
+	{
+
+
+	 	let authHeader = new Headers();
+	   	//console.log( 'token form srvice = '+mtoken);
+
+		//authHeader.append('Authorization',mtoken);
+
+	 	return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/test1')
+	}
+
 }

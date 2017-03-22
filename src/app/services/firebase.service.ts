@@ -21,7 +21,7 @@ export class FirebaseService
     constructor(private af:AngularFire,
     private afo: AngularFireOffline) 
     { 
-        this.folder='listingimages';
+        this.folder='shopgro';
     }
 
    
@@ -29,7 +29,47 @@ export class FirebaseService
 
     
 
+     oaddListing(listing)
+    {
 
+    
+    
+    //this.num=this.num+1;
+
+      //Create root ref
+      console.log("hi from oaddListing fun")
+      let storageRef=firebase.storage().ref();
+
+      for(let selectedFile of [(<HTMLInputElement>document.getElementById('image')).files[0]])
+      {
+          console.log("hi from inside for")
+
+        let path='/shopgro/'+Math.random();
+        let iRef=storageRef.child(path);
+        iRef.put(selectedFile).then((snapshot)=>
+        {
+           listing.image=selectedFile.name;
+           listing.path=path;
+           listing.imageUrl='CC';
+           console.log('offline adding done...');
+          
+          // return " File uploaded succ..."
+           //console.log(iRef.snapshot)
+           //return this.olistings.push(listing);
+
+        }); 
+
+
+
+        //Monitor upload progress
+
+        
+        
+
+      } 
+      //return "Error..."
+
+  }
 
 
 

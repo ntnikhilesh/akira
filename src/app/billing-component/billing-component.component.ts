@@ -10,6 +10,8 @@ import { LocalStorageService } from 'angular-2-local-storage';
 import { Http, Response } from '@angular/http';
 import {Test} from './../providers/test.service';
 
+import {FirebaseService} from './../services/firebase.service';
+
 import * as firebase from 'firebase';
 import {Router} from "@angular/router";
 
@@ -28,7 +30,7 @@ export class BillingComponentComponent implements OnInit
   flag:any;
   error:any;
 
-  constructor(private wegService:WegService,public af:AngularFire,private localStorageService: LocalStorageService,private http: Http,public provider:Test,public router: Router) { }
+  constructor(private firebaseService:FirebaseService,private wegService:WegService,public af:AngularFire,private localStorageService: LocalStorageService,private http: Http,public provider:Test,public router: Router) { }
 
   ngOnInit() 
   {
@@ -71,6 +73,18 @@ export class BillingComponentComponent implements OnInit
   }
 
 
+onAddSubmit()
+{
+
+  let listing=
+  		{
+
+  		
+  		}
+      console.log("hi from submit")
+this.firebaseService.oaddListing(listing); 
+  
+}
 
  logout()
   { 
