@@ -1,10 +1,16 @@
 import { Injectable } from '@angular/core';
 
+import {Http, Response} from '@angular/http';
+
+
+
 import {AngularFire, FirebaseListObservable,FirebaseObjectObservable,AuthProviders, AuthMethods,} from 'angularfire2';
 
 import { AfoListObservable,AfoObjectObservable, AngularFireOffline } from 'angularfire2-offline';
 
 import * as firebase from 'firebase';
+
+import {Router} from "@angular/router";
 
 @Injectable()
 export class FirebaseService 
@@ -17,19 +23,138 @@ export class FirebaseService
 
     folder:any;
     num:number;
+    fileUploadStatus:any;
 
-    constructor(private af:AngularFire,
+    constructor(private router: Router,private http: Http,private af:AngularFire,
     private afo: AngularFireOffline) 
     { 
         this.folder='listingimages';
     }
 
+    ngOnInit() 
+  {
+  
+    //let mUploadFile;
+ 
+  }
+
    
+
+
+
+
+
+
+    myFirstPromise = new Promise((resolve, reject) => {
+    
+   
+});
+
 
 
     
 
+  oaddListing(listing)
+  {
 
+    return new Promise(function(resolve,reject)
+    {
+    
+
+
+
+      // this.mUploadFile(function(result)
+      //     {
+      //       if(result)
+      //       {
+      //         resolve(result)
+      //       }
+      //       else{
+      //         reject(false)
+      //       }
+      //       //response.send(result);
+      //     })
+
+
+      
+    //this.num=this.num+1;
+
+      //Create root ref
+      console.log("hi from oaddListing fun")
+      let storageRef=firebase.storage().ref();
+
+      for(let selectedFile of [(<HTMLInputElement>document.getElementById('image')).files[0]])
+      {
+          console.log("hi from inside for")
+
+        let path='/shopgro/'+Math.random();
+        let iRef=storageRef.child(path);
+        iRef.put(selectedFile).then((snapshot)=>
+        {
+           listing.image=selectedFile.name;
+           listing.path=path;
+           listing.imageUrl='CC';
+           console.log('offline adding done...');
+           resolve(true);
+        }); 
+
+
+
+       
+
+        
+        
+
+      } 
+     // reject(false);
+
+  
+    })
+  }
+
+
+
+
+mUploadFile(callback)
+{
+      console.log("hi from oaddListing fun")
+      let storageRef=firebase.storage().ref();
+
+      for(let selectedFile of [(<HTMLInputElement>document.getElementById('image')).files[0]])
+      {
+          console.log("hi from inside for")
+
+        let path='/shopgro/'+Math.random();
+        let iRef=storageRef.child(path);
+        iRef.put(selectedFile).then((snapshot)=>
+        {
+           //listing.image=selectedFile.name;
+           //listing.path=path;
+           //listing.imageUrl='CC';
+           console.log('offline adding done...');
+           callback(true)
+        }); 
+      }
+}
+
+  	firebaseFileUpload()
+	{
+
+    console.log("hi form file upload")
+	 	//let authHeader = new Headers();
+	   	//console.log( 'token form srvice = '+mtoken);
+
+		//authHeader.append('Authorization',"11ssd");
+
+	 	return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/testFileUpload') 
+	 	
+	}
+
+
+
+
+
+ 
 
 
 

@@ -34,4 +34,18 @@ export class Test
   		})
 	}
 
+
+
+	firebaseFileUpload()
+	{
+
+
+	 	//let authHeader = new Headers();
+	   	//console.log( 'token form srvice = '+mtoken);
+
+		//authHeader.append('Authorization',"11ssd");
+
+	 	return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/testFileUpload')
+	}
+
 }

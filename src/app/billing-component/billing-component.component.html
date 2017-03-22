@@ -124,7 +124,27 @@
         </form>
         
 
+
+
+          <form (submit)="onAddSubmit()">
+  
+ 
+  
+  <div class="form-group">
+
+    
+    <input id="image" name="image" [(ngModel)]="image" type="file" >
+  </div>
+  
+<br><br>
+  <a md-raised-button   (click)="onAddSubmit()">Upload</a>
+  
+</form>
+
       </div> 
+
+
+      
 
 
      

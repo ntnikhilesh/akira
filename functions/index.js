@@ -112,3 +112,15 @@ function insertDocuments(db, callback)
 
 
 
+exports.testFileUpload = functions.https.onRequest((request, response) => 
+{
+
+
+    cors(request, response, () => 
+  {
+    console.log("File uploaded successfully")
+    response.send("Upload done")
+
+  })
+});
+
