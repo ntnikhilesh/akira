@@ -144,8 +144,8 @@ md-toolbar{
   font-size: 20px;
   text-align: center;
 }
-.toolbar-icon{
-
+.example-full-width {
+  width: 100%;
 }
 .toolbar-heading{
   padding-left: 30px;
@@ -187,7 +187,15 @@ md-toolbar{
    
     
 }
+.example-form {
+  padding-top: 40px;
+  width: 100%;
+  
+}
 
+.example-full-width {
+  width: 100%;
+}
 
 
 

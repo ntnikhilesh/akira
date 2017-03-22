@@ -13,45 +13,51 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent  {
 
-/*
 
-    constructor(public af:AngularFire) { }
-
-  ngOnInit() {
-  }
-
-login()
-{
-        this.af.auth.login();
-}
-
-loginFB()
-{
-		console.log('FB login');
-        //this.af.auth.login();
-}
-
-logout()
-{
-        this.af.auth.logout();
-        console.log('Logout succ..');
-}  
-
-*/
 
 
 
 
 public error: any;
-  constructor(public afService: FirebaseService, private router: Router) {}
+  constructor(public af:AngularFire,public afService: FirebaseService, private router: Router) {}
+
+  ngOnInit() 
+  {
+    this.checkAuth();
+  }
+
+
+  checkAuth()
+  {
+       this.af.auth.subscribe(auth => 
+       {
+        if(auth) 
+        {
+          //console.log('logged in');
+           this.router.navigate(['billing']);
+      
+
+        } else 
+        {
+          console.log('not logged in');
+        }
+      });
+  }
  
-  loginWithEmail(event, email, password){
+
+
+
+  loginWithEmail(event, email, password)
+  {
     event.preventDefault();
-    this.afService.loginWithEmail(email, password).then(() => {
+    this.afService.loginWithEmail(email, password).then(() => 
+    {
       this.router.navigate(['billing']);
     })
-      .catch((error: any) => {
-        if (error) {
+      .catch((error: any) => 
+      {
+        if (error) 
+        {
           this.error = error;
           console.log(this.error);
         }

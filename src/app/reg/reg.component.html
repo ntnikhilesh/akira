@@ -1,6 +1,6 @@
 
 
-<!--
+
 
 <div class="row">
 
@@ -11,6 +11,14 @@
 <div class="col-6 col-m-6">
   
 
+
+  <div *ngIf="error" class="alert alert-warning" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+  {{error}}
+</div>
+
+
    <div class="login-page">
       <div class="login-logo" align="center">
         <img src="http://i.imgur.com/wBy57Le.jpg" width="100px" >
@@ -19,30 +27,41 @@
 
       
       <div class="login-form" align="center">
-        <form class="example-form">
+        <form class="example-form" (submit)="register($event, name.value, email.value, password.value)">
 
           <table class="example-full-width" cellspacing="0">
             <tr>
               <td>
                 <md-input-container class="example-full-width">
-                    <input type="text" mdInput placeholder="Enter Email">
+                    <input mdInput #name type="text" id="name" class="form-control" placeholder="Name" required="" autofocus="">
                 </md-input-container>
               </td>
             </tr>
             <tr>
               <td>
                 <md-input-container class="example-full-width">
-                    <input type="password" mdInput placeholder="Enter Password">
+                    <input mdInput #email type="email" id="email" class="form-control" placeholder="Email address" required="" >
+                </md-input-container>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <md-input-container class="example-full-width">
+                    <input mdInput #password type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
                 </md-input-container>
               </td>
             </tr>
             <tr>
               <td align="center ">
 
-                 <a  routerLink="/login" routerLinkActive="active" md-raised-button color="" >Login</a>
-                 <br><br><br>
+              <a  md-raised-button color="" (click)="register($event, name.value, email.value, password.value)">Register</a>
 
-                <a  md-raised-button color="" routerLink="/register" routerLinkActive="active">Register</a>
+                <br><br><br>
+
+                 <a  routerLink="/login" routerLinkActive="active" md-raised-button color="" >Login</a>
+               
+
+                
 
                  
                
@@ -86,32 +105,10 @@
 
 </div>
 
--->
 
 
 
 
-
-<div *ngIf="error" class="alert alert-warning" role="alert">
-  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  <span class="sr-only">Error:</span>
-  {{error}}
-</div>
-<div class="modal-dialog">
-  <div class="registermodal-container">
-    <h1>Register</h1><br>
-    <form class="form-signin" (submit)="register($event, name.value, email.value, password.value)">
-      <label for="name" class="sr-only">Name</label>
-      <input #name type="text" id="name" class="form-control" placeholder="Name" required="">
-      <label for="email" class="sr-only">Email address</label>
-      <input #email type="email" id="email" class="form-control" placeholder="Email address" required="" autofocus="">
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input #password type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-      <br>
-      <button  class="btn btn-md btn-primary btn-block" type="submit">Register</button>
-    </form>
-  </div>
-</div>
 
 
 
