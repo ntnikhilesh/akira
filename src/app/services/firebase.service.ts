@@ -63,21 +63,7 @@ export class FirebaseService
 
 
 
-      // this.mUploadFile(function(result)
-      //     {
-      //       if(result)
-      //       {
-      //         resolve(result)
-      //       }
-      //       else{
-      //         reject(false)
-      //       }
-      //       //response.send(result);
-      //     })
-
-
-      
-    //this.num=this.num+1;
+    
 
       //Create root ref
       console.log("hi from oaddListing fun")
@@ -128,9 +114,7 @@ mUploadFile(callback)
         let iRef=storageRef.child(path);
         iRef.put(selectedFile).then((snapshot)=>
         {
-           //listing.image=selectedFile.name;
-           //listing.path=path;
-           //listing.imageUrl='CC';
+          
            console.log('offline adding done...');
            callback(true)
         }); 
@@ -141,10 +125,7 @@ mUploadFile(callback)
 	{
 
     console.log("hi form file upload")
-	 	//let authHeader = new Headers();
-	   	//console.log( 'token form srvice = '+mtoken);
-
-		//authHeader.append('Authorization',"11ssd");
+	 
 
 	 	return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/testFileUpload') 
 	 	
