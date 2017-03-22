@@ -35,16 +35,68 @@ export class Test
 	}
 
 
+<<<<<<< HEAD
 	firebase1()
+=======
+
+
+	firebaseUpdateDB(mtoken)
 	{
 
 
 	 	let authHeader = new Headers();
+		
+	   	console.log( 'token form srvice = '+mtoken);
+
+		authHeader.append('Authorization',mtoken);
+
+	 	return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/test', 
+	 	{
+    		headers: authHeader
+  		})
+	}
+
+
+	firebaseDeleteDB(mtoken)
+	{
+
+
+	 	let authHeader = new Headers();
+		
+	   	console.log( 'token form srvice = '+mtoken);
+
+		authHeader.append('Authorization',mtoken);
+
+	 	return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/test', 
+	 	{
+    		headers: authHeader
+  		})
+	}
+
+
+	firebaseFindAll(mtoken)
+>>>>>>> 3a9005fe729ea0c9eabe3155e4f0748ad43d9fde
+	{
+
+
+	 	let authHeader = new Headers();
+<<<<<<< HEAD
 	   	//console.log( 'token form srvice = '+mtoken);
 
 		//authHeader.append('Authorization',mtoken);
 
 	 	return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/test1')
+=======
+		
+	   	console.log( 'token form srvice = '+mtoken);
+
+		authHeader.append('Authorization',mtoken);
+
+	 	return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/test', 
+	 	{
+    		headers: authHeader
+  		})
+>>>>>>> 3a9005fe729ea0c9eabe3155e4f0748ad43d9fde
 	}
 
 }

@@ -10,6 +10,7 @@ const cors = require('cors')({origin: true});
 const app = express();
 
 
+
 exports.test = functions.https.onRequest((request, response) => 
 {
 
@@ -76,7 +77,41 @@ function setConnection(callback)
         assert.equal(null, err);
         console.log("Connected successfully to server");
 
-        insertDocuments(db,function(err,docs)
+        // insertDocuments(db,function(err,docs)
+        // {
+        //     if(err)
+        //       callback(err)
+             
+        //     else
+        //       callback(docs)
+              
+        // })
+
+
+
+        //  updateDocuments(db,function(err,docs)
+        // {
+        //     if(err)
+        //       callback(err)
+             
+        //     else
+        //       callback(docs)
+              
+        // })
+
+
+        //   deleteDocuments(db,function(err,docs)
+        // {
+        //     if(err)
+        //       callback(err)
+             
+        //     else
+        //       callback(docs)
+              
+        // })
+
+
+           findAllDocuments(db,function(err,docs)
         {
             if(err)
               callback(err)
@@ -93,23 +128,89 @@ function setConnection(callback)
 
 
 
-function insertDocuments(db, callback) 
+// function insertDocuments(db, callback) 
+// {
+//   // Get the documents collection
+//   var collection = db.collection('documents');
+//   // Insert some documents
+//   collection.insertMany(
+//     [
+//       {d : 1}, {e : 2}, {f : 3}
+//     ], function(err, result) 
+//     {
+//       if(err)
+//       callback(err);
+//       console.log("Inserted 3 documents into the collection");
+//       callback(null,result);
+//     });
+// }
+
+
+// function updateDocuments(db, callback) 
+// {
+  
+//   // Get the documents collection
+//   var collection = db.collection('documents');
+//   // Update document where a is 2, set b equal to 1
+//   collection.updateOne({ a : 2 }
+//     , { $set: { b : 1 } ,new:true,upsert:false}, function(err, result) 
+//     {
+    
+//     console.log("Updated the document with the field a equal to 2");
+//     callback(result);
+//   });  
+
+
+// }
+
+
+// function deleteDocuments(db, callback) 
+// {
+  
+//   // Get the documents collection
+//   var collection = db.collection('documents');
+//   // Delete document where a is 3
+//   collection.deleteOne({ a : 3 }, function(err, result) {
+    
+//     console.log("Removed the document with the field a equal to 3");
+//     callback(result);
+//   });    
+
+
+// }
+
+
+
+// function deleteDocuments(db, callback) 
+// {
+  
+//   // Get the documents collection
+//   var collection = db.collection('documents');
+//   // Delete document where a is 3
+//   collection.deleteOne({ a : 3 }, function(err, result) {
+    
+//     console.log("Removed the document with the field a equal to 3");
+//     callback(result);
+//   });    
+
+
+// }
+
+function findAllDocuments(db, callback) 
 {
+  
   // Get the documents collection
   var collection = db.collection('documents');
-  // Insert some documents
-  collection.insertMany(
-    [
-      {d : 1}, {e : 2}, {f : 3}
-    ], function(err, result) 
-    {
-      if(err)
-      callback(err);
-      console.log("Inserted 3 documents into the collection");
-      callback(null,result);
-    });
-}
+  // Find some documents
+  collection.find({'a': 3}).toArray(function(err, docs) {
+    
+    console.log("Found the following records");
+    console.log(docs)
+    callback(docs);
+  }); 
 
+
+}
 
 
 
