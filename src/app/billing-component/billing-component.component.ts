@@ -25,14 +25,10 @@ export class BillingComponentComponent implements OnInit
 {
 
 
-//     printname:any;
+
  image:any;
 
-// path:any;
-// price:any;
-// name:any;
-// category:any;
-// unit:any;
+
 
   title='Billing';
   result:any;
@@ -99,13 +95,6 @@ export class BillingComponentComponent implements OnInit
   		let listing=
   		{
 
-  			// name:this.name,
-  			// printname:this.printname,
-  			
-  			// //price:this.price,
-  			// price:this.price,
-  			// category:this.category,
-  			// unit:this.unit
   		}
   		
   		console.log("data1="+listing);
@@ -138,7 +127,7 @@ export class BillingComponentComponent implements OnInit
 
           this.firebaseService.oaddInDB(successMessage)
           {
-            
+
           }
 
         }
@@ -155,51 +144,14 @@ export class BillingComponentComponent implements OnInit
 
 
 
-onAddSubmit()
-{
 
-  let listing=
-  		{
-
-  		
-  		}
-      console.log("hi from submit")
-
-      this.firebaseService.oaddListing(listing).then(successMessage => {
-        console.log(successMessage);
-        if(successMessage)
-        {
-            var hai= this.provider.firebaseFileUpload()
-        .map(
-        res=>
-        {
-            console.log("Result in BC= "+res.text());
-            this.result=res.text();
-        }
-        )
-         .subscribe
-         (
-            data => console.log(data),
-            err => console.log(err),
-            () => console.log('Done')
-         );
-        }
-        else{
-          this.result="You are offline...pl check your nw conn...";
-        }
-   
-}).catch(e=>{
-  this.result="Please select file..";
-  console.log("Error Found buddy Yoyo");
-  console.log(e)
-});
 
 
 
 
     
   
-}
+
 
  logout()
   { 

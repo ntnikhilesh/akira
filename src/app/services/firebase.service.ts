@@ -57,63 +57,7 @@ export class FirebaseService {
 
 
 
-  // oaddListing(listing)
-  // {
-
-  //   return new Promise(function(resolve,reject)
-  //   {
-
-
-
-
-  //     // this.mUploadFile(function(result)
-  //     //     {
-  //     //       if(result)
-  //     //       {
-  //     //         resolve(result)
-  //     //       }
-  //     //       else{
-  //     //         reject(false)
-  //     //       }
-  //     //       //response.send(result);
-  //     //     })
-
-
-
-  //   //this.num=this.num+1;
-
-  //     //Create root ref
-  //     console.log("hi from oaddListing fun")
-  //     let storageRef=firebase.storage().ref();
-
-  //     for(let selectedFile of [(<HTMLInputElement>document.getElementById('image')).files[0]])
-  //     {
-  //         console.log("hi from inside for")
-
-  //       let path='/shopgro/'+Math.random();
-  //       let iRef=storageRef.child(path);
-  //       iRef.put(selectedFile).then((snapshot)=>
-  //       {
-  //          listing.image=selectedFile.name;
-  //          listing.path=path;
-  //          listing.imageUrl='CC';
-  //          console.log('offline adding done...');
-  //          resolve(true);
-  //       }); 
-
-
-
-
-
-
-
-
-  //     } 
-  //    // reject(false);
-
-
-  //   })
-  // }
+ 
 
 
 
@@ -173,75 +117,12 @@ oaddInDB(listing)
 }
 
 
-  oaddListing(listing) {
-
-    return new Promise(function (resolve, reject) {
-
-
-      //Create root ref
-      console.log("hi from oaddListing fun")
-      let storageRef = firebase.storage().ref();
-
-      for (let selectedFile of [(<HTMLInputElement>document.getElementById('image')).files[0]]) {
-        console.log("hi from inside for")
-
-        let path = '/shopgro-data/' + Math.random();
-        let iRef = storageRef.child(path);
-        iRef.put(selectedFile).then((snapshot) => {
-          listing.image = selectedFile.name;
-          listing.path = path;
-          listing.imageUrl = 'CC';
-          console.log('offline adding done...');
-          console.log(snapshot);
-          if (snapshot['f'] === "success") {
-            console.log("Sucess Upload Dude");
-            resolve(snapshot)
-          }
-          else {
-            console.log("Failure");
-            reject(snapshot)
-          }
-        }).catch(e => {
-          console.log("NetWork Error", e);
-        })
-
-      }
-
-
-    })
-  }
-
-
-
-
-
-
-  mUploadFile(callback) {
-    console.log("hi from oaddListing fun")
-    let storageRef = firebase.storage().ref();
-
-    for (let selectedFile of [(<HTMLInputElement>document.getElementById('image')).files[0]]) {
-      console.log("hi from inside for")
-
-      let path = '/shopgro/' + Math.random();
-      let iRef = storageRef.child(path);
-      iRef.put(selectedFile).then((snapshot) => {
-        //listing.image=selectedFile.name;
-        //listing.path=path;
-        //listing.imageUrl='CC';
-        console.log('offline adding done...');
-        callback(true)
-      });
-    }
-  }
+ 
 
   firebaseFileUpload() {
 
     console.log("hi form file upload")
-    //let authHeader = new Headers();
-    //console.log( 'token form srvice = '+mtoken);
-
-    //authHeader.append('Authorization',"11ssd");
+  
 
     return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/testFileUpload')
 
