@@ -73,18 +73,18 @@ export class FirebaseService {
       for (let selectedFile of [(<HTMLInputElement>document.getElementById('image1')).files[0]]) {
 
 
-        let path = '/shopgro-img/' + Math.random();
+        let path = '/shopgro-storage/' + Math.random();
         let iRef = storageRef.child(path);
         iRef.put(selectedFile).then((snapshot) => {
           console.log("hi from inside for")
          
           listing.image = selectedFile.name;
           listing.path = path;
-          listing.imageUrl = 'CC';
+          listing.imageUrl = snapshot.downloadURL;
           console.log('offline adding done...');
 
           console.log(listing)
-          console.log(snapshot);
+          console.log(snapshot.downloadURL);
           //this.listings.push(listing);
           if (snapshot['f'] === "success") {
             console.log("Sucess Upload Dude");
