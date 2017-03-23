@@ -1,65 +1,68 @@
 import { Injectable } from '@angular/core';
 
-import {Http, Response} from '@angular/http';
+import { Http, Response } from '@angular/http';
 
 
 
-import {AngularFire, FirebaseListObservable,FirebaseObjectObservable,AuthProviders, AuthMethods,} from 'angularfire2';
+import { AngularFire, FirebaseListObservable, FirebaseObjectObservable, AuthProviders, AuthMethods, } from 'angularfire2';
 
-import { AfoListObservable,AfoObjectObservable, AngularFireOffline } from 'angularfire2-offline';
+import { AfoListObservable, AfoObjectObservable, AngularFireOffline } from 'angularfire2-offline';
 
 import * as firebase from 'firebase';
 
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
 
 @Injectable()
-export class FirebaseService 
-{
-    listings:FirebaseListObservable<any[]>;
-    olistings:AfoListObservable<any[]>;
+export class FirebaseService {
+ public listings: FirebaseListObservable<any[]>;
+  olistings: AfoListObservable<any[]>;
 
-    listing:FirebaseObjectObservable<any[]>;
-    olisting:AfoObjectObservable<any>;
+  listing: FirebaseObjectObservable<any[]>;
+  olisting: AfoObjectObservable<any>;
 
-    folder:any;
-    num:number;
-    fileUploadStatus:any;
+  images: FirebaseListObservable<any[]>
 
-    constructor(private router: Router,private http: Http,private af:AngularFire,
-    private afo: AngularFireOffline) 
-    { 
-        this.folder='listingimages';
-    }
+  folder: any;
+  num: number;
+  fileUploadStatus: any;
 
-    ngOnInit() 
-  {
-  
-    //let mUploadFile;
- 
+  constructor(private router: Router, private http: Http, private af: AngularFire,
+    private afo: AngularFireOffline) {
+    //this.folder='listingimages';
+    this.images = this.af.database.list('shopgro-DB') as FirebaseListObservable<Images[]>
+    this.folder = 'demo-folder1';
+    this.listings = this.af.database.list('/shopgro-DB')as FirebaseListObservable<Listings[]>;
+    console.log("===>",this.listings);
   }
 
-   
+  ngOnInit() {
+
+    //let mUploadFile;
+
+  }
 
 
 
 
 
 
-    myFirstPromise = new Promise((resolve, reject) => {
-    
-   
-});
+
+
+  myFirstPromise = new Promise((resolve, reject) => {
+
+
+  });
 
 
 
-    
+
 
   // oaddListing(listing)
   // {
 
   //   return new Promise(function(resolve,reject)
   //   {
-    
+
 
 
 
@@ -76,7 +79,7 @@ export class FirebaseService
   //     //     })
 
 
-      
+
   //   //this.num=this.num+1;
 
   //     //Create root ref
@@ -100,122 +103,149 @@ export class FirebaseService
 
 
 
-       
 
-        
-        
+
+
+
 
   //     } 
   //    // reject(false);
 
-  
+
   //   })
   // }
 
 
 
 
-
-oaddListing(listing) {
-
-return new Promise(function (resolve, reject) {
+  oaddListing1(listing) {
 
 
-//Create root ref
-console.log("hi from oaddListing fun")
-let storageRef = firebase.storage().ref();
-
-for (let selectedFile of [(<HTMLInputElement>document.getElementById('image')).files[0]]) {
-console.log("hi from inside for")
-
-let path = '/shopgro-data/' + Math.random();
-let iRef = storageRef.child(path);
-iRef.put(selectedFile).then((snapshot) => {
-listing.image = selectedFile.name;
-listing.path = path;
-listing.imageUrl = 'CC';
-console.log('offline adding done...');
-console.log(snapshot);
-if(snapshot['f']==="success") {
-console.log("Sucess Upload Dude");
-resolve(snapshot)
-}
-else {
-console.log("Failure");
-reject(snapshot)
-}
-}).catch(e=>{
-  console.log("NetWork Error",e);
-})
-
-}
-
-
-})
-}
-
-
-
-
-
-
-mUploadFile(callback)
-{
+    return new Promise(function (resolve, reject) {
       console.log("hi from oaddListing fun")
-      let storageRef=firebase.storage().ref();
+      let storageRef = firebase.storage().ref();
 
-      for(let selectedFile of [(<HTMLInputElement>document.getElementById('image')).files[0]])
-      {
+      //var self=this;
+      for (let selectedFile of [(<HTMLInputElement>document.getElementById('image1')).files[0]]) {
+
+
+        let path = '/shopgro-img/' + Math.random();
+        let iRef = storageRef.child(path);
+        iRef.put(selectedFile).then((snapshot) => {
           console.log("hi from inside for")
+         
+          listing.image = selectedFile.name;
+          listing.path = path;
+          listing.imageUrl = 'CC';
+          console.log('offline adding done...');
 
-        let path='/shopgro/'+Math.random();
-        let iRef=storageRef.child(path);
-        iRef.put(selectedFile).then((snapshot)=>
-        {
-           //listing.image=selectedFile.name;
-           //listing.path=path;
-           //listing.imageUrl='CC';
-           console.log('offline adding done...');
-           callback(true)
-        }); 
+          console.log(listing)
+          console.log(snapshot);
+          //this.listings.push(listing);
+          if (snapshot['f'] === "success") {
+            console.log("Sucess Upload Dude");
+            resolve(listing)
+          }
+          else {
+            console.log("Failure");
+            reject(false)
+          }
+
+
+
+        }).catch(function (e) {
+          console.log("merror=" + e);
+        });
+
       }
+
+    })
+  }
+
+
+
+
+oaddInDB(listing)
+{
+  console.log("Item added in BD as well")
+  this.listings.push(listing);
+
 }
 
-  	firebaseFileUpload()
-	{
+
+  oaddListing(listing) {
+
+    return new Promise(function (resolve, reject) {
+
+
+      //Create root ref
+      console.log("hi from oaddListing fun")
+      let storageRef = firebase.storage().ref();
+
+      for (let selectedFile of [(<HTMLInputElement>document.getElementById('image')).files[0]]) {
+        console.log("hi from inside for")
+
+        let path = '/shopgro-data/' + Math.random();
+        let iRef = storageRef.child(path);
+        iRef.put(selectedFile).then((snapshot) => {
+          listing.image = selectedFile.name;
+          listing.path = path;
+          listing.imageUrl = 'CC';
+          console.log('offline adding done...');
+          console.log(snapshot);
+          if (snapshot['f'] === "success") {
+            console.log("Sucess Upload Dude");
+            resolve(snapshot)
+          }
+          else {
+            console.log("Failure");
+            reject(snapshot)
+          }
+        }).catch(e => {
+          console.log("NetWork Error", e);
+        })
+
+      }
+
+
+    })
+  }
+
+
+
+
+
+
+  mUploadFile(callback) {
+    console.log("hi from oaddListing fun")
+    let storageRef = firebase.storage().ref();
+
+    for (let selectedFile of [(<HTMLInputElement>document.getElementById('image')).files[0]]) {
+      console.log("hi from inside for")
+
+      let path = '/shopgro/' + Math.random();
+      let iRef = storageRef.child(path);
+      iRef.put(selectedFile).then((snapshot) => {
+        //listing.image=selectedFile.name;
+        //listing.path=path;
+        //listing.imageUrl='CC';
+        console.log('offline adding done...');
+        callback(true)
+      });
+    }
+  }
+
+  firebaseFileUpload() {
 
     console.log("hi form file upload")
-	 	//let authHeader = new Headers();
-	   	//console.log( 'token form srvice = '+mtoken);
+    //let authHeader = new Headers();
+    //console.log( 'token form srvice = '+mtoken);
 
-		//authHeader.append('Authorization',"11ssd");
+    //authHeader.append('Authorization',"11ssd");
 
-	 	return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/testFileUpload') 
-	 	
-	}
+    return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/testFileUpload')
 
-
-
-
-
- 
-
-
-
-    
-
-
-
-
-
-
-  
-
-    
-
-   
-
-  
+  }
 
 
 
@@ -223,7 +253,30 @@ mUploadFile(callback)
 
 
 
-// Start email/pass auth
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // Start email/pass auth
 
   /**
    * Calls the AngularFire2 service to register a new user
@@ -252,25 +305,25 @@ mUploadFile(callback)
       name: name,
       email: email,
 
-      
+
     });
-    }
+  }
 
 
 
 
 
-    /**
-   * Logs the user in using their Email/Password combo
-   * @param email
-   * @param password
-   * @returns {firebase.Promise<FirebaseAuthState>}
-   */
+  /**
+ * Logs the user in using their Email/Password combo
+ * @param email
+ * @param password
+ * @returns {firebase.Promise<FirebaseAuthState>}
+ */
   loginWithEmail(email, password) {
     return this.af.auth.login({
-        email: email,
-        password: password,
-      },
+      email: email,
+      password: password,
+    },
       {
         provider: AuthProviders.Password,
         method: AuthMethods.Password,
@@ -287,3 +340,18 @@ mUploadFile(callback)
 
 }
 
+interface Listings {
+  // $key?:string;
+  // name?:string;
+  // category?:string;
+  path?: string;
+  image?: string;
+  imageUrl?: string;
+
+
+  // price?:string;
+
+}
+interface Images {
+  name?: string;
+}
