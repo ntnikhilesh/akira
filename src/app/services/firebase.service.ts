@@ -54,49 +54,49 @@ export class FirebaseService
 
     
 
-  oaddListing(listing)
-  {
+  // oaddListing(listing)
+  // {
 
-    return new Promise(function(resolve,reject)
-    {
+  //   return new Promise(function(resolve,reject)
+  //   {
     
 
 
 
-      // this.mUploadFile(function(result)
-      //     {
-      //       if(result)
-      //       {
-      //         resolve(result)
-      //       }
-      //       else{
-      //         reject(false)
-      //       }
-      //       //response.send(result);
-      //     })
+  //     // this.mUploadFile(function(result)
+  //     //     {
+  //     //       if(result)
+  //     //       {
+  //     //         resolve(result)
+  //     //       }
+  //     //       else{
+  //     //         reject(false)
+  //     //       }
+  //     //       //response.send(result);
+  //     //     })
 
 
       
-    //this.num=this.num+1;
+  //   //this.num=this.num+1;
 
-      //Create root ref
-      console.log("hi from oaddListing fun")
-      let storageRef=firebase.storage().ref();
+  //     //Create root ref
+  //     console.log("hi from oaddListing fun")
+  //     let storageRef=firebase.storage().ref();
 
-      for(let selectedFile of [(<HTMLInputElement>document.getElementById('image')).files[0]])
-      {
-          console.log("hi from inside for")
+  //     for(let selectedFile of [(<HTMLInputElement>document.getElementById('image')).files[0]])
+  //     {
+  //         console.log("hi from inside for")
 
-        let path='/shopgro/'+Math.random();
-        let iRef=storageRef.child(path);
-        iRef.put(selectedFile).then((snapshot)=>
-        {
-           listing.image=selectedFile.name;
-           listing.path=path;
-           listing.imageUrl='CC';
-           console.log('offline adding done...');
-           resolve(true);
-        }); 
+  //       let path='/shopgro/'+Math.random();
+  //       let iRef=storageRef.child(path);
+  //       iRef.put(selectedFile).then((snapshot)=>
+  //       {
+  //          listing.image=selectedFile.name;
+  //          listing.path=path;
+  //          listing.imageUrl='CC';
+  //          console.log('offline adding done...');
+  //          resolve(true);
+  //       }); 
 
 
 
@@ -105,12 +105,56 @@ export class FirebaseService
         
         
 
-      } 
-     // reject(false);
+  //     } 
+  //    // reject(false);
 
   
-    })
-  }
+  //   })
+  // }
+
+
+
+
+
+oaddListing(listing) {
+
+return new Promise(function (resolve, reject) {
+
+
+//Create root ref
+console.log("hi from oaddListing fun")
+let storageRef = firebase.storage().ref();
+
+for (let selectedFile of [(<HTMLInputElement>document.getElementById('image')).files[0]]) {
+console.log("hi from inside for")
+
+let path = '/shopgro-data/' + Math.random();
+let iRef = storageRef.child(path);
+iRef.put(selectedFile).then((snapshot) => {
+listing.image = selectedFile.name;
+listing.path = path;
+listing.imageUrl = 'CC';
+console.log('offline adding done...');
+console.log(snapshot);
+if(snapshot['f']==="success") {
+console.log("Sucess Upload Dude");
+resolve(snapshot)
+}
+else {
+console.log("Failure");
+reject(snapshot)
+}
+}).catch(e=>{
+  console.log("NetWork Error",e);
+})
+
+}
+
+
+})
+}
+
+
 
 
 

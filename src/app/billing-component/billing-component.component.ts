@@ -106,37 +106,15 @@ onAddSubmit()
         else{
           this.result="You are offline...pl check your nw conn...";
         }
-    //successMessage is whatever we passed in the resolve(...) function above.
-    //It doesn't have to be a string, but if it is only a succeed message, it probably will be.
-    //console.log("Yay! " + successMessage);
+   
 }).catch(e=>{
+  this.result="Please select file..";
   console.log("Error Found buddy Yoyo");
   console.log(e)
 });
 
 
 
-  //    let uploadStatus= this.firebaseService.oaddListing(listing)
-  //    .then((fileUploadStatus) => this.fileUploadStatus = fileUploadStatus);
-  //  } 
-     //console.log("Upload status from BC="+uploadStatus);
-
-
-
-  //  var hai= this.provider.firebaseFileUpload()
-  //       .map(
-  //       res=>
-  //       {
-  //           console.log("Result in BC= "+res.text());
-  //           this.result=res.text();
-  //       }
-  //       )
-  //        .subscribe
-  //        (
-  //           data => console.log(data),
-  //           err => console.log(err),
-  //           () => console.log('Done')
-  //        );
 
     
   
