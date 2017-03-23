@@ -1,166 +1,168 @@
 <div class="row">
 
-<!--<div class="col-3  menu">
+  <!--<div class="col-3  menu">
  
 </div> -->
 
-<div class="col-6 col-m-12">
+  <div class="col-6 col-m-12">
     <md-sidenav-container fullscreen>
 
-   
-    <md-sidenav #start>
+
+      <md-sidenav #start>
         <md-nav-list>
-         
+
           <div class="side-bottom">
             <div class="side-billing">
-                
 
-                <br>
-                <ul > 
-            
-             <li *ngIf="(af.auth | async)"><a (click)="logout()" routerLink="/login" routerLinkActive="active">Logout</a></li>
-            
-           
-          </ul>
+
+              <br>
+              <ul>
+
+                <li *ngIf="(af.auth | async)"><a (click)="logout()" routerLink="/login" routerLinkActive="active">Logout</a></li>
+
+
+              </ul>
             </div>
 
 
-            
+
 
           </div>
 
-          
-            
-            
+
+
+
         </md-nav-list>
 
-        
-     
 
-    </md-sidenav>
 
-    <md-toolbar >
-      
-    <div class="toolbar-icon">
-      <button md-icon-button (click)="start.open()" >
+
+      </md-sidenav>
+
+      <md-toolbar>
+
+        <div class="toolbar-icon">
+          <button md-icon-button (click)="start.open()">
           <md-icon  >menu
           </md-icon>
        </button>
-    </div>
+        </div>
 
-    <div class="toolbar-heading">
-     Cloud Function Demo
-    </div>
-
-    
-
-    
-
-    <!--</div>-->
-
-
-    </md-toolbar> 
-
-
-
-<!-- Main content -->
-    <div class="col-m-7 col-s-12">
-    
+        <div class="toolbar-heading">
+          Cloud Function Demo
+        </div>
 
 
 
 
 
-
-       <div class="login-form" align="center">
-        <form class="example-form" (submit)="executeURL($event, idToken.value)">
-
-          <table class="example-full-width" cellspacing="0">
-            <tr>
-              <td align="center">
-                
-                   
-                    <md-input-container class="example-full-width">
-                    <input  mdInput #email type="email" id="email" class="form-control" placeholder="ID Token" value={{this.userToken}}>
-                </md-input-container>
-                
-              </td>
-            </tr>
-            <tr>
-              <td align="center">
-                
+        <!--</div>-->
 
 
-                    <md-input-container class="example-full-width">
-                    <input  mdInput  type="text" id="result" class="form-control" placeholder="Result form CF" value={{this.result}}>
-                </md-input-container>
-                
-              </td>
-            </tr>
-            <tr>
-              <td align="center ">
+      </md-toolbar>
 
-               
 
-                 <a md-raised-button   (click)="executeURL($event,email.value)">Execute CF</a>
-                 <br><br><br>
 
-               
+      <!-- Main content -->
+      <div class="col-m-7 col-s-12">
 
-                
-                
-              </td>
-            </tr>
-            <tr>
-              <td>
-                 <ul > 
-           
-            
-           
-          </ul>
-              </td>
-            </tr>
-          </table>
-        </form>
-        
+
+
+
+
+
+
+        <div class="login-form" align="center">
+          <form class="example-form" (submit)="executeURL($event, idToken.value)">
+
+            <table class="example-full-width" cellspacing="0">
+              <tr>
+                <td align="center">
+
+
+                  <md-input-container class="example-full-width">
+                    <input mdInput #email type="email" id="email" class="form-control" placeholder="ID Token" value={{this.userToken}}>
+                  </md-input-container>
+
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+
+
+
+                  <md-input-container class="example-full-width">
+                    <input mdInput type="text" id="result" class="form-control" placeholder="Result form CF" value={{this.result}}>
+                  </md-input-container>
+
+                </td>
+              </tr>
+              <tr>
+                <td align="center ">
+
+
+
+                  <a md-raised-button (click)="executeURL($event,email.value)">Execute CF</a>
+                  <br><br><br>
+
+
+
+
+
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <ul>
+
+
+
+                  </ul>
+                </td>
+              </tr>
+            </table>
+          </form>
+
 
 
 
           <form (submit)="onAddSubmit()">
-  
- 
-  
-  <div class="form-group">
-
-    
-    <input id="image1" name="image1" [(ngModel)]="image1" type="file" >
-  </div>
-  
-<br><br>
-  <a md-raised-button   (click)="onAddSubmit1()">Upload</a>
-  
-</form>
 
 
+
+            <div class="form-group">
+
+
+              <input id="image1" name="image1" [(ngModel)]="image1" type="file">
+            </div>
+
+            <br><br>
+            <a md-raised-button (click)="onAddSubmit1()">Upload</a>
+
+          </form>
 
 
 
 
-      </div> 
 
 
-      
-
-
-     
-    </div><!-- End of col-1 -->
+        </div>
 
 
 
-    <div class="col-m-5 col-s-11">
-      <!--<app-bill-detail></app-bill-detail> -->
-      
-    </div><!-- End of col-2  -->
+
+
+
+      </div>
+      <!-- End of col-1 -->
+
+
+
+      <div class="col-m-5 col-s-11">
+        <!--<app-bill-detail></app-bill-detail> -->
+
+      </div>
+      <!-- End of col-2  -->
 
 
 
@@ -169,43 +171,17 @@
         </div> <!-- End of column 3 -->
 
 
-<!-- End of main content -->
-          
-</md-sidenav-container>
+      <!-- End of main content -->
 
-          
+    </md-sidenav-container>
 
-</div>
 
-<!--<div class="col-3">
+
+  </div>
+
+  <!--<div class="col-3">
 
 </div> -->
 
-</div> <!-- End of action bar row -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div>
+<!-- End of action bar row -->

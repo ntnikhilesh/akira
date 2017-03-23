@@ -34,7 +34,7 @@ export class BillingComponentComponent implements OnInit
   result:any;
   weg:Weg[];
   userToken:any;
-  flag:any;
+  mflag:any;
   error:any;
   fileUploadStatus:any;
 
@@ -42,8 +42,17 @@ export class BillingComponentComponent implements OnInit
 
   ngOnInit() 
   {
-  
-    this.getUserToken();
+    this.mflag =navigator.onLine;
+    if(this.mflag)
+    {
+      console.log("User is online....")
+      this.getUserToken();
+    }
+    else{
+      console.log("User is offline...")
+      alert("Please check you internet connection...")
+    }
+    
  
   }
 
@@ -84,6 +93,12 @@ export class BillingComponentComponent implements OnInit
   onAddSubmit1()
   {
 
+      this.mflag =navigator.onLine;
+    if(this.mflag)
+    {
+      console.log("User is online....")
+      
+    
     
 
 
@@ -138,6 +153,13 @@ export class BillingComponentComponent implements OnInit
   console.log(e)
 });
 
+
+}
+    else{
+      console.log("User is offline...")
+      alert("Please check you internet connection...")
+    }
+
   }
 
 
@@ -178,6 +200,16 @@ checkBrowser()
 
  executeURL(event,midToken)
   {
+
+
+       this.mflag =navigator.onLine;
+    if(this.mflag)
+    {
+      console.log("User is online....")
+     
+    
+
+
       event.preventDefault();
          var hai= this.provider.firebase(midToken)
         .map(
@@ -193,6 +225,12 @@ checkBrowser()
             err => console.log(err),
             () => console.log('Done')
          );
+
+         }
+    else{
+      console.log("User is offline...")
+      alert("Please check you internet connection...")
+    }
           
 
    }

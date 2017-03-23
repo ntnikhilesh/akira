@@ -32,7 +32,7 @@ export class FirebaseService {
     this.images = this.af.database.list('shopgro-DB') as FirebaseListObservable<Images[]>
     this.folder = 'demo-folder1';
     this.listings = this.af.database.list('/shopgro-DB')as FirebaseListObservable<Listings[]>;
-    console.log("===>",this.listings);
+    
   }
 
   ngOnInit() {
