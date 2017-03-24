@@ -141,7 +141,7 @@ exports.testFileUpload = functions.https.onRequest((request, response) =>
 
 function setmConnection(callback)
 {
-
+  mongoose.Promise = global.Promise;
   mongoose.connect('mongodb://cc:cc123@ds135800.mlab.com:35800/mydb');
 
   var db = mongoose.connection;
@@ -172,8 +172,19 @@ kittySchema.methods.speak = function () {
 var Kitten = mongoose.model('Kitten', kittySchema);
 
 var fluffy = new Kitten({ name: 'Vinay' });
+
 fluffy.speak(); // "Meow name is fluffy"
+
+fluffy.save(function (err, fluffy) {
+  if (err) return console.error(err);
+  console.log("Item inserted")
+  fluffy.speak();
+
+});
 });
  
+
+
+
 
 }
