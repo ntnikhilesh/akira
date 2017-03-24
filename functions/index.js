@@ -8,6 +8,7 @@ admin.initializeApp(functions.config().firebase);
 const express = require('express');
 const cors = require('cors')({origin: true});
 const app = express();
+var mongoose = require('mongoose');
 
 
 exports.test = functions.https.onRequest((request, response) => 
@@ -114,15 +115,42 @@ function insertDocuments(db, callback)
 
 exports.testFileUpload = functions.https.onRequest((request, response) => 
 {
-  var param=request.query.mURL
-  console.log("File URL0 ="+param)
+  
+  
 
     cors(request, response, () => 
   {
+    var param=request.query.mURL
     console.log("File URL1 ="+request.query.mURL)
     console.log("File uploaded successfully")
     response.send("Upload done")
 
+
+     setmConnection(function()
+          {
+             console.log("h1")
+            //response.send(result);
+          })
+    
+
+
   })
 });
 
+
+
+function setmConnection(callback)
+{
+
+  mongoose.connect('mongodb://cc:cc123@ds135800.mlab.com:35800/mydb');
+
+  var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+
+  console.log("Mongoos connected...")
+  // we're connected!
+});
+ 
+
+}
