@@ -37,6 +37,7 @@ export class BillingComponentComponent implements OnInit
   mflag:any;
   error:any;
   fileUploadStatus:any;
+  mFileURL:any;
 
   constructor(private firebaseService:FirebaseService,private wegService:WegService,public af:AngularFire,private localStorageService: LocalStorageService,private http: Http,public provider:Test,public router: Router) { }
 
@@ -123,7 +124,7 @@ export class BillingComponentComponent implements OnInit
         }
         else{
          // this.result="You are offline...pl check your nw conn...";
-         console.log("item in BC"+successMessage)
+         console.log("item in BC21"+successMessage)
            var hai= this.provider.firebaseFileUpload()
         .map(
         res=>
@@ -140,10 +141,11 @@ export class BillingComponentComponent implements OnInit
          );
 
 
-          this.firebaseService.oaddInDB(successMessage)
-          {
-
-          }
+          this.mFileURL=this.firebaseService.oaddInDB(successMessage)
+          //console.log("Object Key in BC"+this.mFileURL)
+          
+          
+          
 
         }
    

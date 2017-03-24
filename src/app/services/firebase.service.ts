@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Http, Response } from '@angular/http';
 
-
+import { LocalStorageService } from 'angular-2-local-storage';
 
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable, AuthProviders, AuthMethods, } from 'angularfire2';
 
@@ -25,9 +25,12 @@ export class FirebaseService {
   folder: any;
   num: number;
   fileUploadStatus: any;
+   mItemKey:any;
 
   constructor(private router: Router, private http: Http, private af: AngularFire,
-    private afo: AngularFireOffline) {
+    private afo: AngularFireOffline,public localStorageService: LocalStorageService) {
+
+     
     //this.folder='listingimages';
     this.images = this.af.database.list('shopgro-DB') as FirebaseListObservable<Images[]>
     this.folder = 'demo-folder1';
@@ -68,6 +71,7 @@ export class FirebaseService {
     return new Promise(function (resolve, reject) {
       console.log("hi from oaddListing fun")
       let storageRef = firebase.storage().ref();
+      
 
       //var self=this;
       for (let selectedFile of [(<HTMLInputElement>document.getElementById('image1')).files[0]]) {
@@ -81,6 +85,7 @@ export class FirebaseService {
           listing.image = selectedFile.name;
           listing.path = path;
           listing.imageUrl = snapshot.downloadURL;
+
           console.log('offline adding done...');
 
           console.log(listing)
@@ -88,6 +93,7 @@ export class FirebaseService {
           //this.listings.push(listing);
           if (snapshot['f'] === "success") {
             console.log("Sucess Upload Dude");
+
             resolve(listing)
           }
           else {
@@ -111,22 +117,50 @@ export class FirebaseService {
 
 oaddInDB(listing)
 {
-  console.log("Item added in BD as well")
-  this.listings.push(listing);
 
+
+  
+  console.log("Item added in BD as well")
+  //console.log("File URL form service="+listing.imageURL)
+  //var mDBRef=this.listings.push(listing)
+
+  this.listings.push(listing).then((item) => { 
+
+
+    this.mItemKey=item.key;
+    console.log("Your key is service ="+this.mItemKey);
+
+    this.olisting=this.afo.database.object('/shopgro-DB/'+this.mItemKey) as AfoObjectObservable<Listings>
+
+    console.log("Item in service="+this.olisting)
+
+        
+
+    
+
+    //this.localStorageService.set("myfileID",this.mItemKey);
+  
+});
+  //console.log("Data after insert opn="+)
+//return this.mItemKey;
 }
 
 
  
 
-  firebaseFileUpload() {
+  // firebaseFileUpload() {
 
-    console.log("hi form file upload")
+  //   console.log("hi form file upload")
+
+  //   console.log("User id in Upload fun="+this.localStorageService.get("fileID"))
+
+  //   //  this.mFileURL=this.localStorageService.get("fileID");
+  //   this.mFileURL="nt"
   
 
-    return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/testFileUpload')
+  //   return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/testFileUpload?mURL='+this.mFileURL)
 
-  }
+  // }
 
 
 

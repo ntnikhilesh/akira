@@ -114,10 +114,12 @@ function insertDocuments(db, callback)
 
 exports.testFileUpload = functions.https.onRequest((request, response) => 
 {
-
+  var param=request.query.mURL
+  console.log("File URL0 ="+param)
 
     cors(request, response, () => 
   {
+    console.log("File URL1 ="+request.query.mURL)
     console.log("File uploaded successfully")
     response.send("Upload done")
 
