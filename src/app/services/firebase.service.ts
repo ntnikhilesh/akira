@@ -128,23 +128,24 @@ oaddInDB(listing)
 
 
     this.mItemKey=item.key;
-    console.log("Your key is service ="+this.mItemKey);
-
-    this.olisting=this.afo.database.object('/shopgro-DB/'+this.mItemKey) as AfoObjectObservable<Listings>
-
-    console.log("Item in service="+this.olisting)
-
-        
+    console.log("Your key="+this.mItemKey);
 
     
 
-    //this.localStorageService.set("myfileID",this.mItemKey);
-  
+    this.localStorageService.set("fileID1", this.mItemKey);
 });
-  //console.log("Data after insert opn="+)
+
 //return this.mItemKey;
+  //console.log("Data after insert opn="+)
+
 }
 
+
+
+// getFileURL(id)
+// {
+//  return 1;
+// }
 
  
 

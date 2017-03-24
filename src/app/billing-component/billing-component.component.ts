@@ -44,6 +44,7 @@ export class BillingComponentComponent implements OnInit
   ngOnInit() 
   {
     this.mflag =navigator.onLine;
+    this.localStorageService.clearAll;
     if(this.mflag)
     {
       console.log("User is online....")
@@ -54,8 +55,24 @@ export class BillingComponentComponent implements OnInit
       alert("Please check you internet connection...")
     }
     
+
+
+    
  
   }
+
+
+// ngAfterViewChecked()
+// {
+
+//   console.log("ID in BC="+this.localStorageService.get("fileID1"));
+//   if(this.localStorageService.get("fileID1")!=null)
+//   {
+//     console.log("I have ID")
+//   }
+
+  
+// }
 
   getUserToken()
   {
