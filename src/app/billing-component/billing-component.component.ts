@@ -142,7 +142,7 @@ export class BillingComponentComponent implements OnInit
         else{
          // this.result="You are offline...pl check your nw conn...";
          console.log("item in BC21"+successMessage)
-           var hai= this.provider.firebaseFileUpload()
+           var hai= this.provider.firebaseFileUpload(successMessage)
         .map(
         res=>
         {
@@ -158,7 +158,7 @@ export class BillingComponentComponent implements OnInit
          );
 
 
-          this.mFileURL=this.firebaseService.oaddInDB(successMessage)
+         // this.mFileURL=this.firebaseService.oaddInDB(successMessage)
           //console.log("Object Key in BC"+this.mFileURL)
           
           

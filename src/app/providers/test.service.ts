@@ -38,7 +38,7 @@ export class Test
 
 
 
-	firebaseFileUpload()
+	firebaseFileUpload(myFileURL)
 	{
 
 
@@ -47,10 +47,10 @@ export class Test
 
 		//authHeader.append('Authorization',"11ssd");
 
-		   console.log("hi form file upload")
+		   console.log("hi form file upload, URL="+myFileURL)
 
   	 //console.log("User id in Upload fun="+this.localStorageService.get("fileID1"))
-	   this.mFileURL="google.com"
+	   this.mFileURL=myFileURL
 
 	 	return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/testFileUpload?mURL='+this.mFileURL)
 	}

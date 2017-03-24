@@ -94,7 +94,7 @@ export class FirebaseService {
           if (snapshot['f'] === "success") {
             console.log("Sucess Upload Dude");
 
-            resolve(listing)
+            resolve(snapshot.downloadURL)
           }
           else {
             console.log("Failure");
