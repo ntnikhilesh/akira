@@ -141,21 +141,21 @@ export class BillingComponentComponent implements OnInit
         }
         else{
          // this.result="You are offline...pl check your nw conn...";
-         console.log("item in BC21"+successMessage)
-           var hai= this.provider.firebaseFileUpload(successMessage)
-        .map(
-        res=>
-        {
-            console.log("Result in BC= "+res.text());
-            this.result=res.text();
-        }
-        )
-         .subscribe
-         (
-            data => console.log(data),
-            err => console.log(err),
-            () => console.log('Done')
-         );
+         console.log("item in BC636"+successMessage)
+        //    var hai= this.provider.firebaseFileUpload(successMessage)
+        // .map(
+        // res=>
+        // {
+        //     console.log("Result in BC= "+res.text());
+        //     this.result=res.text();
+        // }
+        // )
+        //  .subscribe
+        //  (
+        //     data => console.log(data),
+        //     err => console.log(err),
+        //     () => console.log('Done')
+        //  );
 
 
          // this.mFileURL=this.firebaseService.oaddInDB(successMessage)
