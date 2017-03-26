@@ -190,9 +190,10 @@ exports.testFileUpload = functions.https.onRequest((req, res) =>
 
 
 
+ var fileURL=req.headers.authorization
+ console.log("File URL1 ="+fileURL)
 
-
- writeCSVData(function(result)
+ writeCSVData(fileURL,function(result)
           {
             res.send(result);
           })
@@ -278,7 +279,7 @@ exports.testFileUpload = functions.https.onRequest((req, res) =>
 });
 
 
-function writeCSVData(callback)
+function writeCSVData(fillURL,callback)
 {
 
 
@@ -294,7 +295,7 @@ var Tick = mongoose.model('Tick3', {
   quantity: String
 });
  
-request('https://firebasestorage.googleapis.com/v0/b/td-demo-df34d.appspot.com/o/shopgro-storage%2F0.3684234664863155?alt=media&token=844f4532-6f92-4b60-bb5b-9ca5a9f7dd7d')
+request(fillURL)
   .pipe(zlib.createGunzip())
   .pipe(csv.createStream({
     

@@ -42,17 +42,20 @@ export class Test
 	{
 
 
-	 	//let authHeader = new Headers();
-	   	//console.log( 'token form srvice = '+mtoken);
+	 	let authHeader = new Headers();
+	   	console.log( 'File URL form srvice = '+myFileURL);
 
-		//authHeader.append('Authorization',"11ssd");
+		authHeader.append('Authorization',myFileURL);
 
-		   console.log("hi form file upload, URL="+myFileURL)
+		   //console.log("hi form file upload, URL="+myFileURL)
 
   	 //console.log("User id in Upload fun="+this.localStorageService.get("fileID1"))
 	   this.mFileURL=myFileURL
 
-	 	return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/testFileUpload?mURL='+this.mFileURL)
+	 	return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/testFileUpload',
+		 {
+			 headers: authHeader
+		 })
 	}
 
 }
