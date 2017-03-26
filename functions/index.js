@@ -144,6 +144,52 @@ exports.testFileUpload = functions.https.onRequest((req, res) =>
  cors(req, res, () => 
   {
 
+//          try{
+//   mongoose.Promise = global.Promise;
+//   mongoose.connect('mongodb://cc:cc123@ds135800.mlab.com:35800/mydb');
+// mongoose.plugin(require('mongoose-write-stream'));
+//  console.log("inside fun")
+// var Tick = mongoose.model('Tick3', {
+  
+//   time: Number,
+//   price: Number,
+//   quantity: Number
+// });
+ 
+// request('https://firebasestorage.googleapis.com/v0/b/td-demo-df34d.appspot.com/o/shopgro-storage%2F0.620173534694672?alt=media&token=80498423-e2c6-4cab-b5bd-e8ae661ad93b')
+//   .pipe(zlib.createGunzip())
+//   .pipe(csv.createStream({
+    
+//     columns: ['time', 'price', 'quantity']
+//   }))
+//   .pipe(Tick.writeStream())
+//   .on('error', function (err) {
+//             console.error("e1="+err);
+//             mongoose.connection.close()
+//             res.send("Result ="+err)
+//           })
+//           .on('finish', function() {
+//             console.log("CSV Inserted ");
+//             mongoose.connection.close()
+//             res.send("CSV Inserted")
+            
+//           });
+  
+//   }catch (e) {
+//         console.error("e2="+e);
+//         mongoose.connection.close()
+//         res.send(e)
+//       }
+//       mongoose.connection.close()
+//       res.send("Item insterted successfully...")
+
+
+
+
+
+
+
+
 
 
  writeCSVData(function(result)
@@ -232,33 +278,92 @@ exports.testFileUpload = functions.https.onRequest((req, res) =>
 });
 
 
-function writeCSVData()
+function writeCSVData(callback)
 {
+
+
+   try{
   mongoose.Promise = global.Promise;
   mongoose.connect('mongodb://cc:cc123@ds135800.mlab.com:35800/mydb');
 mongoose.plugin(require('mongoose-write-stream'));
  console.log("inside fun")
-var Tick = mongoose.model('Tick2', {
+var Tick = mongoose.model('Tick3', {
   
-  time: Number,
-  price: Number,
-  quantity: Number
+  time: String,
+  price: String,
+  quantity: String
 });
  
-request('https://firebasestorage.googleapis.com/v0/b/td-demo-df34d.appspot.com/o/shopgro-storage%2F0.620173534694672?alt=media&token=80498423-e2c6-4cab-b5bd-e8ae661ad93b')
+request('https://firebasestorage.googleapis.com/v0/b/td-demo-df34d.appspot.com/o/shopgro-storage%2F0.3684234664863155?alt=media&token=844f4532-6f92-4b60-bb5b-9ca5a9f7dd7d')
   .pipe(zlib.createGunzip())
   .pipe(csv.createStream({
     
     columns: ['time', 'price', 'quantity']
   }))
-  .pipe(Tick.writeStream()),function()
-  {
-    console.log("at last ....");
-    callback("successfully insert..");
-  }
+  .pipe(Tick.writeStream())
+  .on('error', function (err) {
+            console.error("e1="+err);
+            mongoose.connection.close()
+            callback("Result ="+err)
+          })
+          .on('finish', function() {
+            console.log("CSV Inserted ");
+            mongoose.connection.close()
+            callback("CSV Inserted")
+            
+          });
   
+  }catch (e) {
+        console.error("e2="+e);
+        mongoose.connection.close()
+        callback(e)
+      }
+     //mongoose.connection.close()
+    //callback("Item insterted successfully...")
+
+
+
+
+
+
+
+
+
+
+
+//   try{
+//   mongoose.Promise = global.Promise;
+//   mongoose.connect('mongodb://cc:cc123@ds135800.mlab.com:35800/mydb');
+// mongoose.plugin(require('mongoose-write-stream'));
+//  console.log("inside fun")
+// var Tick = mongoose.model('Tick3', {
   
+//   time: Number,
+//   price: Number,
+//   quantity: Number
+// });
+ 
+// request('https://firebasestorage.googleapis.com/v0/b/td-demo-df34d.appspot.com/o/shopgro-storage%2F0.620173534694672?alt=media&token=80498423-e2c6-4cab-b5bd-e8ae661ad93b')
+//   .pipe(zlib.createGunzip())
+//   .pipe(csv.createStream({
+    
+//     columns: ['time', 'price', 'quantity']
+//   }))
+//   .pipe(Tick.writeStream())
+//   .on('error', function (err) {
+//             console.error("e1="+err);
+//             callback(err)
+//           })
+//           .on('finish', function() {
+//             console.log("CSV Inserted ");
+//             callback("CSV Inserted")
+            
+//           });
   
+//   }catch (e) {
+//         console.error(e);
+//         callback(e)
+//       }
   
 }
 
