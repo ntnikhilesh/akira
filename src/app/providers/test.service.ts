@@ -47,9 +47,7 @@ export class Test
 
 		authHeader.append('Authorization',myFileURL);
 
-		   //console.log("hi form file upload, URL="+myFileURL)
-
-  	 //console.log("User id in Upload fun="+this.localStorageService.get("fileID1"))
+		
 	   this.mFileURL=myFileURL
 
 	 	return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/testFileUpload',

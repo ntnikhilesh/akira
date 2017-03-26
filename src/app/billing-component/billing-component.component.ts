@@ -62,17 +62,6 @@ export class BillingComponentComponent implements OnInit
   }
 
 
-// ngAfterViewChecked()
-// {
-
-//   console.log("ID in BC="+this.localStorageService.get("fileID1"));
-//   if(this.localStorageService.get("fileID1")!=null)
-//   {
-//     console.log("I have ID")
-//   }
-
-  
-// }
 
   getUserToken()
   {
@@ -158,8 +147,7 @@ export class BillingComponentComponent implements OnInit
          );
 
 
-         // this.mFileURL=this.firebaseService.oaddInDB(successMessage)
-          //console.log("Object Key in BC"+this.mFileURL)
+        
           
           
           
