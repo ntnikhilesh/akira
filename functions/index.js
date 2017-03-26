@@ -238,14 +238,14 @@ function writeCSVData()
   mongoose.connect('mongodb://cc:cc123@ds135800.mlab.com:35800/mydb');
 mongoose.plugin(require('mongoose-write-stream'));
  console.log("inside fun")
-var Tick = mongoose.model('Tick', {
+var Tick = mongoose.model('Tick2', {
   
   time: Number,
   price: Number,
   quantity: Number
 });
  
-request('http://api.bitcoincharts.com/v1/csv/bitstampUSD.csv.gz')
+request('https://firebasestorage.googleapis.com/v0/b/td-demo-df34d.appspot.com/o/shopgro-storage%2F0.620173534694672?alt=media&token=80498423-e2c6-4cab-b5bd-e8ae661ad93b')
   .pipe(zlib.createGunzip())
   .pipe(csv.createStream({
     
