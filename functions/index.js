@@ -186,19 +186,21 @@ function writeCSVData(fillURL, callback) {
       quantity: String
     });
 
-    request(fillURL)
-      .pipe(zlib.createGunzip())
-      .pipe(csv.createStream({
+   let mrequest= request(fillURL)
+      mrequest.pipe(zlib.createGunzip())
+      let csvData=mrequest.pipe(csv.createStream({
 
         columns: ['time', 'price', 'quantity']
       }))
-      .pipe(Tick.writeStream())
-      .on('error', function (err) {
+      console.log("Your CSV data="+csvData)
+      //mrequest.pipe(Tick.writeStream())
+      
+      mrequest.on('error', function (err) {
         console.error("e1=" + err);
         mongoose.connection.close()
         callback("Result =" + err)
       })
-      .on('finish', function () {
+      mrequest.on('finish', function () {
         console.log("CSV Inserted ");
         mongoose.connection.close()
         callback("CSV Inserted")
