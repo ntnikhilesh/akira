@@ -32,6 +32,8 @@ var _ = require('lodash');
 
 const concat = require('concat-stream');
 
+var populatedObject;
+
 
 
 
@@ -120,12 +122,12 @@ function insertDocuments(db, callback) {
   var collection = db.collection('documents');
   // Insert some documents
   collection.insertMany(
-    [
-      { d: 1 }, { e: 2 }, { f: 3 }
-    ], function (err, result) {
+    populatedObject, function (err, result) {
       if (err)
         callback(err);
-      console.log("Inserted 3 documents into the collection");
+        db.close
+      console.log("Inserted into the collection");
+      db.close
       callback(null, result);
     });
 }
@@ -211,17 +213,50 @@ console.log(arr)
 var objects = _.map(arr, function(item){return item.split(',');});
 var headers = objects[0];
 objects.splice(0, 1); // remove the header line
-var populatedObject = [];
+populatedObject = [];
 objects.forEach(function(item){
 var obj = _.zipObject(headers, item);
 populatedObject.push(obj);
 });
+
+
 console.log(populatedObject);
+
+
+ setConnection(function (result) {
+        callback(result)
+      })
+
+
+
 }));
 
 
+// var productSchema = mongoose.Schema({
+//     barcode: String,
+//     itemName: String,  
+//     mrp: String,                                                                                                              
+//     categories: String,
+//     imageUrl: String
+// });
 
 
+// var Product = mongoose.model('Product', productSchema);
+
+// var product = new Product(populatedObject
+// );
+
+// product.save( function(error, document){ 
+//   if(error)
+//   {
+//     console.log("r123"+error)
+//   }
+//   else
+//   {
+//     console.log("res123"+document)
+//   }
+  
+//    } );
 
 
 
