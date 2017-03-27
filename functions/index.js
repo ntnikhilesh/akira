@@ -28,7 +28,7 @@ var csv = require('csv-stream');
 //var request  = require('request');
 var zlib = require('zlib');
 
-//var _ = require('loadash');
+var _ = require('lodash');
 
 const concat = require('concat-stream');
 
@@ -195,13 +195,39 @@ request('https://firebasestorage.googleapis.com/v0/b/td-demo-df34d.appspot.com/o
 let test= stringBuffer.toString();
 var arr = test.split('\n');
 console.log(arr)
-var jsonObj = [];
-var headers = arr[0].split(',');
-jsonObj.push({[headers[0]]:arr[1].split(',')[0] })
 
-console.log("headers......");
-console.log(jsonObj);
+
+
+
+// var jsonObj = [];
+// var headers = arr[0].split(',');
+// jsonObj.push({[headers[0]]:arr[1].split(',')[0] })
+
+// console.log("headers......");
+// console.log(jsonObj);
+
+
+
+var objects = _.map(arr, function(item){return item.split(',');});
+var headers = objects[0];
+objects.splice(0, 1); // remove the header line
+var populatedObject = [];
+objects.forEach(function(item){
+var obj = _.zipObject(headers, item);
+populatedObject.push(obj);
+});
+console.log(populatedObject);
 }));
+
+
+
+
+
+
+
+
+
+
 
 
 //     var Tick = mongoose.model('Tick3', {
