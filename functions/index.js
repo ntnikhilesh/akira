@@ -194,15 +194,15 @@ function getCSVData(fillURL, callback) {
 
 
   try {
-    mongoose.Promise = global.Promise;
-    mongoose.connect('mongodb://cc:cc123@ds135800.mlab.com:35800/mydb');
+   // mongoose.Promise = global.Promise;
+   // mongoose.connect('mongodb://cc:cc123@ds135800.mlab.com:35800/mydb');
     mongoose.plugin(require('mongoose-write-stream'));
     console.log("inside fun")
 
 
 
     
-request('https://firebasestorage.googleapis.com/v0/b/td-demo-df34d.appspot.com/o/shopgro-storage%2F0.19122197755861037?alt=media&token=ce9a0862-3782-4d00-9048-69bdfa19dcb6')
+request(fillURL)
 .pipe(zlib.createGunzip())
 .pipe(concat(stringBuffer => {
 let test= stringBuffer.toString();
