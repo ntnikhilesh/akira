@@ -28,6 +28,12 @@ var csv = require('csv-stream');
 //var request  = require('request');
 var zlib = require('zlib');
 
+//var _ = require('loadash');
+
+const concat = require('concat-stream');
+
+
+
 
 
 
@@ -158,7 +164,7 @@ exports.testFileUpload = functions.https.onRequest((req, res) => {
     var fileURL = req.headers.authorization
     console.log("File URL1 =" + fileURL)
 
-    writeCSVData(fileURL, function (result) {
+    writeCSVData(fileURL, function (err,result) {
       res.send(result);
     })
 
@@ -179,31 +185,60 @@ function writeCSVData(fillURL, callback) {
     mongoose.connect('mongodb://cc:cc123@ds135800.mlab.com:35800/mydb');
     mongoose.plugin(require('mongoose-write-stream'));
     console.log("inside fun")
-    var Tick = mongoose.model('Tick3', {
 
-      time: String,
-      price: String,
-      quantity: String
-    });
 
-    request(fillURL)
-      .pipe(zlib.createGunzip())
-      .pipe(csv.createStream({
 
-        columns: ['time', 'price', 'quantity']
-      }))
-      .pipe(Tick.writeStream())
-      .on('error', function (err) {
-        console.error("e1=" + err);
-        mongoose.connection.close()
-        callback("Result =" + err)
-      })
-      .on('finish', function () {
-        console.log("CSV Inserted ");
-        mongoose.connection.close()
-        callback("CSV Inserted")
+    
+request('https://firebasestorage.googleapis.com/v0/b/td-demo-df34d.appspot.com/o/shopgro-storage%2F0.19122197755861037?alt=media&token=ce9a0862-3782-4d00-9048-69bdfa19dcb6')
+.pipe(zlib.createGunzip())
+.pipe(concat(stringBuffer => {
+let test= stringBuffer.toString();
+var arr = test.split('\n');
+console.log(arr)
+var jsonObj = [];
+var headers = arr[0].split(',');
+jsonObj.push({[headers[0]]:arr[1].split(',')[0] })
 
-      });
+console.log("headers......");
+console.log(jsonObj);
+}));
+
+
+//     var Tick = mongoose.model('Tick3', {
+
+//       time: String,
+//       price: String,
+//       quantity: String
+//     });
+
+
+//     request({uri:fillURL,gzip:true,json:true}, function(err, response, body){
+// console.log("Response")
+//       console.log(response.body);
+//       callback(null,response.body)
+
+// });
+
+
+  //  request(fillURL)
+  //    .pipe(zlib.createGunzip())
+     
+    //  .pipe(csv.createStream({
+
+    //     columns: ['time', 'price', 'quantity']
+    //   }))
+    //   .pipe(Tick.writeStream())
+    //   .on('error', function (err) {
+    //     console.error("e1=" + err);
+    //     mongoose.connection.close()
+    //     callback("Result =" + err)
+    //   })
+    //   .on('finish', function () {
+    //     console.log("CSV Inserted ");
+    //     mongoose.connection.close()
+    //     callback("CSV Inserted")
+
+    //   });
 
   } catch (e) {
     console.error("e2=" + e);
