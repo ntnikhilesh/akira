@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {Http, Response,URLSearchParams} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import { Headers, RequestOptions } from '@angular/http';
 
@@ -25,15 +25,23 @@ export class Test
 	{
 
 
-	 	let authHeader = new Headers();
-	   	console.log( 'token form srvice = '+mtoken);
+		let data = new URLSearchParams();
+  data.append('mytoken', mtoken);
+  data.append('myurl', "google.com");
 
-		authHeader.append('Authorization',mtoken);
+  return this.http
+    .post('https://us-central1-td-demo-df34d.cloudfunctions.net/test', data)
+    
 
-	 	return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/test', 
-	 	{
-    		headers: authHeader
-  		})
+	 	// let authHeader = new Headers();
+	   	// console.log( 'token form srvice = '+mtoken);
+
+		// authHeader.append('Authorization',mtoken);
+
+	 	// return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/test', 
+	 	// {
+    	// 	headers: authHeader
+  		// })
 	}
 
 

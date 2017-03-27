@@ -49,26 +49,31 @@ exports.test = functions.https.onRequest((request, response) => {
 
 
 
+
+console.log(request.body.myurl)
+console.log(request.body.mytoken)
+response.send("done...")
+
     //verify token
 
-    admin.auth().verifyIdToken(request.headers.authorization).then(decodedIdToken => {
-      console.log('ID Token correctly decoded', decodedIdToken);
-      request.user = decodedIdToken;
-      console.log("Valid User")
+    // admin.auth().verifyIdToken(request.headers.authorization).then(decodedIdToken => {
+    //   console.log('ID Token correctly decoded', decodedIdToken);
+    //   request.user = decodedIdToken;
+    //   console.log("Valid User")
 
 
-      setConnection(function (result) {
-        response.send(result);
-      })
+    //   setConnection(function (result) {
+    //     response.send(result);
+    //   })
 
 
 
-    }).catch(error => {
-      console.error('Error while verifying Firebase ID token:', error);
+    // }).catch(error => {
+    //   console.error('Error while verifying Firebase ID token:', error);
 
-      response.send("Invalid user")
+    //   response.send("Invalid user")
 
-    });
+    // });
 
 
 
