@@ -52,28 +52,34 @@ exports.test = functions.https.onRequest((request, response) => {
 
 console.log(request.body.myurl)
 console.log(request.body.mytoken)
-response.send("done...")
+//response.send("done...")
 
     //verify token
 
-    // admin.auth().verifyIdToken(request.headers.authorization).then(decodedIdToken => {
-    //   console.log('ID Token correctly decoded', decodedIdToken);
-    //   request.user = decodedIdToken;
-    //   console.log("Valid User")
+    admin.auth().verifyIdToken(request.body.mytoken).then(decodedIdToken => {
+      console.log('ID Token correctly decoded', decodedIdToken);
+      request.user = decodedIdToken;
+      console.log("Valid User")
 
 
-    //   setConnection(function (result) {
-    //     response.send(result);
-    //   })
+      getCSVData(request.body.myurl,function (result) {
+        response.send(result);
+      })
+
+      
+
+      // setConnection(function (result) {
+      //   response.send(result);
+      // })
 
 
 
-    // }).catch(error => {
-    //   console.error('Error while verifying Firebase ID token:', error);
+    }).catch(error => {
+      console.error('Error while verifying Firebase ID token:', error);
 
-    //   response.send("Invalid user")
+      response.send("Invalid user")
 
-    // });
+    });
 
 
 
@@ -171,7 +177,7 @@ exports.testFileUpload = functions.https.onRequest((req, res) => {
     var fileURL = req.headers.authorization
     console.log("File URL1 =" + fileURL)
 
-    writeCSVData(fileURL, function (err,result) {
+    getCSVData(fileURL, function (err,result) {
       res.send(result);
     })
 
@@ -184,7 +190,7 @@ exports.testFileUpload = functions.https.onRequest((req, res) => {
 });
 
 
-function writeCSVData(fillURL, callback) {
+function getCSVData(fillURL, callback) {
 
 
   try {

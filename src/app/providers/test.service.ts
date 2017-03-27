@@ -46,6 +46,34 @@ export class Test
 
 
 
+		firebase1(mtoken,mfileURL)
+	{
+
+
+		let data = new URLSearchParams();
+  data.append('mytoken', mtoken);
+  data.append('myurl', mfileURL);
+console.log( 'token form srvice = '+mtoken);
+console.log( 'File URL form srvice = '+mfileURL);
+
+
+  return this.http
+    .post('https://us-central1-td-demo-df34d.cloudfunctions.net/test', data)
+    
+
+	 	// let authHeader = new Headers();
+	   	// console.log( 'token form srvice = '+mtoken);
+
+		// authHeader.append('Authorization',mtoken);
+
+	 	// return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/test', 
+	 	// {
+    	// 	headers: authHeader
+  		// })
+	}
+
+
+
 	firebaseFileUpload(myFileURL)
 	{
 

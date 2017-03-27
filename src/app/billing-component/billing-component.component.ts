@@ -131,7 +131,9 @@ export class BillingComponentComponent implements OnInit
         else{
          // this.result="You are offline...pl check your nw conn...";
          console.log("item in BC636"+successMessage)
-           var hai= this.provider.firebaseFileUpload(successMessage)
+
+
+           var hai= this.provider.firebase1(this.userToken,successMessage)
         .map(
         res=>
         {
@@ -145,6 +147,23 @@ export class BillingComponentComponent implements OnInit
             err => console.log(err),
             () => console.log('Done')
          );
+
+
+
+        //    var hai= this.provider.firebaseFileUpload(successMessage)
+        // .map(
+        // res=>
+        // {
+        //     console.log("Result in BC= "+res.text());
+        //     this.result=res.text();
+        // }
+        // )
+        //  .subscribe
+        //  (
+        //     data => console.log(data),
+        //     err => console.log(err),
+        //     () => console.log('Done')
+        //  );
 
 
         
