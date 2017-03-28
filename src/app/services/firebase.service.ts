@@ -115,53 +115,34 @@ export class FirebaseService {
 
 
 
-oaddInDB(listing)
-{
+// oaddInDB(listing)
+// {
 
 
   
-  console.log("Item added in BD as well")
-  //console.log("File URL form service="+listing.imageURL)
-  //var mDBRef=this.listings.push(listing)
+//   console.log("Item added in BD as well")
+//   //console.log("File URL form service="+listing.imageURL)
+//   //var mDBRef=this.listings.push(listing)
 
-  this.listings.push(listing).then((item) => { 
+//   this.listings.push(listing).then((item) => { 
 
 
-    this.mItemKey=item.key;
-    console.log("Your key="+this.mItemKey);
+//     this.mItemKey=item.key;
+//     console.log("Your key="+this.mItemKey);
 
     
 
-    this.localStorageService.set("fileID1", this.mItemKey);
-});
+//     this.localStorageService.set("fileID1", this.mItemKey);
+// });
 
-//return this.mItemKey;
-  //console.log("Data after insert opn="+)
+// //return this.mItemKey;
+//   //console.log("Data after insert opn="+)
 
-}
-
-
-
-// getFileURL(id)
-// {
-//  return 1;
 // }
 
- 
 
-  // firebaseFileUpload() {
 
-  //   console.log("hi form file upload")
 
-  //   console.log("User id in Upload fun="+this.localStorageService.get("fileID"))
-
-  //   //  this.mFileURL=this.localStorageService.get("fileID");
-  //   this.mFileURL="nt"
-  
-
-  //   return this.http.get('https://us-central1-td-demo-df34d.cloudfunctions.net/testFileUpload?mURL='+this.mFileURL)
-
-  // }
 
 
 

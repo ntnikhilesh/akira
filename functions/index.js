@@ -22,8 +22,6 @@ const LOCAL_TMP_FOLDER = '/tmp/';
 // File extension for the created JPEG files.
 const JPEG_EXTENSION = 'jpg';
 
-//Write CSV file
-//var mongoose = require('mongoose');
 var csv = require('csv-stream');
 //var request  = require('request');
 var zlib = require('zlib');
@@ -50,9 +48,9 @@ exports.test = functions.https.onRequest((request, response) => {
 
 
 
-console.log(request.body.myurl)
-console.log(request.body.mytoken)
-//response.send("done...")
+    console.log(request.body.myurl)
+    console.log(request.body.mytoken)
+    //response.send("done...")
 
     //verify token
 
@@ -62,15 +60,11 @@ console.log(request.body.mytoken)
       console.log("Valid User")
 
 
-      getCSVData(request.body.myurl,function (result) {
+      getCSVData(request.body.myurl, function (result) {
         response.send(result);
       })
 
-      
 
-      // setConnection(function (result) {
-      //   response.send(result);
-      // })
 
 
 
@@ -95,6 +89,63 @@ console.log(request.body.mytoken)
 
 
 })
+
+
+
+
+function getCSVData(fillURL, callback) {
+
+
+  try {
+
+    mongoose.plugin(require('mongoose-write-stream'));
+    console.log("inside fun")
+
+
+
+
+    request(fillURL)
+      .pipe(zlib.createGunzip())
+      .pipe(concat(stringBuffer => {
+        let test = stringBuffer.toString();
+        var arr = test.split('\n');
+        console.log(arr)
+
+
+        var objects = _.map(arr, function (item) { return item.split(','); });
+        var headers = objects[0];
+        objects.splice(0, 1); // remove the header line
+        populatedObject = [];
+        objects.forEach(function (item) {
+          var obj = _.zipObject(headers, item);
+          populatedObject.push(obj);
+        });
+
+
+        console.log(populatedObject);
+
+
+        setConnection(function (result) {
+          callback(result)
+        })
+
+
+
+      }));
+
+
+
+  } catch (e) {
+    console.error("e2=" + e);
+    mongoose.connection.close()
+    callback(e)
+  }
+
+
+}
+
+
+
 
 
 function setConnection(callback) {
@@ -136,7 +187,7 @@ function insertDocuments(db, callback) {
     populatedObject, function (err, result) {
       if (err)
         callback(err);
-        db.close
+      db.close
       console.log("Inserted into the collection");
       db.close
       callback(null, result);
@@ -145,129 +196,33 @@ function insertDocuments(db, callback) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //Download file from storage and write data on DB
 
 
-exports.testFileUpload = functions.https.onRequest((req, res) => {
+// exports.testFileUpload = functions.https.onRequest((req, res) => {
 
 
 
-  cors(req, res, () => {
+//   cors(req, res, () => {
 
 
 
-    var fileURL = req.headers.authorization
-    console.log("File URL1 =" + fileURL)
+//     var fileURL = req.headers.authorization
+//     console.log("File URL1 =" + fileURL)
 
-    getCSVData(fileURL, function (err,result) {
-      res.send(result);
-    })
-
-
-
-  })
+//     getCSVData(fileURL, function (err, result) {
+//       res.send(result);
+//     })
 
 
 
-});
-
-
-function getCSVData(fillURL, callback) {
-
-
-  try {
-   // mongoose.Promise = global.Promise;
-   // mongoose.connect('mongodb://cc:cc123@ds135800.mlab.com:35800/mydb');
-    mongoose.plugin(require('mongoose-write-stream'));
-    console.log("inside fun")
+//   })
 
 
 
-    
-request(fillURL)
-.pipe(zlib.createGunzip())
-.pipe(concat(stringBuffer => {
-let test= stringBuffer.toString();
-var arr = test.split('\n');
-console.log(arr)
-
-
-
-
-// var jsonObj = [];
-// var headers = arr[0].split(',');
-// jsonObj.push({[headers[0]]:arr[1].split(',')[0] })
-
-// console.log("headers......");
-// console.log(jsonObj);
-
-
-
-var objects = _.map(arr, function(item){return item.split(',');});
-var headers = objects[0];
-objects.splice(0, 1); // remove the header line
-populatedObject = [];
-objects.forEach(function(item){
-var obj = _.zipObject(headers, item);
-populatedObject.push(obj);
-});
-
-
-console.log(populatedObject);
-
-
- setConnection(function (result) {
-        callback(result)
-      })
-
-
-
-}));
-
-
-// var productSchema = mongoose.Schema({
-//     barcode: String,
-//     itemName: String,  
-//     mrp: String,                                                                                                              
-//     categories: String,
-//     imageUrl: String
 // });
 
 
-// var Product = mongoose.model('Product', productSchema);
-
-// var product = new Product(populatedObject
-// );
-
-// product.save( function(error, document){ 
-//   if(error)
-//   {
-//     console.log("r123"+error)
-//   }
-//   else
-//   {
-//     console.log("res123"+document)
-//   }
-  
-//    } );
 
 
 
@@ -276,121 +231,70 @@ console.log(populatedObject);
 
 
 
-//     var Tick = mongoose.model('Tick3', {
 
-//       time: String,
-//       price: String,
-//       quantity: String
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function setmConnection(callback) {
+//   mongoose.Promise = global.Promise;
+//   mongoose.connect('mongodb://cc:cc123@ds135800.mlab.com:35800/mydb');
+
+//   var db = mongoose.connection;
+//   db.on('error', console.error.bind(console, 'connection error:'));
+//   db.once('open', function () {
+
+//     console.log("Mongoos connected...")
+
+//     var kittySchema = mongoose.Schema({
+//       name: String
 //     });
 
 
-//     request({uri:fillURL,gzip:true,json:true}, function(err, response, body){
-// console.log("Response")
-//       console.log(response.body);
-//       callback(null,response.body)
-
-// });
 
 
-  //  request(fillURL)
-  //    .pipe(zlib.createGunzip())
-     
-    //  .pipe(csv.createStream({
-
-    //     columns: ['time', 'price', 'quantity']
-    //   }))
-    //   .pipe(Tick.writeStream())
-    //   .on('error', function (err) {
-    //     console.error("e1=" + err);
-    //     mongoose.connection.close()
-    //     callback("Result =" + err)
-    //   })
-    //   .on('finish', function () {
-    //     console.log("CSV Inserted ");
-    //     mongoose.connection.close()
-    //     callback("CSV Inserted")
-
-    //   });
-
-  } catch (e) {
-    console.error("e2=" + e);
-    mongoose.connection.close()
-    callback(e)
-  }
 
 
-}
+//     kittySchema.methods.speak = function () {
+//       var greeting = this.name
+//         ? "Meow name is " + this.name
+//         : "I don't have a name";
+//       console.log(greeting);
+//     }
+
+//     var Kitten = mongoose.model('Kitten', kittySchema);
+
+//     var fluffy = new Kitten({ name: 'Vinay' });
+
+//     fluffy.speak(); // "Meow name is fluffy"
+
+//     fluffy.save(function (err, fluffy) {
+//       if (err) return console.error(err);
+//       console.log("Item inserted")
+//       fluffy.speak();
+
+//     });
+//   });
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function setmConnection(callback) {
-  mongoose.Promise = global.Promise;
-  mongoose.connect('mongodb://cc:cc123@ds135800.mlab.com:35800/mydb');
-
-  var db = mongoose.connection;
-  db.on('error', console.error.bind(console, 'connection error:'));
-  db.once('open', function () {
-
-    console.log("Mongoos connected...")
-
-    var kittySchema = mongoose.Schema({
-      name: String
-    });
-
-
-   
-
-
-
-    kittySchema.methods.speak = function () {
-      var greeting = this.name
-        ? "Meow name is " + this.name
-        : "I don't have a name";
-      console.log(greeting);
-    }
-
-    var Kitten = mongoose.model('Kitten', kittySchema);
-
-    var fluffy = new Kitten({ name: 'Vinay' });
-
-    fluffy.speak(); // "Meow name is fluffy"
-
-    fluffy.save(function (err, fluffy) {
-      if (err) return console.error(err);
-      console.log("Item inserted")
-      fluffy.speak();
-
-    });
-  });
-
-
-
-
-
-}
+// }
 
 
 
