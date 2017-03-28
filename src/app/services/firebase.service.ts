@@ -65,7 +65,8 @@ export class FirebaseService {
 
 
 
-  oaddListing1(listing) {
+  oaddListing1(listing) 
+  {
 
 
     return new Promise(function (resolve, reject) {
@@ -115,30 +116,7 @@ export class FirebaseService {
 
 
 
-// oaddInDB(listing)
-// {
 
-
-  
-//   console.log("Item added in BD as well")
-//   //console.log("File URL form service="+listing.imageURL)
-//   //var mDBRef=this.listings.push(listing)
-
-//   this.listings.push(listing).then((item) => { 
-
-
-//     this.mItemKey=item.key;
-//     console.log("Your key="+this.mItemKey);
-
-    
-
-//     this.localStorageService.set("fileID1", this.mItemKey);
-// });
-
-// //return this.mItemKey;
-//   //console.log("Data after insert opn="+)
-
-// }
 
 
 

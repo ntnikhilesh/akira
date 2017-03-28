@@ -40,13 +40,12 @@ var populatedObject;
 
 
 
-exports.test = functions.https.onRequest((request, response) => {
+exports.test = functions.https.onRequest((request, response) => 
+{
 
 
-  cors(request, response, () => {
-
-
-
+  cors(request, response, () => 
+  {
 
     console.log(request.body.myurl)
     console.log(request.body.mytoken)
@@ -75,25 +74,15 @@ exports.test = functions.https.onRequest((request, response) => {
 
     });
 
-
-
-
-
-
-
-
-
   });
-
-
-
 
 })
 
 
 
 
-function getCSVData(fillURL, callback) {
+function getCSVData(fillURL, callback) 
+{
 
 
   try {
@@ -118,12 +107,21 @@ function getCSVData(fillURL, callback) {
         populatedObject = [];
         objects.forEach(function (item) {
           var obj = _.zipObject(headers, item);
+          if(obj['imageUrl']=="null"|| obj['imageUrl']=="undefined"||obj['imageUrl']=="")
+          {
+              console.log("imageUrl is empty")
+              delete obj['imageUrl'];
+          }
+          //console.log("obj---"+obj['barcode'])
           populatedObject.push(obj);
         });
 
 
         console.log(populatedObject);
 
+      //  var myfilter= _.filter(populatedObject, {   'imageUrl': ''});
+      //  console.log("filer====>")
+      //  console.log("ffff"+myfilter)
 
         setConnection(function (result) {
           callback(result)
@@ -148,7 +146,8 @@ function getCSVData(fillURL, callback) {
 
 
 
-function setConnection(callback) {
+function setConnection(callback) 
+{
 
 
   console.log("hi form c2")
@@ -179,9 +178,10 @@ function setConnection(callback) {
 
 
 
-function insertDocuments(db, callback) {
+function insertDocuments(db, callback) 
+{
   // Get the documents collection
-  var collection = db.collection('documents');
+  var collection = db.collection('inventory');
   // Insert some documents
   collection.insertMany(
     populatedObject, function (err, result) {
@@ -196,31 +196,6 @@ function insertDocuments(db, callback) {
 
 
 
-//Download file from storage and write data on DB
-
-
-// exports.testFileUpload = functions.https.onRequest((req, res) => {
-
-
-
-//   cors(req, res, () => {
-
-
-
-//     var fileURL = req.headers.authorization
-//     console.log("File URL1 =" + fileURL)
-
-//     getCSVData(fileURL, function (err, result) {
-//       res.send(result);
-//     })
-
-
-
-//   })
-
-
-
-// });
 
 
 
@@ -250,51 +225,20 @@ function insertDocuments(db, callback) {
 
 
 
-// function setmConnection(callback) {
-//   mongoose.Promise = global.Promise;
-//   mongoose.connect('mongodb://cc:cc123@ds135800.mlab.com:35800/mydb');
-
-//   var db = mongoose.connection;
-//   db.on('error', console.error.bind(console, 'connection error:'));
-//   db.once('open', function () {
-
-//     console.log("Mongoos connected...")
-
-//     var kittySchema = mongoose.Schema({
-//       name: String
-//     });
 
 
 
 
 
 
-//     kittySchema.methods.speak = function () {
-//       var greeting = this.name
-//         ? "Meow name is " + this.name
-//         : "I don't have a name";
-//       console.log(greeting);
-//     }
-
-//     var Kitten = mongoose.model('Kitten', kittySchema);
-
-//     var fluffy = new Kitten({ name: 'Vinay' });
-
-//     fluffy.speak(); // "Meow name is fluffy"
-
-//     fluffy.save(function (err, fluffy) {
-//       if (err) return console.error(err);
-//       console.log("Item inserted")
-//       fluffy.speak();
-
-//     });
-//   });
 
 
 
 
 
-// }
+
+
+
 
 
 

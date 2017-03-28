@@ -26,9 +26,6 @@ export class BillingComponentComponent implements OnInit {
 
 
   image: any;
-
-
-
   title = 'Billing';
   result: any;
   weg: Weg[];
@@ -40,7 +37,8 @@ export class BillingComponentComponent implements OnInit {
 
   constructor(private firebaseService: FirebaseService, private wegService: WegService, public af: AngularFire, private localStorageService: LocalStorageService, private http: Http, public provider: Test, public router: Router) { }
 
-  ngOnInit() {
+  ngOnInit() 
+  {
     this.mflag = navigator.onLine;
     this.localStorageService.clearAll;
     if (this.mflag) {
@@ -55,7 +53,8 @@ export class BillingComponentComponent implements OnInit {
 
 
 
-  getUserToken() {
+  getUserToken() 
+  {
 
     this.af.auth.subscribe(auth => {
       if (auth) {
@@ -83,19 +82,18 @@ export class BillingComponentComponent implements OnInit {
   }
 
 
-  onAddSubmit1() {
+
+
+
+
+
+
+  onAddSubmit1() 
+  {
 
     this.mflag = navigator.onLine;
     if (this.mflag) {
       console.log("User is online....")
-
-
-
-
-
-      console.log('offline adding1');
-
-      //console.log(this.title);
 
 
       let listing =
