@@ -59,10 +59,24 @@ export class FirebaseService {
 
 
 
+  getFileListings()
+    {
+       this.olistings=this.afo.database.list('/shopgro-DB') as AfoListObservable<Listings[]>
+        return this.olistings
+
+    }
 
  
 
+getoListingDetails(id)
+    {
 
+        this.olisting=this.afo.database.object('/shopgro-DB/'+id) as AfoObjectObservable<Listings>
+
+
+        return this.olisting;
+
+    }
 
 
   oaddListing1(listing) 
@@ -230,3 +244,7 @@ interface Listings {
 interface Images {
   name?: string;
 }
+
+
+
+

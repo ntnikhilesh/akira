@@ -1,0 +1,7 @@
+<h1> List of files............ </h1>
+<ul class="list-group">
+	<li class="list-group-item" *ngFor="let listing of mFileListings">
+			<a [routerLink]="['/filelisting/'+listing.$key]">{{listing.image}}</a>
+	</li>
+
+</ul>

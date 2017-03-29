@@ -8,8 +8,8 @@ import {WegService} from './services/weg.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './dashboard/dashboard.component.html',
-  styleUrls: ['./dashboard/dashboard.component.css']
+  templateUrl: './components/dashboard/dashboard.component.html',
+  styleUrls: ['./components/dashboard/dashboard.component.css']
 })
 export class AppComponent {
   title = 'Hello Ravi';

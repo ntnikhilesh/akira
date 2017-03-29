@@ -2,23 +2,17 @@ import { Component, OnInit } from '@angular/core';
 
 import {AngularFire} from 'angularfire2';
 
-import {FirebaseService} from '../services/firebase.service';
+import {FirebaseService} from '../../services/firebase.service';
 import {Router} from "@angular/router";
-
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent  {
+export class LoginComponent implements OnInit {
 
-
-
-
-
-
-public error: any;
+  public error: any;
   constructor(public af:AngularFire,public afService: FirebaseService, private router: Router) {}
 
   ngOnInit() 
@@ -34,7 +28,7 @@ public error: any;
         if(auth) 
         {
           //console.log('logged in');
-           this.router.navigate(['billing']);
+           this.router.navigate(['filelistings']);
       
 
         } else 
@@ -52,7 +46,7 @@ public error: any;
     event.preventDefault();
     this.afService.loginWithEmail(email, password).then(() => 
     {
-      this.router.navigate(['billing']);
+      this.router.navigate(['filelistings']);
     })
       .catch((error: any) => 
       {
@@ -63,6 +57,5 @@ public error: any;
         }
       });
   }
+
 }
-
-
