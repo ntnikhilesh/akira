@@ -40,12 +40,10 @@ var populatedObject;
 
 
 
-exports.test = functions.https.onRequest((request, response) => 
-{
+exports.test = functions.https.onRequest((request, response) => {
 
 
-  cors(request, response, () => 
-  {
+  cors(request, response, () => {
 
     console.log(request.body.myurl)
     console.log(request.body.mytoken)
@@ -81,8 +79,7 @@ exports.test = functions.https.onRequest((request, response) =>
 
 
 
-function getCSVData(fillURL, callback) 
-{
+function getCSVData(fillURL, callback) {
 
 
   try {
@@ -107,21 +104,55 @@ function getCSVData(fillURL, callback)
         populatedObject = [];
         objects.forEach(function (item) {
           var obj = _.zipObject(headers, item);
-          if(obj['imageUrl']=="null"|| obj['imageUrl']=="undefined"||obj['imageUrl']=="")
-          {
-              console.log("imageUrl is empty")
-              delete obj['imageUrl'];
-          }
-          //console.log("obj---"+obj['barcode'])
+          // if(obj['imageUrl']=="null"|| obj['imageUrl']=="undefined"||obj['imageUrl']=="")
+          // {
+          //       //console.log("imageUrl is empty")
+          //       delete obj['imageUrl'];
+          // }
           populatedObject.push(obj);
+
         });
 
-
+        console.log("Pre---")
         console.log(populatedObject);
 
-      //  var myfilter= _.filter(populatedObject, {   'imageUrl': ''});
-      //  console.log("filer====>")
-      //  console.log("ffff"+myfilter)
+        _.map(populatedObject, function (item) {
+          Object.keys(item).forEach(key => 
+          {
+            if (item[key] === "" || item[key] === null || item[key] === 'undefined')
+            {
+                delete item[key];
+            } 
+            if (key === 'itemName') 
+            {
+              console.log("Coming here")
+              if (typeof item[key] != 'undefined')
+              {
+                console.log("Before trim",item['itemName']);
+              item[key] = item[key].replace(/(^\s+|\s+$)/g, '');
+              //item[key] = item['itemName'].trim();
+              console.log("After trim",item['itemName'].trim());
+              }
+             
+             
+              
+             
+            }
+            if (key === 'categories') 
+            {
+              item[key] = 
+              {
+                __type: 'Pointer',
+                className: 'Category',
+                objectId: item['categories']
+              }
+            }
+          })
+        });
+        console.log("Post---")
+        console.log(populatedObject);
+
+
 
         setConnection(function (result) {
           callback(result)
@@ -146,8 +177,7 @@ function getCSVData(fillURL, callback)
 
 
 
-function setConnection(callback) 
-{
+function setConnection(callback) {
 
 
   console.log("hi form c2")
@@ -178,8 +208,7 @@ function setConnection(callback)
 
 
 
-function insertDocuments(db, callback) 
-{
+function insertDocuments(db, callback) {
   // Get the documents collection
   var collection = db.collection('inventory');
   // Insert some documents
