@@ -1,0 +1,14 @@
+  <form (submit)="onAddSubmit()">
+  
+ 
+  
+  <div class="form-group">
+
+    
+    <input id="image1" name="image1" [(ngModel)]="image1" type="file" >
+  </div>
+  
+<br><br>
+  <a md-raised-button  [routerLink]="['/filelistings']" (click)="onAddSubmit1()">Upload</a>
+  
+</form>

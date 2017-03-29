@@ -46,6 +46,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FilelistingsComponent } from './components/filelistings/filelistings.component';
 import { FilelistingComponent } from './components/filelisting/filelisting.component';
+import { UploadfileComponent } from './components/uploadfile/uploadfile.component';
 
 
 const firebaseAuthConfig = {
@@ -88,6 +89,8 @@ export const firebaseConfig = {
     
     FilelistingComponent,
     
+    UploadfileComponent,
+    
     
   ],
   imports: [
@@ -104,7 +107,7 @@ export const firebaseConfig = {
             storageType: 'localStorage'
         })
   ],
-  providers: [WegService,FirebaseService],
+  providers: [WegService,FirebaseService,Test],
   entryComponents: [],
   bootstrap: [AppComponent]
 })

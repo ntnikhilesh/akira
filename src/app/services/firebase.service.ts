@@ -58,6 +58,19 @@ export class FirebaseService {
 
 
 
+oaddInDB(listing)
+{
+  console.log("Item added in BD as well")
+  this.listings.push(listing);
+
+}
+
+
+ 
+
+  
+
+
 
   getFileListings()
     {
@@ -97,7 +110,7 @@ getoListingDetails(id)
         iRef.put(selectedFile).then((snapshot) => {
           console.log("hi from inside for")
          
-          listing.image = selectedFile.name;
+          listing.name = selectedFile.name;
           listing.path = path;
           listing.imageUrl = snapshot.downloadURL;
 
@@ -109,7 +122,7 @@ getoListingDetails(id)
           if (snapshot['f'] === "success") {
             console.log("Sucess Upload Dude");
 
-            resolve(snapshot.downloadURL)
+            resolve(listing)
           }
           else {
             console.log("Failure");

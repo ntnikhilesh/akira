@@ -2,13 +2,18 @@ import { Component, OnInit } from '@angular/core';
 
 import {FirebaseService} from '../../services/firebase.service';
 import {Router,ActivatedRoute,Params} from '@angular/router';
+import {AngularFire} from 'angularfire2';
 
 import * as firebase from 'firebase';
+import {Test} from '../../providers/test.service';
+
 
 @Component({
   selector: 'app-filelisting',
   templateUrl: './filelisting.component.html',
-  styleUrls: ['./filelisting.component.css']
+  styleUrls: ['./filelisting.component.css'],
+  providers: [Test]
+  
 })
 export class FilelistingComponent implements OnInit {
 
@@ -16,19 +21,25 @@ export class FilelistingComponent implements OnInit {
 	listing:any;
 	imageUrl:any;
 	path:string;
-
+result:any;
+userToken:any;
+error:any;
+mflag:any;
 
 
   	constructor
  	(
 		private firebaseService:FirebaseService,
 		private router:Router,
-		private route:ActivatedRoute
+		private route:ActivatedRoute,
+    public provider:Test,
+    public af:AngularFire
   	) { }
 
   	ngOnInit() 
   	{ 
 		//Get ID from URL
+    this.getUserToken();
 
 		this.id=this.route.snapshot.params['id'];
 		this.firebaseService.getoListingDetails(this.id).subscribe(listing=>
@@ -55,6 +66,82 @@ export class FilelistingComponent implements OnInit {
 
   	}
 
+
+
+
+     getUserToken()
+  {
+
+      this.af.auth.subscribe(auth => 
+      {
+        if(auth) 
+        {
+          //console.log('logged in');
+
+          firebase.auth().currentUser.getToken(true).then((idToken) => 
+          {
+    
+            //console.log("id token in BC1"+idToken);
+            this.userToken=idToken;
+    
+          })
+          .catch((error) => 
+          {  
+            this.error = error;
+            console.log(this.error);
+          });
+
+        } 
+        else 
+        {
+          console.log('not logged in');
+          this.router.navigate(['login']);
+        }
+      });
+
+  
+  }
+
+
+hitCF()
+{
+   this.mflag = navigator.onLine;
+    if (this.mflag) {
+      console.log("User is online....")
+
+
+     
+
+      
+          // this.result="You are offline...pl check your nw conn...";
+          console.log("item in BC636" + this.listing.imageUrl)
+
+
+          var hai = this.provider.firebase1(this.userToken, this.listing.imageUrl)
+            .map(
+            res => {
+              console.log("Result in BC= " + res.text());
+              this.result = res.text();
+            }
+            )
+            .subscribe
+            (
+            data => console.log(data),
+            err => console.log(err),
+            () => console.log('Done')
+            );
+
+
+       
+
+     
+
+    }
+    else {
+      console.log("User is offline...")
+      alert("Please check you internet connection...")
+    }
+}
 
   	// updateItem()
   	// {	

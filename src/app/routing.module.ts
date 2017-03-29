@@ -11,6 +11,7 @@
  import {LoginComponent} from './components/login/login.component';
  import {FilelistingsComponent} from './components/filelistings/filelistings.component';
  import {FilelistingComponent} from './components/filelisting/filelisting.component';
+ import {UploadfileComponent} from './components/uploadfile/uploadfile.component';
  import {RegComponent} from './reg/reg.component';
 
 
@@ -20,7 +21,7 @@ const routes:Routes=[
 
 {path:'',redirectTo:'/login',pathMatch:'full'},
 {path:'login',component:LoginComponent},
-
+{path:'uploadfile',component:UploadfileComponent},
 {path:'filelistings',component:FilelistingsComponent},
 {path:'filelisting/:id', component:FilelistingComponent},
 
