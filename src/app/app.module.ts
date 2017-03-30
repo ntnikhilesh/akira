@@ -47,6 +47,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FilelistingsComponent } from './components/filelistings/filelistings.component';
 import { FilelistingComponent } from './components/filelisting/filelisting.component';
 import { UploadfileComponent } from './components/uploadfile/uploadfile.component';
+import { HitCFComponent } from './components/hit-cf/hit-cf.component';
 
 
 const firebaseAuthConfig = {
@@ -90,6 +91,8 @@ export const firebaseConfig = {
     FilelistingComponent,
     
     UploadfileComponent,
+    
+    HitCFComponent,
     
     
   ],

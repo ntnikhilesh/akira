@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Http, Response } from '@angular/http';
+import { Http, Response,URLSearchParams } from '@angular/http';
 
 import { LocalStorageService } from 'angular-2-local-storage';
 
@@ -88,6 +88,24 @@ export class FirebaseService {
 
   }
 
+  hitCF(mtoken,mfileURL) {
+var mres:any;
+let data = new URLSearchParams();
+		data.append('mytoken', mtoken);
+		data.append('myurl', mfileURL);
+		console.log('token form srvice = ' + mtoken);
+		console.log('File URL form srvice = ' + mfileURL);
+
+
+		
+    mres = this.http
+			.post('https://us-central1-td-demo-df34d.cloudfunctions.net/test', data)
+
+
+    return mres;
+
+  }
+
   getJWTToken() {
     return new Promise(function (resolve, reject) {
 
@@ -168,7 +186,56 @@ export class FirebaseService {
 
 
 
+  testCF(listing) {
+    
 
+    return new Promise(function (resolve, reject) {
+
+
+      console.log("hi from oaddListing CF fun")
+
+      resolve("true")
+      // let storageRef = firebase.storage().ref();
+
+
+      // //var self=this;
+      // for (let selectedFile of [(<HTMLInputElement>document.getElementById('image1')).files[0]]) {
+      //   console.log("hi from inside for1")
+
+      //   let path = '/shopgro-storage/' + Math.random();
+      //   let iRef = storageRef.child(path);
+      //   iRef.put(selectedFile).then((snapshot) => {
+      //     console.log("hi from inside for2")
+
+      //     listing.name = selectedFile.name;
+      //     listing.path = path;
+      //     listing.imageUrl = snapshot.downloadURL;
+
+      //     console.log('offline adding done...');
+
+      //     console.log(listing)
+      //     console.log(snapshot.downloadURL);
+      //     //this.listings.push(listing);
+      //     if (snapshot['f'] === "success") {
+      //       console.log("Sucess Upload Dude");
+
+      //       resolve(listing)
+      //     }
+      //     else {
+      //       console.log("Failure");
+      //       reject(false)
+      //     }
+
+
+
+      //   }).catch(function (e) {
+      //     console.log("merror=" + e);
+      //   });
+
+      // }
+
+    })
+  }
 
 
 

@@ -125,13 +125,13 @@ function getCSVData(fillURL, callback) {
             } 
             if (key === 'itemName') 
             {
-              console.log("Coming here")
+              //console.log("Coming here")
               if (typeof item[key] != 'undefined')
               {
-                console.log("Before trim",item['itemName']);
+                //console.log("Before trim",item['itemName']);
               item[key] = item[key].replace(/(^\s+|\s+$)/g, '');
               //item[key] = item['itemName'].trim();
-              console.log("After trim",item['itemName'].trim());
+              //console.log("After trim",item['itemName'].trim());
               }
              
              

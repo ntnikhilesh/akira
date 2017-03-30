@@ -12,6 +12,7 @@
  import {FilelistingsComponent} from './components/filelistings/filelistings.component';
  import {FilelistingComponent} from './components/filelisting/filelisting.component';
  import {UploadfileComponent} from './components/uploadfile/uploadfile.component';
+ import {HitCFComponent} from './components/hit-cf/hit-cf.component';
  import {RegComponent} from './reg/reg.component';
 
 
@@ -24,6 +25,7 @@ const routes:Routes=[
 {path:'uploadfile',component:UploadfileComponent},
 {path:'filelistings',component:FilelistingsComponent},
 {path:'filelisting/:id', component:FilelistingComponent},
+{path:'hit-cf/:id', component:HitCFComponent},
 
 {path:'billing',component:BillingComponentComponent},
 {path:'register',component:RegComponent},
