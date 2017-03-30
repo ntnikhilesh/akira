@@ -1,4 +1,4 @@
-  <form (submit)="onAddSubmit()">
+  <!--<form (submit)="onAddSubmit()">
   
  
   
@@ -11,4 +11,43 @@
 <br><br>
   <a md-raised-button  [routerLink]="['/filelistings']" (click)="uploadFile()">Upload</a>
   
+</form>-->
+
+
+<div class="row">
+
+<div class="col-3 col-m-3 menu">
+ 
+</div>
+
+<div class="col-6 col-m-6">
+  
+
+ <div class="login-form" align="center">
+  <form (submit)="onAddSubmit()" class="example-form">
+  
+ 
+  
+  <div class="form-group">
+
+    <h1> Upload your file </h1>
+    <input id="image1" name="image1" [(ngModel)]="image1" type="file" >
+  </div>
+  
+<br><br>
+<a  class="btn btn-info" [routerLink]="['/filelistings']" (click)="uploadFile()">Upload</a>
+  <!--<a md-raised-button  [routerLink]="['/filelistings']" (click)="uploadFile()">Upload</a>-->
+  
 </form>
+ </div>
+ 
+
+          
+
+</div>
+
+<div class="col-3 col-m-3">
+
+</div>
+
+</div>
