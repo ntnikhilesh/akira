@@ -14,7 +14,7 @@ import { Router } from "@angular/router";
 
 @Injectable()
 export class FirebaseService {
- public listings: FirebaseListObservable<any[]>;
+  public listings: FirebaseListObservable<any[]>;
   olistings: AfoListObservable<any[]>;
 
   listing: FirebaseObjectObservable<any[]>;
@@ -25,17 +25,17 @@ export class FirebaseService {
   folder: any;
   num: number;
   fileUploadStatus: any;
-   mItemKey:any;
+  mItemKey: any;
 
   constructor(private router: Router, private http: Http, private af: AngularFire,
-    private afo: AngularFireOffline,public localStorageService: LocalStorageService) {
+    private afo: AngularFireOffline, public localStorageService: LocalStorageService) {
 
-     
+
     //this.folder='listingimages';
     this.images = this.af.database.list('shopgro-DB') as FirebaseListObservable<Images[]>
     this.folder = 'demo-folder1';
-    this.listings = this.af.database.list('/shopgro-DB')as FirebaseListObservable<Listings[]>;
-    
+    this.listings = this.af.database.list('/shopgro-DB') as FirebaseListObservable<Listings[]>;
+
   }
 
   ngOnInit() {
@@ -58,58 +58,83 @@ export class FirebaseService {
 
 
 
-oaddInDB(listing)
-{
-  console.log("Item added in BD as well")
-  this.listings.push(listing);
+  oaddInDB(listing) {
+    console.log("Item added in BD as well")
+    this.listings.push(listing);
 
-}
-
-
- 
-
-  
+  }
 
 
 
-  getFileListings()
-    {
-       this.olistings=this.afo.database.list('/shopgro-DB') as AfoListObservable<Listings[]>
-        return this.olistings
-
-    }
-
- 
-
-getoListingDetails(id)
-    {
-
-        this.olisting=this.afo.database.object('/shopgro-DB/'+id) as AfoObjectObservable<Listings>
 
 
-        return this.olisting;
-
-    }
 
 
-  oaddListing1(listing) 
-  {
 
+  getFileListings() {
+    this.olistings = this.afo.database.list('/shopgro-DB') as AfoListObservable<Listings[]>
+    return this.olistings
+
+  }
+
+
+
+  getFileDetails(id) {
+
+    this.olisting = this.afo.database.object('/shopgro-DB/' + id) as AfoObjectObservable<Listings>
+
+
+    return this.olisting;
+
+  }
+
+  getJWTToken() {
+    return new Promise(function (resolve, reject) {
+
+      this.af.auth.subscribe(auth => {
+        if (auth) {
+          console.log('logged in');
+
+          firebase.auth().currentUser.getToken(true).then((idToken) => {
+
+            console.log("id token in service",idToken);
+            resolve(idToken)
+
+          })
+            .catch((error) => {
+              this.error = error;
+              console.log(this.error);
+            });
+
+        }
+        else {
+          console.log('not logged in');
+          this.router.navigate(['login']);
+          reject("User not logged in")
+        }
+      });
+
+    })
+  }
+
+
+  oaddListing1(listing) {
+    
 
     return new Promise(function (resolve, reject) {
       console.log("hi from oaddListing fun")
       let storageRef = firebase.storage().ref();
-      
+
 
       //var self=this;
       for (let selectedFile of [(<HTMLInputElement>document.getElementById('image1')).files[0]]) {
-
+        console.log("hi from inside for1")
 
         let path = '/shopgro-storage/' + Math.random();
         let iRef = storageRef.child(path);
         iRef.put(selectedFile).then((snapshot) => {
-          console.log("hi from inside for")
-         
+          console.log("hi from inside for2")
+
           listing.name = selectedFile.name;
           listing.path = path;
           listing.imageUrl = snapshot.downloadURL;

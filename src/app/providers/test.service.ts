@@ -17,6 +17,8 @@ export class Test {
 	userID: any;
 	flag: any;
 	mFileURL: any;
+	userToken:any;
+	error:any;
 	constructor(private http: Http, private localStorageService: LocalStorageService)
 	{ }
 
@@ -26,6 +28,9 @@ export class Test {
 
 	firebase1(mtoken, mfileURL) {
 
+
+		//  this.userToken=firebase.auth().currentUser.getToken
+          
 
 		let data = new URLSearchParams();
 		data.append('mytoken', mtoken);

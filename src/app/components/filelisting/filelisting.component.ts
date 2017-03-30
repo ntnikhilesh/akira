@@ -39,19 +39,19 @@ mflag:any;
   	ngOnInit() 
   	{ 
 		//Get ID from URL
-    this.getUserToken();
+    this.getmUserToken();
 
 		this.id=this.route.snapshot.params['id'];
-		this.firebaseService.getoListingDetails(this.id).subscribe(listing=>
+		this.firebaseService.getFileDetails(this.id).subscribe(listing=>
 		{
 			this.listing=listing;
 			
 
 			console.log(listing);  
-
+      //this.getUserToken();
 			
-			let storageRef=firebase.storage().ref();
-			let spaceRef=storageRef.child(this.listing.path);
+			// let storageRef=firebase.storage().ref();
+			// let spaceRef=storageRef.child(this.listing.path);
 
 			// storageRef.child(this.listing.path).getDownloadURL().then((url)=>
 			// {
@@ -67,40 +67,75 @@ mflag:any;
   	}
 
 
+getmUserToken()
+{
+
+    this.mflag = navigator.onLine;
+    if (this.mflag) {
+      console.log("User is online....")
 
 
-     getUserToken()
-  {
+      // firebase.auth().currentUser.getToken(true).then((idToken) => 
+      //     {
+        this.firebaseService.getJWTToken().then(idToken => {
 
-      this.af.auth.subscribe(auth => 
-      {
-        if(auth) 
-        {
-          //console.log('logged in');
+            if(idToken)
+            {
+              console.log("Id token in BC123=",idToken)
 
-          firebase.auth().currentUser.getToken(true).then((idToken) => 
-          {
-    
-            //console.log("id token in BC1"+idToken);
-            this.userToken=idToken;
-    
-          })
-          .catch((error) => 
-          {  
-            this.error = error;
-            console.log(this.error);
-          });
+              this.userToken=idToken;
+            }
+            else{
+              console.log("Not able to generate token...")
+            }
+      
 
-        } 
-        else 
-        {
-          console.log('not logged in');
-          this.router.navigate(['login']);
-        }
+      }).catch(e => {
+        this.result = "Please select file..";
+        console.log("Error Found buddy Yoyo");
+        console.log(e)
       });
 
+
+    }
+    else {
+      console.log("User is offline...")
+      alert("Please check you internet connection...")
+    }
+}
+
+  //    getUserToken()
+  // {
+
+  //     this.af.auth.subscribe(auth => 
+  //     {
+  //       if(auth) 
+  //       {
+  //         //console.log('logged in');
+
+  //         firebase.auth().currentUser.getToken(true).then((idToken) => 
+  //         {
+    
+  //           //console.log("id token in BC1"+idToken);
+  //           this.userToken=idToken;
+    
+  //         })
+  //         .catch((error) => 
+  //         {  
+  //           this.error = error;
+  //           console.log(this.error);
+  //         });
+
+  //       } 
+  //       else 
+  //       {
+  //         console.log('not logged in');
+  //         this.router.navigate(['login']);
+  //       }
+  //     });
+
   
-  }
+  // }
 
 
 hitCF()
@@ -111,6 +146,11 @@ hitCF()
 
 
      
+        // this.getUserToken();
+
+        //get idToken
+
+       
 
       
           // this.result="You are offline...pl check your nw conn...";

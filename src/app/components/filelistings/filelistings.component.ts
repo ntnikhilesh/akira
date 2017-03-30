@@ -29,7 +29,7 @@ export class FilelistingsComponent implements OnInit {
     this.localStorageService.clearAll;
     if (this.mflag) {
       console.log("User is online....")
-      this.getUserToken();
+      //this.getUserToken();
     }
     else {
       console.log("User is offline...")
@@ -58,6 +58,7 @@ export class FilelistingsComponent implements OnInit {
 
         })
           .catch((error) => {
+            //alert("Please check your internet connection..")
             this.error = error;
             console.log(this.error);
           });
