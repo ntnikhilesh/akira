@@ -58,7 +58,7 @@ export class FirebaseService {
 
 
 
-  oaddInDB(listing) {
+  addInDB(listing) {
     console.log("Item added in BD as well")
     this.listings.push(listing);
 
@@ -118,7 +118,7 @@ export class FirebaseService {
   }
 
 
-  oaddListing1(listing) {
+  uploadCSV(listing) {
     
 
     return new Promise(function (resolve, reject) {

@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
-import {AngularFire} from 'angularfire2';
+import { AngularFire } from 'angularfire2';
 
 import { LocalStorageService } from 'angular-2-local-storage';
 
 import { Http, Response } from '@angular/http';
-import {Test} from '../../providers/test.service';
+import { Test } from '../../providers/test.service';
 
 import * as firebase from 'firebase';
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
 
-import {FirebaseService} from '../../services/firebase.service';
+import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-uploadfile',
@@ -20,20 +20,20 @@ import {FirebaseService} from '../../services/firebase.service';
 })
 export class UploadfileComponent implements OnInit {
 
-   image:any;
+  image: any;
 
 
 
-  title='Billing';
-  result:any;
+  title = 'Billing';
+  result: any;
 
-  userToken:any;
-  flag:any;
-  error:any;
-  fileUploadStatus:any;
-  mflag:any;
+  userToken: any;
+  flag: any;
+  error: any;
+  fileUploadStatus: any;
+  mflag: any;
 
-  constructor(private firebaseService:FirebaseService,public af:AngularFire,private localStorageService: LocalStorageService,private http: Http,public provider:Test,public router: Router) { }
+  constructor(private firebaseService: FirebaseService, public af: AngularFire, private localStorageService: LocalStorageService, private http: Http, public provider: Test, public router: Router) { }
 
 
   ngOnInit() {
@@ -41,8 +41,7 @@ export class UploadfileComponent implements OnInit {
 
 
 
- onAddSubmit1() 
-  {
+  uploadFile() {
 
     this.mflag = navigator.onLine;
     if (this.mflag) {
@@ -55,7 +54,7 @@ export class UploadfileComponent implements OnInit {
         }
 
       console.log("data1=" + listing);
-      this.firebaseService.oaddListing1(listing).then(successMessage => {
+      this.firebaseService.uploadCSV(listing).then(successMessage => {
         console.log(successMessage);
         if (!successMessage) {
 
@@ -66,23 +65,11 @@ export class UploadfileComponent implements OnInit {
           // this.result="You are offline...pl check your nw conn...";
           console.log("item in 123", successMessage)
 
-          this.firebaseService.oaddInDB(successMessage)
+          this.firebaseService.addInDB(successMessage)
           {
 
           }
-          // var hai = this.provider.firebase1(this.userToken, successMessage)
-          //   .map(
-          //   res => {
-          //     console.log("Result in BC= " + res.text());
-          //     this.result = res.text();
-          //   }
-          //   )
-          //   .subscribe
-          //   (
-          //   data => console.log(data),
-          //   err => console.log(err),
-          //   () => console.log('Done')
-          //   );
+
 
 
         }
@@ -108,63 +95,6 @@ export class UploadfileComponent implements OnInit {
 
 
 
-//     onAddSubmit1()
-//   {
 
-    
-
-
-//   		console.log('offline adding1');
-
-//   		//console.log(this.title);
-
-
-//   		let listing=
-//   		{
-
-//   		}
-  		
-//   		console.log("data1="+listing);
-//   	  this.firebaseService.oaddListing1(listing).then(successMessage => {
-//         console.log("Image upload done",successMessage);
-//         if(!successMessage)
-//         {
-
-//           this.result="You are offline...pl check your nw conn...";
-          
-//         }
-//         else{
-//         //  // this.result="You are offline...pl check your nw conn...";
-//         //  console.log("item in BC",successMessage)
-//         //    var hai= this.provider.firebaseFileUpload()
-//         // .map(
-//         // res=>
-//         // {
-//         //     console.log("Result in BC= ",res.text());
-//         //     this.result=res.text();
-//         // }
-//         // )
-//         //  .subscribe
-//         //  (
-//         //     data => console.log(data),
-//         //     err => console.log(err),
-//         //     () => console.log('Done')
-//         //  );
-
-
-//           this.firebaseService.oaddInDB(successMessage)
-//           {
-
-//           }
-
-//         }
-   
-// }).catch(e=>{
-//   this.result="Please select file..";
-//   console.log("Error Found buddy Yoyo");
-//   console.log(e)
-// });
-
-//   }
 
 }

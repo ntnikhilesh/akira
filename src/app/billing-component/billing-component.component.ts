@@ -91,58 +91,58 @@ export class BillingComponentComponent implements OnInit {
   onAddSubmit1() 
   {
 
-    this.mflag = navigator.onLine;
-    if (this.mflag) {
-      console.log("User is online....")
+    // this.mflag = navigator.onLine;
+    // if (this.mflag) {
+    //   console.log("User is online....")
 
 
-      let listing =
-        {
+    //   let listing =
+    //     {
 
-        }
+    //     }
 
-      console.log("data1=" + listing);
-      this.firebaseService.oaddListing1(listing).then(successMessage => {
-        console.log(successMessage);
-        if (!successMessage) {
+    //   console.log("data1=" + listing);
+    //   this.firebaseService.oaddListing1(listing).then(successMessage => {
+    //     console.log(successMessage);
+    //     if (!successMessage) {
 
-          this.result = "You are offline...pl check your nw conn...";
+    //       this.result = "You are offline...pl check your nw conn...";
 
-        }
-        else {
-          // this.result="You are offline...pl check your nw conn...";
-          console.log("item in BC636" + successMessage)
-
-
-          var hai = this.provider.firebase1(this.userToken, successMessage)
-            .map(
-            res => {
-              console.log("Result in BC= " + res.text());
-              this.result = res.text();
-            }
-            )
-            .subscribe
-            (
-            data => console.log(data),
-            err => console.log(err),
-            () => console.log('Done')
-            );
+    //     }
+    //     else {
+    //       // this.result="You are offline...pl check your nw conn...";
+    //       console.log("item in BC636" + successMessage)
 
 
-        }
+    //       var hai = this.provider.firebase1(this.userToken, successMessage)
+    //         .map(
+    //         res => {
+    //           console.log("Result in BC= " + res.text());
+    //           this.result = res.text();
+    //         }
+    //         )
+    //         .subscribe
+    //         (
+    //         data => console.log(data),
+    //         err => console.log(err),
+    //         () => console.log('Done')
+    //         );
 
-      }).catch(e => {
-        this.result = "Please select file..";
-        console.log("Error Found buddy Yoyo");
-        console.log(e)
-      });
+
+    //     }
+
+    //   }).catch(e => {
+    //     this.result = "Please select file..";
+    //     console.log("Error Found buddy Yoyo");
+    //     console.log(e)
+    //   });
 
 
-    }
-    else {
-      console.log("User is offline...")
-      alert("Please check you internet connection...")
-    }
+    // }
+    // else {
+    //   console.log("User is offline...")
+    //   alert("Please check you internet connection...")
+    // }
 
   }
 
