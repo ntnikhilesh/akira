@@ -52,33 +52,33 @@ export class Test {
 
 
 
-	getUserToken() 
-  {
+	// getUserToken() 
+  // {
 
-    this.af.auth.subscribe(auth => {
-      if (auth) {
-        //console.log('logged in');
+  //   this.af.auth.subscribe(auth => {
+  //     if (auth) {
+  //       //console.log('logged in');
 
-        firebase.auth().currentUser.getToken().then((idToken) => {
+  //       firebase.auth().currentUser.getToken().then((idToken) => {
 
-          console.log("id token in 1001",idToken);
-          this.userToken = idToken;
+  //         console.log("id token in 1001",idToken);
+  //         this.userToken = idToken;
 
-        })
-          .catch((error) => {
-            this.error = error;
-            console.log(this.error);
-          });
+  //       })
+  //         .catch((error) => {
+  //           this.error = error;
+  //           console.log(this.error);
+  //         });
 
-      }
-      else {
-        console.log('not logged in');
-        this.router.navigate(['login']);
-      }
-    });
+  //     }
+  //     else {
+  //       console.log('not logged in');
+  //       this.router.navigate(['login']);
+  //     }
+  //   });
 
 
-  }
+  // }
 
 
 		firebaseFileUpload()
