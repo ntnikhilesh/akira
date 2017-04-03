@@ -75,6 +75,16 @@ exports.test = functions.https.onRequest((request, response) => {
           response.send(result)
         })
     }
+    else if(mcode==3)
+    {
+      console.log("Operation No -3")
+      //response.send("coming soon....")
+    //response.send("Operation No -2");
+
+     setConnection(function (result) {
+          response.send(result)
+        })
+    }
 
 // switch(request.body.mcode)
 // {
@@ -245,6 +255,17 @@ function setConnection(callback) {
 
     })
   }
+   else if(mcode==3)
+  {
+      findSpecDocuments(db, function (err, docs) {
+      if (err)
+        callback(err)
+
+      else
+        callback(docs)
+
+    })
+  }
     
     
 
@@ -279,7 +300,27 @@ function findDocuments(db, callback) {
     if (err)
         callback(err);
       db.close
-      console.log("Inserted into the collection");
+      console.log("Find all doc from DB");
+      db.close
+      callback(null, docs);
+
+    // assert.equal(err, null);
+    // console.log("Found the following records");
+    // console.log(docs)
+    // callback(docs);
+  });
+}
+
+
+function findSpecDocuments(db, callback) {
+  // Get the documents collection
+  var collection = db.collection('inventory');
+  // Find some documents
+  collection.find({mrp:"100"}).toArray(function(err, docs) {
+    if (err)
+        callback(err);
+      db.close
+      console.log("Find specific doc from DB");
       db.close
       callback(null, docs);
 

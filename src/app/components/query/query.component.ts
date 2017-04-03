@@ -15,7 +15,7 @@ import { Test } from '../../providers/test.service';
 })
 export class QueryComponent implements OnInit {
 
- favoriteSeason: string;
+ selectQuery: string;
  id: any;
   listing: any;
   imageUrl: any;
@@ -24,11 +24,12 @@ export class QueryComponent implements OnInit {
   userToken: any;
   error: any;
   mflag: any;
+  mcode: any;
 
   seasons = [
     'Select All Documents in a Collection',
-    'selects from the inventory collection all documents where the MRP equals "75"',
-    'retrieves all documents from the inventory collection where MRP equals either "75" or "25"',
+    'selects from the inventory collection all documents where the MRP equals 100',
+    'retrieves all documents from the inventory collection where MRP equals either 75 or 25',
     'retrieves all documents in the inventory collection where the Item-Name equals "7 UP PET 250ML" and MRP is less than ($lt) 30',
     'retrieves all documents in the collection where the Item-Name equals "7 UP PET 250ML" or MRP is less than ($lt) 30',
     
@@ -58,13 +59,24 @@ export class QueryComponent implements OnInit {
 
       firebase.auth().currentUser.getToken().then((idToken) => 
       {
+        
+        console.log("Token in Query =", idToken)
+        console.log("Code in Query =", this.selectQuery)
 
-        console.log("TOken in listing=", idToken)
+        if(this.selectQuery=="Select All Documents in a Collection")
+        {
+          this.mcode=2;
+        }
+        else if(this.selectQuery=="selects from the inventory collection all documents where the MRP equals 100")
+        {
+          this.mcode=3;
+        }
+        
 
         if (idToken) 
         {
 
-          this.firebaseService.hitCF(idToken,"not require",2).map(
+          this.firebaseService.hitCF(idToken,"not require",this.mcode).map(
             res => {
               console.log("Result in BC1221= " + res.text());
               this.result = res.text();
