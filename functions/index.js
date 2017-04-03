@@ -46,11 +46,11 @@ exports.test = functions.https.onRequest((request, response) => {
 
   cors(request, response, () => {
 
-    console.log("CSV file URL =",request.body.myurl)
-    console.log("ID Token =",request.body.mytoken)
-    console.log("Operation Code =",request.body.mcode)
+    console.log("CSV file URL =", request.body.myurl)
+    console.log("ID Token =", request.body.mytoken)
+    console.log("Operation Code =", request.body.mcode)
 
-    mcode=request.body.mcode;
+    mcode = request.body.mcode;
     //response.send("done...")
 
     //verify token
@@ -60,75 +60,21 @@ exports.test = functions.https.onRequest((request, response) => {
       request.user = decodedIdToken;
       console.log("Valid User")
 
-      if(mcode==1)
-      {
-         getCSVData(request.body.myurl, function (result) {
-        response.send(result);
-      })
-    }
-    else if(mcode==2)
-    {
-      console.log("Operation No -2")
-    //response.send("Operation No -2");
+      if (mcode == 1) {
+        getCSVData(request.body.myurl, function (result) {
+          response.send(result);
+        })
+      }
+      else if (mcode == 2 || mcode == 3 || mcode == 4 || mcode == 5 || mcode == 6) {
+        console.log("Operation No -2,3,4,5,6")
+        //response.send("Operation No -2");
 
-     setConnection(function (result) {
+        setConnection(function (result) {
           response.send(result)
         })
-    }
-    else if(mcode==3)
-    {
-      console.log("Operation No -3")
-      //response.send("coming soon....")
-    //response.send("Operation No -2");
+      }
 
-     setConnection(function (result) {
-          response.send(result)
-        })
-    }
-     else if(mcode==4)
-    {
-      console.log("Operation No -4")
-      //response.send("coming soon....")
-    //response.send("Operation No -2");
 
-     setConnection(function (result) {
-          response.send(result)
-        })
-    }
-     else if(mcode==5)
-    {
-      console.log("Operation No -5")
-   
-
-     setConnection(function (result) {
-          response.send(result)
-        })
-    }
-      else if(mcode==6)
-    {
-      console.log("Operation No -6")
-   
-
-     setConnection(function (result) {
-          response.send(result)
-        })
-    }
-
-// switch(request.body.mcode)
-// {
-//   case 1:
-//   {
-//      getCSVData(request.body.myurl, function (result) {
-//         response.send(result);
-//       })
-//   }
-//   case 2:
-//   {
-//     console.log("Operation No -2")
-//     response.send("Operation No -2");
-//   }
-// }
-     
 
 
 
@@ -186,35 +132,30 @@ function getCSVData(fillURL, callback) {
         console.log(populatedObject);
 
         _.map(populatedObject, function (item) {
-          Object.keys(item).forEach(key => 
-          {
-            if (item[key] === "" || item[key] === null || item[key] === 'undefined')
-            {
-                delete item[key];
-            } 
-            if (key === 'itemName') 
-            {
-              //console.log("Coming here")
-              if (typeof item[key] != 'undefined')
-              {
-                //console.log("Before trim",item['itemName']);
-              item[key] = item[key].replace(/(^\s+|\s+$)/g, '');
-              //item[key] = item['itemName'].trim();
-              //console.log("After trim",item['itemName'].trim());
-              }
-             
-             
-              
-             
+          Object.keys(item).forEach(key => {
+            if (item[key] === "" || item[key] === null || item[key] === 'undefined') {
+              delete item[key];
             }
-            if (key === 'categories') 
-            {
-              item[key] = 
-              {
-                __type: 'Pointer',
-                className: 'Category',
-                objectId: item['categories']
+            if (key === 'itemName') {
+              //console.log("Coming here")
+              if (typeof item[key] != 'undefined') {
+                //console.log("Before trim",item['itemName']);
+                item[key] = item[key].replace(/(^\s+|\s+$)/g, '');
+                //item[key] = item['itemName'].trim();
+                //console.log("After trim",item['itemName'].trim());
               }
+
+
+
+
+            }
+            if (key === 'categories') {
+              item[key] =
+                {
+                  __type: 'Pointer',
+                  className: 'Category',
+                  objectId: item['categories']
+                }
             }
           })
         });
@@ -261,74 +202,68 @@ function setConnection(callback) {
     assert.equal(null, err);
     console.log("Connected successfully to server");
 
-    if(mcode==1)
-    {
-        insertDocuments(db, function (err, docs) {
-      if (err)
-        callback(err)
+    if (mcode == 1) {
+      insertDocuments(db, function (err, docs) {
+        if (err)
+          callback(err)
 
-      else
-        callback(docs)
+        else
+          callback(docs)
 
-    })
-  }
-  else if(mcode==2)
-  {
+      })
+    }
+    else if (mcode == 2) {
       findDocuments(db, function (err, docs) {
-      if (err)
-        callback(err)
+        if (err)
+          callback(err)
 
-      else
-        callback(docs)
+        else
+          callback(docs)
 
-    })
-  }
-   else if(mcode==3)
-  {
+      })
+    }
+    else if (mcode == 3) {
       findSpecDocuments(db, function (err, docs) {
-      if (err)
-        callback(err)
+        if (err)
+          callback(err)
 
-      else
-        callback(docs)
+        else
+          callback(docs)
 
-    })
-  }
-   else if(mcode==4)
-  {
+      })
+    }
+    else if (mcode == 4) {
       findSpecDocuments1(db, function (err, docs) {
-      if (err)
-        callback(err)
+        if (err)
+          callback(err)
 
-      else
-        callback(docs)
+        else
+          callback(docs)
 
-    })
-  }
-   else if(mcode==5)
-  {
+      })
+    }
+    else if (mcode == 5) {
       findSpecDocuments2(db, function (err, docs) {
-      if (err)
-        callback(err)
+        if (err)
+          callback(err)
 
-      else
-        callback(docs)
+        else
+          callback(docs)
 
-    })
-  }
-    else if(mcode==6)
-  {
+      })
+    }
+    else if (mcode == 6) {
       findSpecDocuments3(db, function (err, docs) {
-      if (err)
-        callback(err)
+        if (err)
+          callback(err)
 
-      else
-        callback(docs)
+        else
+          callback(docs)
 
-    })
-  }
-    
-    
+      })
+    }
+
+
 
   });
 
@@ -357,13 +292,13 @@ function findDocuments(db, callback) {
   // Get the documents collection
   var collection = db.collection('inventory');
   // Find some documents
-  collection.find({}).toArray(function(err, docs) {
+  collection.find({}).toArray(function (err, docs) {
     if (err)
-        callback(err);
-      db.close
-      console.log("Find all doc from DB");
-      db.close
-      callback(null, docs);
+      callback(err);
+    db.close
+    console.log("Find all doc from DB");
+    db.close
+    callback(null, docs);
 
     // assert.equal(err, null);
     // console.log("Found the following records");
@@ -377,15 +312,15 @@ function findSpecDocuments(db, callback) {
   // Get the documents collection
   var collection = db.collection('inventory');
   // Find some documents
-  collection.find({mrp:"100"}).toArray(function(err, docs) {
+  collection.find({ mrp: "100" }).toArray(function (err, docs) {
     if (err)
-        callback(err);
-      db.close
-      console.log("Find specific doc from DB");
-      db.close
-      callback(null, docs);
+      callback(err);
+    db.close
+    console.log("Find specific doc from DB");
+    db.close
+    callback(null, docs);
 
- 
+
   });
 }
 
@@ -393,15 +328,15 @@ function findSpecDocuments1(db, callback) {
   // Get the documents collection
   var collection = db.collection('inventory');
   // Find some documents
-  collection.find({mrp: { $in: [ "100", "25" ] }}).toArray(function(err, docs) {
+  collection.find({ mrp: { $in: ["100", "25"] } }).toArray(function (err, docs) {
     if (err)
-        callback(err);
-      db.close
-      console.log("Find very specific doc from DB");
-      db.close
-      callback(null, docs);
+      callback(err);
+    db.close
+    console.log("Find very specific doc from DB");
+    db.close
+    callback(null, docs);
 
- 
+
   });
 }
 
@@ -409,15 +344,15 @@ function findSpecDocuments2(db, callback) {
   // Get the documents collection
   var collection = db.collection('inventory');
   // Find some documents
-  collection.find({itemName: "7 UP PET 250ML", mrp: { $lt: "30" }}).toArray(function(err, docs) {
+  collection.find({ itemName: "7 UP PET 250ML", mrp: { $lt: "30" } }).toArray(function (err, docs) {
     if (err)
-        callback(err);
-      db.close
-      console.log("Query 5 done");
-      db.close
-      callback(null, docs);
+      callback(err);
+    db.close
+    console.log("Query 5 done");
+    db.close
+    callback(null, docs);
 
- 
+
   });
 }
 
@@ -425,15 +360,15 @@ function findSpecDocuments3(db, callback) {
   // Get the documents collection
   var collection = db.collection('inventory');
   // Find some documents
-  collection.find({$or: [ { barcode: "8901361301510" }, { mrp: { $lt: "30" } } ]}).toArray(function(err, docs) {
+  collection.find({ $or: [{ barcode: "8901361301510" }, { mrp: { $lt: "30" } }] }).toArray(function (err, docs) {
     if (err)
-        callback(err);
-      db.close
-      console.log("Query 6 done");
-      db.close
-      callback(null, docs);
+      callback(err);
+    db.close
+    console.log("Query 6 done");
+    db.close
+    callback(null, docs);
 
- 
+
   });
 }
 

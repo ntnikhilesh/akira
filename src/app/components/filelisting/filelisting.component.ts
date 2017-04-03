@@ -6,6 +6,7 @@ import { AngularFire } from 'angularfire2';
 
 import * as firebase from 'firebase';
 import { Test } from '../../providers/test.service';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 
 @Component({
@@ -33,10 +34,22 @@ export class FilelistingComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     public provider: Test,
-    public af: AngularFire
+    public af: AngularFire,
+    private localStorageService: LocalStorageService
     ) { }
 
   ngOnInit() {
+
+    this.mflag = navigator.onLine;
+    this.localStorageService.clearAll;
+    if (this.mflag) {
+      console.log("User is online....")
+      this.getUserToken();
+    }
+    else {
+      console.log("User is offline...")
+      alert("Please check you internet connection...")
+    }
     //Get ID from URL
     //this.getmUserToken();
 
@@ -53,6 +66,35 @@ export class FilelistingComponent implements OnInit {
   }
 
 
+  getUserToken() {
+
+    this.af.auth.subscribe(auth => {
+      if (auth) {
+        //console.log('logged in');
+
+        firebase.auth().currentUser.getToken().then((idToken) => {
+
+          //console.log("id token in BC1"+idToken);
+          this.userToken = idToken;
+
+        })
+          .catch((error) => {
+            //alert("Please check your internet connection..")
+            this.error = error;
+            console.log(this.error);
+          });
+
+      }
+      else {
+        console.log('not logged in');
+        this.router.navigate(['login']);
+      }
+    });
+
+
+  }
+
+
 
 
 
@@ -65,15 +107,13 @@ export class FilelistingComponent implements OnInit {
       // this.result="You are offline...pl check your nw conn...";
       console.log("item in BC636", this.listing.imageUrl)
 
-      firebase.auth().currentUser.getToken().then((idToken) => 
-      {
+      firebase.auth().currentUser.getToken().then((idToken) => {
 
         console.log("TOken in listing=", idToken)
 
-        if (idToken) 
-        {
+        if (idToken) {
 
-          this.firebaseService.hitCF(idToken, this.listing.imageUrl,1).map(
+          this.firebaseService.hitCF(idToken, this.listing.imageUrl, 1).map(
             res => {
               console.log("Result in BC1221= " + res.text());
               this.result = res.text();

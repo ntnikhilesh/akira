@@ -1,6 +1,6 @@
 
 
-<div class="row">
+<div class="row" *ngIf="listing">
 
 <div class="col-3 col-m-3 menu">
  
@@ -38,7 +38,8 @@
 	<a class="btn btn-danger" >Delete</a>
   
 </div>
-<label>DB Result---</label><h5>{{result}}</h5>
+<h1> DB Result </h1>
+<h5>{{result}}</h5>
 </div>
 
  
