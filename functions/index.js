@@ -31,6 +31,7 @@ var _ = require('lodash');
 const concat = require('concat-stream');
 
 var populatedObject;
+var mcode;
 
 
 
@@ -48,6 +49,8 @@ exports.test = functions.https.onRequest((request, response) => {
     console.log("CSV file URL =",request.body.myurl)
     console.log("ID Token =",request.body.mytoken)
     console.log("Operation Code =",request.body.mcode)
+
+    mcode=request.body.mcode;
     //response.send("done...")
 
     //verify token
@@ -57,16 +60,20 @@ exports.test = functions.https.onRequest((request, response) => {
       request.user = decodedIdToken;
       console.log("Valid User")
 
-      if(request.body.mcode==1)
+      if(mcode==1)
       {
          getCSVData(request.body.myurl, function (result) {
         response.send(result);
       })
     }
-    else if(request.body.mcode==2)
+    else if(mcode==2)
     {
       console.log("Operation No -2")
-    response.send("Operation No -2");
+    //response.send("Operation No -2");
+
+     setConnection(function (result) {
+          response.send(result)
+        })
     }
 
 // switch(request.body.mcode)
@@ -216,7 +223,9 @@ function setConnection(callback) {
     assert.equal(null, err);
     console.log("Connected successfully to server");
 
-    insertDocuments(db, function (err, docs) {
+    if(mcode==1)
+    {
+        insertDocuments(db, function (err, docs) {
       if (err)
         callback(err)
 
@@ -224,6 +233,20 @@ function setConnection(callback) {
         callback(docs)
 
     })
+  }
+  else if(mcode==2)
+  {
+      findDocuments(db, function (err, docs) {
+      if (err)
+        callback(err)
+
+      else
+        callback(docs)
+
+    })
+  }
+    
+    
 
   });
 
@@ -245,6 +268,26 @@ function insertDocuments(db, callback) {
       db.close
       callback(null, result);
     });
+}
+
+
+function findDocuments(db, callback) {
+  // Get the documents collection
+  var collection = db.collection('inventory');
+  // Find some documents
+  collection.find({}).toArray(function(err, docs) {
+    if (err)
+        callback(err);
+      db.close
+      console.log("Inserted into the collection");
+      db.close
+      callback(null, docs);
+
+    // assert.equal(err, null);
+    // console.log("Found the following records");
+    // console.log(docs)
+    // callback(docs);
+  });
 }
 
 
