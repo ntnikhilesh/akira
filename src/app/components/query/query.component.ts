@@ -31,7 +31,7 @@ export class QueryComponent implements OnInit {
     'Select from the inventory collection all documents where the MRP equals 100',
     'Retrieves all documents from the inventory collection where MRP equals either 100 or 25',
     'Retrieves all documents in the inventory collection where the Item-Name equals 7 UP PET 250ML and MRP is less than 30',
-    'Retrieves all documents in the collection where the Item-Name equals 7 UP PET 250ML or MRP is less than 30',
+    'Retrieves all documents in the collection where the Barcode equals 8901361301510 or MRP is less than 30',
     
   ];
   constructor(
@@ -78,6 +78,10 @@ export class QueryComponent implements OnInit {
          else if(this.selectQuery=="Retrieves all documents in the inventory collection where the Item-Name equals 7 UP PET 250ML and MRP is less than 30")
         {
           this.mcode=5;
+        }
+        else if(this.selectQuery=="Retrieves all documents in the collection where the Barcode equals 8901361301510 or MRP is less than 30")
+        {
+          this.mcode=6;
         }
         
 

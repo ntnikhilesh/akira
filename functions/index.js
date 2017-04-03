@@ -98,8 +98,16 @@ exports.test = functions.https.onRequest((request, response) => {
      else if(mcode==5)
     {
       console.log("Operation No -5")
-      //response.send("coming soon....")
-    //response.send("Operation No -2");
+   
+
+     setConnection(function (result) {
+          response.send(result)
+        })
+    }
+      else if(mcode==6)
+    {
+      console.log("Operation No -6")
+   
 
      setConnection(function (result) {
           response.send(result)
@@ -308,6 +316,17 @@ function setConnection(callback) {
 
     })
   }
+    else if(mcode==6)
+  {
+      findSpecDocuments3(db, function (err, docs) {
+      if (err)
+        callback(err)
+
+      else
+        callback(docs)
+
+    })
+  }
     
     
 
@@ -395,6 +414,22 @@ function findSpecDocuments2(db, callback) {
         callback(err);
       db.close
       console.log("Query 5 done");
+      db.close
+      callback(null, docs);
+
+ 
+  });
+}
+
+function findSpecDocuments3(db, callback) {
+  // Get the documents collection
+  var collection = db.collection('inventory');
+  // Find some documents
+  collection.find({$or: [ { barcode: "8901361301510" }, { mrp: { $lt: "30" } } ]}).toArray(function(err, docs) {
+    if (err)
+        callback(err);
+      db.close
+      console.log("Query 6 done");
       db.close
       callback(null, docs);
 
