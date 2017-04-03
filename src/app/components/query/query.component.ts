@@ -28,7 +28,7 @@ export class QueryComponent implements OnInit {
 
   seasons = [
     'Select All Documents in a Collection',
-    'Select from the inventory collection all documents where the MRP equals 100',
+    'Retrieves all documents from the inventory collection where the MRP equals 100',
     'Retrieves all documents from the inventory collection where MRP equals either 100 or 25',
     'Retrieves all documents in the inventory collection where the Item-Name equals 7 UP PET 250ML and MRP is less than 30',
     'Retrieves all documents in the collection where the Barcode equals 8901361301510 or MRP is less than 30',
@@ -67,7 +67,7 @@ export class QueryComponent implements OnInit {
         {
           this.mcode=2;
         }
-        else if(this.selectQuery=="Select from the inventory collection all documents where the MRP equals 100")
+        else if(this.selectQuery=="Retrieves all documents from the inventory collection where the MRP equals 100")
         {
           this.mcode=3;
         }
