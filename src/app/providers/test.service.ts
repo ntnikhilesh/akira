@@ -59,5 +59,25 @@ export class Test {
 
 
 
+// 	  getStringFromWebServerAsync(mtoken: string,mfileURL:string) {
+//     return new Promise<string>((resolve, reject) => {
+//         // note: could be written `$.get(url).done(resolve).fail(reject);`,
+//         //       but I expanded it out for clarity
+
+// 		let data = new URLSearchParams();
+// 		data.append('mytoken', mtoken);
+// 		data.append('myurl', mfileURL);
+// 		console.log('token form srvice = ' + mtoken);
+// 		console.log('File URL form srvice = ' + mfileURL);
+//         $.post('https://us-central1-td-demo-df34d.cloudfunctions.net/test',data).done((data) => {
+//             resolve(data);
+//         }).fail((err) => {
+//             reject(err);
+//         });
+//     });
+// }
+
+
+
 
 }

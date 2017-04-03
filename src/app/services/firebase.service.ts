@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Http, Response } from '@angular/http';
+import { Http, Response,URLSearchParams } from '@angular/http';
 
 import { LocalStorageService } from 'angular-2-local-storage';
 
@@ -85,6 +85,24 @@ export class FirebaseService {
 
 
     return this.olisting;
+
+  }
+
+  hitCF(mtoken,mfileURL) {
+var mres:any;
+let data = new URLSearchParams();
+		data.append('mytoken', mtoken);
+		data.append('myurl', mfileURL);
+		console.log('token form srvice = ' + mtoken);
+		console.log('File URL form srvice = ' + mfileURL);
+
+
+		
+    mres = this.http
+			.post('https://us-central1-td-demo-df34d.cloudfunctions.net/test', data)
+
+
+    return mres;
 
   }
 

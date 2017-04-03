@@ -29,7 +29,7 @@ export class FilelistingsComponent implements OnInit {
     this.localStorageService.clearAll;
     if (this.mflag) {
       console.log("User is online....")
-      //this.getUserToken();
+      this.getUserToken();
     }
     else {
       console.log("User is offline...")
@@ -53,7 +53,7 @@ export class FilelistingsComponent implements OnInit {
       if (auth) {
         //console.log('logged in');
 
-        firebase.auth().currentUser.getToken(true).then((idToken) => {
+        firebase.auth().currentUser.getToken().then((idToken) => {
 
           //console.log("id token in BC1"+idToken);
           this.userToken = idToken;

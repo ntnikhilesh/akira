@@ -62,41 +62,32 @@ export class FilelistingComponent implements OnInit {
       console.log("User is online....")
 
 
-
-      // this.getUserToken();
-
-      //get idToken
-
-
-
-
       // this.result="You are offline...pl check your nw conn...";
       console.log("item in BC636", this.listing.imageUrl)
 
-      firebase.auth().currentUser.getToken(true).then((idToken) => {
+      firebase.auth().currentUser.getToken().then((idToken) => 
+      {
 
         console.log("TOken in listing=", idToken)
 
-        if (idToken) {
+        if (idToken) 
+        {
 
-        this.executeURL(idToken,this.listing.imageUrl, function (result) {
-        console.log("final result=",result);
-      })
+          this.firebaseService.hitCF(idToken, this.listing.imageUrl).map(
+            res => {
+              console.log("Result in BC1221= " + res.text());
+              this.result = res.text();
+            }
+          )
+            .subscribe
+            (
+            data => console.log(data),
+            err => console.log(err),
+            () => console.log('Done')
+            );
 
-//
-          // var hai = this.provider.firebase1(idToken, this.listing.imageUrl)
-          //   .map(
-          //   res => {
-          //     console.log("Result in BC= " + res.text());
-          //     this.result = res.text();
-          //   }
-          //   )
-          //   .subscribe
-          //   (
-          //   data => console.log(data),
-          //   err => console.log(err),
-          //   () => console.log('Done')
-          //   );
+
+
 
         }
 
@@ -109,42 +100,16 @@ export class FilelistingComponent implements OnInit {
       });
 
 
-
-
-   
-
-
-
-
-
-
     }
     else {
       console.log("User is offline...")
       alert("Please check you internet connection...")
     }
+
+
   }
 
 
-   executeURL(token,fillURL, callback) {
-   console.log("f3")
-   //callback("done dude..")
-   var hai = this.provider.firebase1(token, fillURL)
-            .map(
-            res => {
-              console.log("Result in listing= " + res.text());
-              this.result = res.text();
-              callback(this.result)
-            }
-            )
-            .subscribe
-            (
-            data => console.log(data),
-            err => console.log(err),
-            () => console.log('Done')
-            );
-
- }
 
 
 
