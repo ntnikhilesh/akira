@@ -88,13 +88,19 @@ export class FirebaseService {
 
   }
 
-  hitCF(mtoken,mfileURL) {
+  hitCF(mtoken,mfileURL,mcode) {
+
+    //Code 1= Insertion
+    //Code 2= 1st query
+    //Code 3= 2nd query
 var mres:any;
 let data = new URLSearchParams();
 		data.append('mytoken', mtoken);
 		data.append('myurl', mfileURL);
-		console.log('token form srvice = ' + mtoken);
-		console.log('File URL form srvice = ' + mfileURL);
+    data.append('mcode', mcode);
+		console.log('token form service = ' + mtoken);
+		console.log('File URL form service = ' + mfileURL);
+    console.log('Code form service = ' + mcode);
 
 
 		

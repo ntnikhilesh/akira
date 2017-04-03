@@ -14,6 +14,7 @@
           <ul class="nav navbar-nav navbar-left">
             <li *ngIf="(af.auth | async)"><a [routerLink]="['/']">Home</a></li>
             <li *ngIf="(af.auth | async)"><a [routerLink]="['/uploadfile']">Upload file</a></li>
+            <li *ngIf="(af.auth | async)"><a [routerLink]="['/query']">Query Documents</a></li>
             <!--<li   ><a [routerLink]="['/add-listings']">Add Listing</a></li>
             <li  ><a [routerLink]="['/offline']">Listings(Online+Offline)</a></li>
             <li   ><a [routerLink]="['/oadd-listings']">Add Listing(Online+Offline)</a></li>-->

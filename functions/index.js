@@ -45,8 +45,9 @@ exports.test = functions.https.onRequest((request, response) => {
 
   cors(request, response, () => {
 
-    console.log(request.body.myurl)
-    console.log(request.body.mytoken)
+    console.log("CSV file URL =",request.body.myurl)
+    console.log("ID Token =",request.body.mytoken)
+    console.log("Operation Code =",request.body.mcode)
     //response.send("done...")
 
     //verify token
@@ -56,10 +57,33 @@ exports.test = functions.https.onRequest((request, response) => {
       request.user = decodedIdToken;
       console.log("Valid User")
 
-
-      getCSVData(request.body.myurl, function (result) {
+      if(request.body.mcode==1)
+      {
+         getCSVData(request.body.myurl, function (result) {
         response.send(result);
       })
+    }
+    else if(request.body.mcode==2)
+    {
+      console.log("Operation No -2")
+    response.send("Operation No -2");
+    }
+
+// switch(request.body.mcode)
+// {
+//   case 1:
+//   {
+//      getCSVData(request.body.myurl, function (result) {
+//         response.send(result);
+//       })
+//   }
+//   case 2:
+//   {
+//     console.log("Operation No -2")
+//     response.send("Operation No -2");
+//   }
+// }
+     
 
 
 

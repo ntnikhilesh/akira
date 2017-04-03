@@ -12,6 +12,7 @@
  import {FilelistingsComponent} from './components/filelistings/filelistings.component';
  import {FilelistingComponent} from './components/filelisting/filelisting.component';
  import {UploadfileComponent} from './components/uploadfile/uploadfile.component';
+ import {QueryComponent} from './components/query/query.component';
  import {RegComponent} from './reg/reg.component';
 
 
@@ -23,6 +24,7 @@ const routes:Routes=[
 {path:'login',component:LoginComponent},
 {path:'uploadfile',component:UploadfileComponent},
 {path:'filelistings',component:FilelistingsComponent},
+{path:'query',component:QueryComponent},
 {path:'filelisting/:id', component:FilelistingComponent},
 
 {path:'billing',component:BillingComponentComponent},
