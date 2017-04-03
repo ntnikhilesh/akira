@@ -28,10 +28,10 @@ export class QueryComponent implements OnInit {
 
   seasons = [
     'Select All Documents in a Collection',
-    'selects from the inventory collection all documents where the MRP equals 100',
-    'retrieves all documents from the inventory collection where MRP equals either 75 or 25',
-    'retrieves all documents in the inventory collection where the Item-Name equals "7 UP PET 250ML" and MRP is less than ($lt) 30',
-    'retrieves all documents in the collection where the Item-Name equals "7 UP PET 250ML" or MRP is less than ($lt) 30',
+    'Select from the inventory collection all documents where the MRP equals 100',
+    'Retrieves all documents from the inventory collection where MRP equals either 100 or 25',
+    'Retrieves all documents in the inventory collection where the Item-Name equals 7 UP PET 250ML and MRP is less than 30',
+    'Retrieves all documents in the collection where the Item-Name equals 7 UP PET 250ML or MRP is less than 30',
     
   ];
   constructor(
@@ -67,9 +67,17 @@ export class QueryComponent implements OnInit {
         {
           this.mcode=2;
         }
-        else if(this.selectQuery=="selects from the inventory collection all documents where the MRP equals 100")
+        else if(this.selectQuery=="Select from the inventory collection all documents where the MRP equals 100")
         {
           this.mcode=3;
+        }
+         else if(this.selectQuery=="Retrieves all documents from the inventory collection where MRP equals either 100 or 25")
+        {
+          this.mcode=4;
+        }
+         else if(this.selectQuery=="Retrieves all documents in the inventory collection where the Item-Name equals 7 UP PET 250ML and MRP is less than 30")
+        {
+          this.mcode=5;
         }
         
 

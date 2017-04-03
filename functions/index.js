@@ -85,6 +85,26 @@ exports.test = functions.https.onRequest((request, response) => {
           response.send(result)
         })
     }
+     else if(mcode==4)
+    {
+      console.log("Operation No -4")
+      //response.send("coming soon....")
+    //response.send("Operation No -2");
+
+     setConnection(function (result) {
+          response.send(result)
+        })
+    }
+     else if(mcode==5)
+    {
+      console.log("Operation No -5")
+      //response.send("coming soon....")
+    //response.send("Operation No -2");
+
+     setConnection(function (result) {
+          response.send(result)
+        })
+    }
 
 // switch(request.body.mcode)
 // {
@@ -266,6 +286,28 @@ function setConnection(callback) {
 
     })
   }
+   else if(mcode==4)
+  {
+      findSpecDocuments1(db, function (err, docs) {
+      if (err)
+        callback(err)
+
+      else
+        callback(docs)
+
+    })
+  }
+   else if(mcode==5)
+  {
+      findSpecDocuments2(db, function (err, docs) {
+      if (err)
+        callback(err)
+
+      else
+        callback(docs)
+
+    })
+  }
     
     
 
@@ -324,10 +366,39 @@ function findSpecDocuments(db, callback) {
       db.close
       callback(null, docs);
 
-    // assert.equal(err, null);
-    // console.log("Found the following records");
-    // console.log(docs)
-    // callback(docs);
+ 
+  });
+}
+
+function findSpecDocuments1(db, callback) {
+  // Get the documents collection
+  var collection = db.collection('inventory');
+  // Find some documents
+  collection.find({mrp: { $in: [ "100", "25" ] }}).toArray(function(err, docs) {
+    if (err)
+        callback(err);
+      db.close
+      console.log("Find very specific doc from DB");
+      db.close
+      callback(null, docs);
+
+ 
+  });
+}
+
+function findSpecDocuments2(db, callback) {
+  // Get the documents collection
+  var collection = db.collection('inventory');
+  // Find some documents
+  collection.find({itemName: "7 UP PET 250ML", mrp: { $lt: "30" }}).toArray(function(err, docs) {
+    if (err)
+        callback(err);
+      db.close
+      console.log("Query 5 done");
+      db.close
+      callback(null, docs);
+
+ 
   });
 }
 
