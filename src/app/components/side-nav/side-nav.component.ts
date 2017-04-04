@@ -18,7 +18,7 @@ export class SideNavComponent implements OnInit {
     //this.setFlag();
     this.af.auth.logout();
     console.log('Logout succ..');
-    this.router.navigate(['login']);
+    //this.router.navigate(['login']);
   }
 
 }
