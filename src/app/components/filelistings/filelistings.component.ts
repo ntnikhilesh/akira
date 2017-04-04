@@ -75,5 +75,12 @@ export class FilelistingsComponent implements OnInit {
 
   }
 
+   logout() {
+    //this.setFlag();
+    this.af.auth.logout();
+    console.log('Logout succ..');
+    this.router.navigate(['login']);
+  }
+
 
 }

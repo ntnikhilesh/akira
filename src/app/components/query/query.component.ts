@@ -158,4 +158,11 @@ export class QueryComponent implements OnInit {
 
   }
 
+  logout() {
+    //this.setFlag();
+    this.af.auth.logout();
+    console.log('Logout succ..');
+    this.router.navigate(['login']);
+  }
+
 }

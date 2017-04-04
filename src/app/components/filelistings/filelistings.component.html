@@ -1,6 +1,6 @@
 
 
-<div class="row">
+<!--<div class="row">
 
 <div class="col-3 col-m-3 menu">
  
@@ -27,7 +27,143 @@
 
 </div>
 
+</div>-->
+
+
+
+<div class="row">
+
+  <!--<div class="col-3  menu">
+ 
+</div> -->
+
+  <div class="col-6 col-m-12">
+    <md-sidenav-container fullscreen>
+
+
+      <md-sidenav #start>
+        <md-nav-list>
+
+          <div class="side-bottom">
+            <div class="side-billing">
+
+
+              <br>
+              <ul>
+
+                
+				<br><br>
+				 <li *ngIf="(af.auth | async)"><a  routerLink="/filelistings" routerLinkActive="active">Home</a></li>
+
+				 <br><br>
+
+				 <li *ngIf="(af.auth | async)"><a  routerLink="/uploadfile" routerLinkActive="active">Upload File</a></li>
+				 
+				 <br><br>
+
+				 <li *ngIf="(af.auth | async)"><a  routerLink="/query" routerLinkActive="active">Query</a></li>
+				 
+				 <br><br>
+
+				 <li *ngIf="(af.auth | async)"><a (click)="logout()" routerLink="/login" routerLinkActive="active">Logout</a></li>
+
+
+              </ul>
+            </div>
+
+
+
+
+          </div>
+
+
+
+
+        </md-nav-list>
+
+
+
+
+      </md-sidenav>
+
+      <md-toolbar>
+
+        <div class="toolbar-icon">
+          <button md-icon-button (click)="start.open()">
+          <md-icon  >menu
+          </md-icon>
+       </button>
+        </div>
+
+        <div class="toolbar-heading">
+			Home
+        </div>
+
+
+
+
+
+        <!--</div>-->
+
+
+      </md-toolbar>
+
+
+
+      <!-- Main content -->
+      <div class="col-m-7 col-s-12">
+
+
+
+
+
+
+
+       <h1> Sellect file </h1>
+<ul class="list-group">
+	<li class="list-group-item" *ngFor="let listing of mFileListings">
+			<a [routerLink]="['/filelisting/'+listing.$key]">{{listing.name}}</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+      </div>
+      <!-- End of col-1 -->
+
+
+
+      <div class="col-m-5 col-s-11">
+        <!--<app-bill-detail></app-bill-detail> -->
+
+      </div>
+      <!-- End of col-2  -->
+
+
+
+      <!--<div class="col-m-1 col-s-1">
+          
+        </div> <!-- End of column 3 -->
+
+
+      <!-- End of main content -->
+
+    </md-sidenav-container>
+
+
+
+  </div>
+
+  <!--<div class="col-3">
+
+</div> -->
+
 </div>
+<!-- End of action bar row -->
 
 
 
