@@ -1,0 +1,31 @@
+<div class="side-bottom">
+  <div class="side-billing">
+
+
+    <br>
+    <ul>
+
+
+      <br><br>
+      <li *ngIf="(af.auth | async)"><a routerLink="/filelistings" routerLinkActive="active">Home</a></li>
+
+      <br><br>
+
+      <li *ngIf="(af.auth | async)"><a routerLink="/uploadfile" routerLinkActive="active">Upload File</a></li>
+
+      <br><br>
+
+      <li *ngIf="(af.auth | async)"><a routerLink="/query" routerLinkActive="active">Query</a></li>
+
+      <br><br>
+
+      <li *ngIf="(af.auth | async)"><a (click)="logout()" routerLink="/login" routerLinkActive="active">Logout</a></li>
+
+
+    </ul>
+  </div>
+
+
+
+
+</div>

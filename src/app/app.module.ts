@@ -48,6 +48,7 @@ import { FilelistingsComponent } from './components/filelistings/filelistings.co
 import { FilelistingComponent } from './components/filelisting/filelisting.component';
 import { UploadfileComponent } from './components/uploadfile/uploadfile.component';
 import { QueryComponent } from './components/query/query.component';
+import { SideNavComponent } from './components/side-nav/side-nav.component';
 
 
 const firebaseAuthConfig = {
@@ -93,6 +94,8 @@ export const firebaseConfig = {
     UploadfileComponent,
     
     QueryComponent,
+    
+    SideNavComponent,
     
     
   ],
