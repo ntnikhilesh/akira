@@ -1,49 +1,6 @@
-
-
-
-<!--<div class="row">
-
-<div class="col-3 col-m-3 menu">
- 
-</div>
-
-<div class="col-6 col-m-6">
-  
-
- <div class="login-form" align="center">
-  <form (submit)="onAddSubmit()" class="example-form">
-  
- 
-  
-  <div class="form-group">
-
-    <h1> Upload your file </h1>
-    <input id="image1" name="image1" [(ngModel)]="image1" type="file" >
-  </div>
-  
-<br><br>
-<a  class="btn btn-info" [routerLink]="['/filelistings']" (click)="uploadFile()">Upload</a>
- 
-  
-</form>
- </div>
- 
-
-          
-
-</div>
-
-<div class="col-3 col-m-3">
-
-</div>
-
-</div>-->
-
 <div class="row">
 
-  <!--<div class="col-3  menu">
- 
-</div> -->
+
 
   <div class="col-6 col-m-12">
     <md-sidenav-container fullscreen>
@@ -59,21 +16,21 @@
               <br>
               <ul>
 
-                
-				<br><br>
-				 <li *ngIf="(af.auth | async)"><a  routerLink="/filelistings" routerLinkActive="active">Home</a></li>
 
-				 <br><br>
+                <br><br>
+                <li *ngIf="(af.auth | async)"><a routerLink="/filelistings" routerLinkActive="active">Home</a></li>
 
-				 <li *ngIf="(af.auth | async)"><a  routerLink="/uploadfile" routerLinkActive="active">Upload File</a></li>
-				 
-				 <br><br>
+                <br><br>
 
-				 <li *ngIf="(af.auth | async)"><a  routerLink="/query" routerLinkActive="active">Query</a></li>
-				 
-				 <br><br>
+                <li *ngIf="(af.auth | async)"><a routerLink="/uploadfile" routerLinkActive="active">Upload File</a></li>
 
-				 <li *ngIf="(af.auth | async)"><a (click)="logout()" routerLink="/login" routerLinkActive="active">Logout</a></li>
+                <br><br>
+
+                <li *ngIf="(af.auth | async)"><a routerLink="/query" routerLinkActive="active">Query</a></li>
+
+                <br><br>
+
+                <li *ngIf="(af.auth | async)"><a (click)="logout()" routerLink="/login" routerLinkActive="active">Logout</a></li>
 
 
               </ul>
@@ -104,50 +61,50 @@
         </div>
 
         <div class="toolbar-heading">
-			Home
+          Home
         </div>
 
 
 
 
 
-        <!--</div>-->
+
 
 
       </md-toolbar>
 
 
 
-      <!-- Main content -->
+
       <div class="col-3 col-m-3 menu">
- 
-</div>
 
-<div class="col-6 col-m-6">
+      </div>
 
-
+      <div class="col-6 col-m-6">
 
 
 
 
 
-<div class="login-form" align="center">
-  <form (submit)="onAddSubmit()" class="example-form">
-  
- 
-  
-  <div class="form-group">
 
-    <h1> Upload your file </h1>
-    <input id="image1" name="image1" [(ngModel)]="image1" type="file" >
-  </div>
-  
-<br><br>
-<a  class="btn btn-info" [routerLink]="['/filelistings']" (click)="uploadFile()">Upload</a>
- 
-  
-</form>
- </div>
+
+        <div class="login-form" align="center">
+          <form (submit)="onAddSubmit()" class="example-form">
+
+
+
+            <div class="form-group">
+
+              <h1> Upload your file </h1>
+              <input id="image1" name="image1" [(ngModel)]="image1" type="file">
+            </div>
+
+            <br><br>
+            <a class="btn btn-info" [routerLink]="['/filelistings']" (click)="uploadFile()">Upload</a>
+
+
+          </form>
+        </div>
 
 
 
@@ -155,23 +112,14 @@
 
 
       </div>
-      <!-- End of col-1 -->
 
 
 
-    <div class="col-3 col-m-3">
 
-</div>
-      <!-- End of col-2  -->
+      <div class="col-3 col-m-3">
 
+      </div>
 
-
-      <!--<div class="col-m-1 col-s-1">
-          
-        </div> <!-- End of column 3 -->
-
-
-      <!-- End of main content -->
 
     </md-sidenav-container>
 
@@ -179,9 +127,6 @@
 
   </div>
 
-  <!--<div class="col-3">
 
-</div> -->
 
 </div>
-<!-- End of action bar row -->

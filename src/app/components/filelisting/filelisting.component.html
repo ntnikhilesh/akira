@@ -1,239 +1,142 @@
-
-
-<!--<div class="row" *ngIf="listing">
-
-<div class="col-3 col-m-3 menu">
- 
-</div>
-
-<div class="col-6 col-m-6">
-  
-
-
-<h1>File Detail</h1>
-<div >
-<a [routerLink]="['/filelistings']">Go Back</a>
-
-<br>
-
-
-<div class="row">
-	
-
-	<div class="col-md-8">
-		<ul class="list-group">
-			<li class="list-group-item">File Name  : {{listing.name}}</li>
-			
-
-		</ul>
-		
-	</div>
-
-
-</div>
-<div>
- <a class="btn btn-primary" (click)="hitCF()">Process</a>
- 
-	<a class="btn btn-default" >Edit</a>
-	<a class="btn btn-danger" >Delete</a>
-  
-</div>
-<h1> DB Result </h1>
-<h5>{{result}}</h5>
-</div>
-
- 
-
-          
-
-</div>
-
-<div class="col-3 col-m-3">
-
-</div>
-
-</div>-->
-
-
 <div class="row">
 
-  <!--<div class="col-3  menu">
- 
-</div> -->
-
-  <div class="col-6 col-m-12">
-    <md-sidenav-container fullscreen>
 
 
-      <md-sidenav #start>
-        <md-nav-list>
-
-          <div class="side-bottom">
-            <div class="side-billing">
+	<div class="col-6 col-m-12">
+		<md-sidenav-container fullscreen>
 
 
-              <br>
-              <ul>
+			<md-sidenav #start>
+				<md-nav-list>
 
-                
-				<br><br>
-				 <li *ngIf="(af.auth | async)"><a  routerLink="/filelistings" routerLinkActive="active">Home</a></li>
-
-				 <br><br>
-
-				 <li *ngIf="(af.auth | async)"><a  routerLink="/uploadfile" routerLinkActive="active">Upload File</a></li>
-				 
-				 <br><br>
-
-				 <li *ngIf="(af.auth | async)"><a  routerLink="/query" routerLinkActive="active">Query</a></li>
-				 
-				 <br><br>
-
-				 <li *ngIf="(af.auth | async)"><a (click)="logout()" routerLink="/login" routerLinkActive="active">Logout</a></li>
+					<div class="side-bottom">
+						<div class="side-billing">
 
 
-              </ul>
-            </div>
+							<br>
+							<ul>
+
+
+								<br><br>
+								<li *ngIf="(af.auth | async)"><a routerLink="/filelistings" routerLinkActive="active">Home</a></li>
+
+								<br><br>
+
+								<li *ngIf="(af.auth | async)"><a routerLink="/uploadfile" routerLinkActive="active">Upload File</a></li>
+
+								<br><br>
+
+								<li *ngIf="(af.auth | async)"><a routerLink="/query" routerLinkActive="active">Query</a></li>
+
+								<br><br>
+
+								<li *ngIf="(af.auth | async)"><a (click)="logout()" routerLink="/login" routerLinkActive="active">Logout</a></li>
+
+
+							</ul>
+						</div>
 
 
 
 
-          </div>
+					</div>
 
 
 
 
-        </md-nav-list>
+				</md-nav-list>
 
 
 
 
-      </md-sidenav>
+			</md-sidenav>
 
-      <md-toolbar>
+			<md-toolbar>
 
-        <div class="toolbar-icon">
-          <button md-icon-button (click)="start.open()">
+				<div class="toolbar-icon">
+					<button md-icon-button (click)="start.open()">
           <md-icon  >menu
           </md-icon>
        </button>
-        </div>
+				</div>
 
-        <div class="toolbar-heading">
-			Home
-        </div>
-
-
+				<div class="toolbar-heading">
+					Home
+				</div>
 
 
 
-        <!--</div>-->
-
-
-      </md-toolbar>
 
 
 
-      <!-- Main content -->
-      <div class="col-3 col-m-3 menu">
- 
-</div>
 
-<div class="col-6 col-m-6">
 
-<h1>File Detail</h1>
+			</md-toolbar>
 
-<a [routerLink]="['/filelistings']">Go Back</a>
 
-<br>
 
-	<div >
-		<ul class="list-group">
-			<li class="list-group-item">File Name  : {{listing.name}}</li>
-			
 
-		</ul>
-		
+			<div class="col-3 col-m-3 menu">
+
+			</div>
+
+			<div class="col-6 col-m-6">
+
+				<h1>File Detail</h1>
+
+				<a [routerLink]="['/filelistings']">Go Back</a>
+
+				<br>
+
+				<div>
+					<ul class="list-group">
+						<li class="list-group-item">File Name : {{listing.name}}</li>
+
+
+					</ul>
+
+				</div>
+
+				<div>
+					<a class="btn btn-primary" (click)="hitCF()">Process</a>
+
+					<a class="btn btn-default">Edit</a>
+					<a class="btn btn-danger">Delete</a>
+
+				</div>
+				<h1> DB Result </h1>
+				<h5>{{result}}</h5>
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+
+
+
+			<div class="col-3 col-m-3">
+
+			</div>
+
+
+
+
+
+
+		</md-sidenav-container>
+
+
+
 	</div>
 
-	<div>
- <a class="btn btn-primary" (click)="hitCF()">Process</a>
- 
-	<a class="btn btn-default" >Edit</a>
-	<a class="btn btn-danger" >Delete</a>
-  
-</div>
-<h1> DB Result </h1>
-<h5>{{result}}</h5>
 
-
-
-<!--<h1>File Detail</h1>
-<div >
-<a [routerLink]="['/filelistings']">Go Back</a>
-
-<br>
-
-
-<div class="row">
-	
-
-	<div class="col-md-8">
-		<ul class="list-group">
-			<li class="list-group-item">File Name  : {{listing.name}}</li>
-			
-
-		</ul>
-		
-	</div>
-
-
-</div>
-<div>
- <a class="btn btn-primary" (click)="hitCF()">Process</a>
- 
-	<a class="btn btn-default" >Edit</a>
-	<a class="btn btn-danger" >Delete</a>
-  
-</div>
-<h1> DB Result </h1>
-<h5>{{result}}</h5>
-</div>-->
-
-
-
-
-
-
-      </div>
-      <!-- End of col-1 -->
-
-
-
-    <div class="col-3 col-m-3">
-
-</div>
-      <!-- End of col-2  -->
-
-
-
-      <!--<div class="col-m-1 col-s-1">
-          
-        </div> <!-- End of column 3 -->
-
-
-      <!-- End of main content -->
-
-    </md-sidenav-container>
-
-
-
-  </div>
-
-  <!--<div class="col-3">
-
-</div> -->
 
 </div>
 <!-- End of action bar row -->
-

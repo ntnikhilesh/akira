@@ -7,7 +7,7 @@
  
  
 
- import {BillingComponentComponent} from './billing-component/billing-component.component';
+
  import {LoginComponent} from './components/login/login.component';
  import {FilelistingsComponent} from './components/filelistings/filelistings.component';
  import {FilelistingComponent} from './components/filelisting/filelisting.component';
@@ -27,7 +27,7 @@ const routes:Routes=[
 {path:'query',component:QueryComponent},
 {path:'filelisting/:id', component:FilelistingComponent},
 
-{path:'billing',component:BillingComponentComponent},
+
 {path:'register',component:RegComponent},
 
    

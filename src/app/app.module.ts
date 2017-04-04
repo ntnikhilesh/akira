@@ -19,7 +19,7 @@ import {RoutingModule} from './routing.module';
 
 
 
-import { BillingComponentComponent } from './billing-component/billing-component.component';
+
 import { LoginComponent } from './components/login/login.component';
 
 
@@ -42,8 +42,8 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { RegComponent } from './reg/reg.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+
+
 import { FilelistingsComponent } from './components/filelistings/filelistings.component';
 import { FilelistingComponent } from './components/filelisting/filelisting.component';
 import { UploadfileComponent } from './components/uploadfile/uploadfile.component';
@@ -75,16 +75,16 @@ export const firebaseConfig = {
     
     
     
-    BillingComponentComponent,
+   
     LoginComponent,
     
     
     
     RegComponent,
     
-    DashboardComponent,
+  
     
-    NavbarComponent,
+   
     
     FilelistingsComponent,
     
