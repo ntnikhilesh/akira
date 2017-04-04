@@ -13,6 +13,7 @@
  import {FilelistingComponent} from './components/filelisting/filelisting.component';
  import {UploadfileComponent} from './components/uploadfile/uploadfile.component';
  import {QueryComponent} from './components/query/query.component';
+ import {TestSedenavComponent} from './components/test-sedenav/test-sedenav.component';
  import {RegComponent} from './reg/reg.component';
 
 
@@ -22,6 +23,7 @@ const routes:Routes=[
 
 {path:'',redirectTo:'/login',pathMatch:'full'},
 {path:'login',component:LoginComponent},
+{path:'test',component:TestSedenavComponent},
 {path:'uploadfile',component:UploadfileComponent},
 {path:'filelistings',component:FilelistingsComponent},
 {path:'query',component:QueryComponent},

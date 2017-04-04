@@ -1,6 +1,8 @@
 
 
 import { BrowserModule } from '@angular/platform-browser';
+//import BrowserAnimationsModule from '@angular/platform-browser/animations';
+
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -49,6 +51,9 @@ import { FilelistingComponent } from './components/filelisting/filelisting.compo
 import { UploadfileComponent } from './components/uploadfile/uploadfile.component';
 import { QueryComponent } from './components/query/query.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
+import { TestSedenavComponent } from './components/test-sedenav/test-sedenav.component';
+
+import {BusyModule} from 'angular2-busy';
 
 
 const firebaseAuthConfig = {
@@ -97,13 +102,17 @@ export const firebaseConfig = {
     
     SideNavComponent,
     
+    TestSedenavComponent,
+    
     
   ],
   imports: [
     BrowserModule,
+    //BrowserAnimationsModule,
     AngularFireModule.initializeApp(firebaseConfig,firebaseAuthConfig),
     FormsModule,
     HttpModule,
+    BusyModule,
     MaterialModule,
     RoutingModule,
     AngularFireOfflineModule,
