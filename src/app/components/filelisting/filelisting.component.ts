@@ -27,7 +27,7 @@ export class FilelistingComponent implements OnInit {
   error: any;
   mflag: any;
 
-
+isLoading: boolean | number = false;
   constructor
     (
     private firebaseService: FirebaseService,
@@ -102,7 +102,7 @@ export class FilelistingComponent implements OnInit {
     this.mflag = navigator.onLine;
     if (this.mflag) {
       console.log("User is online....")
-
+      this.isLoading = true;
 
       // this.result="You are offline...pl check your nw conn...";
       console.log("item in BC636", this.listing.imageUrl)
@@ -115,8 +115,10 @@ export class FilelistingComponent implements OnInit {
 
           this.firebaseService.hitCF(idToken, this.listing.imageUrl, 1).map(
             res => {
+              this.isLoading = false;
               console.log("Result in BC1221= " + res.text());
               this.result = res.text();
+              
             }
           )
             .subscribe
@@ -159,5 +161,26 @@ logout() {
   }
 
 
+
+
+
+// trigger-variable for Ladda
+    startLoading() {
+      this.isLoading = true;
+      //this.progress = false;
+        // this.progress = 0; // starts spinner
+ 
+        // setTimeout(() => {
+        //     this.progress = 0.5; // sets progress bar to 50%
+ 
+        //     setTimeout(() => {
+        //         this.progress = 1; // sets progress bar to 100%
+ 
+        //         setTimeout(() => {
+        //             this.progress = false; // stops spinner
+        //         }, 200);
+        //     }, 500);
+        // }, 400);
+    }
 
 }

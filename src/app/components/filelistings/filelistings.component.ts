@@ -7,6 +7,8 @@ import { LocalStorageService } from 'angular-2-local-storage';
 import { Router } from "@angular/router";
 import { AngularFire } from 'angularfire2';
 import * as firebase from 'firebase';
+import {Subscription} from 'rxjs';
+
 
 
 @Component({
@@ -15,11 +17,20 @@ import * as firebase from 'firebase';
   styleUrls: ['./filelistings.component.css']
 })
 export class FilelistingsComponent implements OnInit {
+  //busy: Subscription;
+   busy: Promise<any>;
+  nikil:any;
+  mconfig={};
+  
 
   	mFileListings:any;
     userToken: any;
-  mflag: any;
+    mflag: any;
     error: any;
+
+isLoading: boolean | number = false;
+    
+    
 
   constructor(private firebaseService:FirebaseService,public af: AngularFire,private localStorageService: LocalStorageService,public router: Router) { }
 
@@ -37,12 +48,42 @@ export class FilelistingsComponent implements OnInit {
       alert("Please check you internet connection...")
     }
   
+this.isLoading=true;
+// this.busy = this.firebaseService.getFileListings().toPromise();
+// console.log(this.busy)
 
-
+// this.busy=this.firebaseService.getFileListings().subscribe();
+// this.mFileListings=this.busy;
+   
+  // this.busy = this.firebaseService.getFileListings().subscribe();
+  // console.log(this.busy)
   this.firebaseService.getFileListings().subscribe(filelistings=>{
+  this.isLoading=false;
   console.log(filelistings);
   this.mFileListings=filelistings;
+
+  this.busy = this.firebaseService.promiseDemo();
+console.log(this.busy)
+  //this.busy=filelistings[0]
+  //console.log("onj1",filelistings[0])
+
   }); 
+ 
+ 
+  //this.mconfig={'busy': this.mFileListings, 'message': 'Please Wait', 'backdrop': false,}
+//filelistings=>{
+   
+//   console.log(filelistings);
+//   debugger
+//  let ty= filelistings.map(function(item){
+//     return item;
+//   })
+ 
+//   this.busy=filelistings;
+//   // this.busy=filelistings.forEach(function(item){
+//   //   return item;
+//   // })
+//   }); 
 }
 
 

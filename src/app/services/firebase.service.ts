@@ -58,6 +58,14 @@ export class FirebaseService {
 
 
 
+promiseDemo()
+{
+    return new Promise(function(resolve,reject)
+    {
+      resolve(true)
+    })
+}
+
   addInDB(listing) {
     console.log("Item added in BD as well")
     this.listings.push(listing);

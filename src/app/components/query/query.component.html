@@ -66,12 +66,16 @@
           </md-radio-group>
           <div class="example-selected-value">Your selected query is: {{selectQuery}}</div>
 
-          <br><br>
-          <a class="btn btn-primary" (click)="hitCF()">Process</a>
+          
 
 
         </div>
 
+        <div align="center">
+          <br><br>
+          <a [ladda]="isLoading" class="btn btn-primary" (click)="hitCF()">Process</a>
+            <br><br>
+        </div>
         <div>
           <h1> DB Result</h1>
           <h5>{{result}}</h5>

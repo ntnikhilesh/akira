@@ -1,4 +1,6 @@
-<div class="row">
+<!--<md-spinner></md-spinner>-->
+<!--<div class="ng-busy" [ngBusy]="{busy:busy, backdrop:true}" style="height:100%;position: absolute;z-index:1;">-->
+<div class="row" >
 
 
 
@@ -47,21 +49,15 @@
 
 
 
-			<div class="col-m-12 col-s-12">
+			<div  class="col-m-12 col-s-12">
 
+			<h1> Sellect file </h1>
+<ul class="list-group">
+	<li class="list-group-item" *ngFor="let listing of mFileListings">
+			<a [routerLink]="['/filelisting/'+listing.$key]">{{listing.name}}</a>
+	</li>
 
-
-
-
-
-
-				<h1> Sellect file </h1>
-				<ul class="list-group">
-					<li class="list-group-item" *ngFor="let listing of mFileListings">
-						<a [routerLink]="['/filelisting/'+listing.$key]">{{listing.name}}</a>
-					</li>
-
-				</ul>
+</ul>
 
 
 
@@ -90,4 +86,5 @@
 
 
 </div>
+<!--</div>-->
 <!-- End of action bar row -->

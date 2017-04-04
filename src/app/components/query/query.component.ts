@@ -7,6 +7,7 @@ import { AngularFire } from 'angularfire2';
 import * as firebase from 'firebase';
 import { Test } from '../../providers/test.service';
 import { LocalStorageService } from 'angular-2-local-storage';
+//import {Subscription} from 'rxjs';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { LocalStorageService } from 'angular-2-local-storage';
   styleUrls: ['./query.component.css']
 })
 export class QueryComponent implements OnInit {
-
+//busy: Subscription;
   selectQuery: string;
   id: any;
   listing: any;
@@ -26,6 +27,7 @@ export class QueryComponent implements OnInit {
   error: any;
   mflag: any;
   mcode: any;
+  isLoading: boolean | number = false;
 
   seasons = [
     'Select All Documents in a Collection',
@@ -93,7 +95,7 @@ export class QueryComponent implements OnInit {
     this.mflag = navigator.onLine;
     if (this.mflag) {
       console.log("User is online....")
-
+      this.isLoading=true;
 
       // this.result="You are offline...pl check your nw conn...";
       // console.log("item in BC636", this.listing.imageUrl)
@@ -124,8 +126,10 @@ export class QueryComponent implements OnInit {
 
           this.firebaseService.hitCF(idToken, "not require", this.mcode).map(
             res => {
+              this.isLoading=false;
               console.log("Result in BC1221= " + res.text());
               this.result = res.text();
+              //this.busy=res.text();
             }
           )
             .subscribe

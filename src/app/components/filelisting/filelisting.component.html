@@ -1,4 +1,5 @@
-<div class="row">
+<!--<md-spinner></md-spinner>-->
+<div class="row" *ngIf="listing">
 
 
 
@@ -66,10 +67,12 @@
 				</div>
 
 				<div>
-					<a class="btn btn-primary" (click)="hitCF()">Process</a>
+					<a [ladda]="isLoading" class="btn btn-primary" (click)="hitCF()">Process</a>
 
 					<a class="btn btn-default">Edit</a>
 					<a class="btn btn-danger">Delete</a>
+					<h1>Home Component</h1>
+        <!--<button   (click)="startLoading()">Click to show progress</button>-->
 
 				</div>
 				<h1> DB Result </h1>

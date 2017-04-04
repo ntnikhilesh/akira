@@ -33,6 +33,8 @@ export class UploadfileComponent implements OnInit {
   fileUploadStatus: any;
   mflag: any;
 
+  isLoading: boolean | number = false;
+
   constructor(private firebaseService: FirebaseService, public af: AngularFire, private localStorageService: LocalStorageService, private http: Http, public provider: Test, public router: Router) { }
 
 
@@ -86,6 +88,7 @@ getUserToken()
     this.mflag = navigator.onLine;
     if (this.mflag) {
       console.log("User is online....")
+      this.isLoading=true;
 
 
       let listing =
@@ -104,7 +107,7 @@ getUserToken()
         else {
           // this.result="You are offline...pl check your nw conn...";
           console.log("item in 123", successMessage)
-
+          this.isLoading=false;
           this.firebaseService.addInDB(successMessage)
           {
 

@@ -54,7 +54,7 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { TestSedenavComponent } from './components/test-sedenav/test-sedenav.component';
 
 import {BusyModule} from 'angular2-busy';
-
+import { LaddaModule } from 'angular2-ladda';
 
 const firebaseAuthConfig = {
   provider: AuthProviders.Google,
@@ -112,7 +112,13 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig,firebaseAuthConfig),
     FormsModule,
     HttpModule,
-    BusyModule,
+     LaddaModule.forRoot({
+            style: "contract",
+            spinnerSize: 120,
+            spinnerColor: "#FF0000",
+            spinnerLines: 12
+        }),
+     //BusyModule,
     MaterialModule,
     RoutingModule,
     AngularFireOfflineModule,
