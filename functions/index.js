@@ -73,13 +73,6 @@ exports.test = functions.https.onRequest((request, response) => {
           response.send(result)
         })
       }
-
-
-
-
-
-
-
     }).catch(error => {
       console.error('Error while verifying Firebase ID token:', error);
 
@@ -101,53 +94,32 @@ function getCSVData(fillURL, callback) {
 
     mongoose.plugin(require('mongoose-write-stream'));
     console.log("inside fun")
-
-
-
-
     request(fillURL)
       .pipe(zlib.createGunzip())
       .pipe(concat(stringBuffer => {
         let test = stringBuffer.toString();
         var arr = test.split('\n');
         console.log(arr)
-
-
         var objects = _.map(arr, function (item) { return item.split(','); });
         var headers = objects[0];
         objects.splice(0, 1); // remove the header line
         populatedObject = [];
         objects.forEach(function (item) {
           var obj = _.zipObject(headers, item);
-          // if(obj['imageUrl']=="null"|| obj['imageUrl']=="undefined"||obj['imageUrl']=="")
-          // {
-          //       //console.log("imageUrl is empty")
-          //       delete obj['imageUrl'];
-          // }
           populatedObject.push(obj);
-
         });
 
         console.log("Pre---")
         console.log(populatedObject);
-
         _.map(populatedObject, function (item) {
           Object.keys(item).forEach(key => {
             if (item[key] === "" || item[key] === null || item[key] === 'undefined') {
               delete item[key];
             }
             if (key === 'itemName') {
-              //console.log("Coming here")
               if (typeof item[key] != 'undefined') {
-                //console.log("Before trim",item['itemName']);
                 item[key] = item[key].replace(/(^\s+|\s+$)/g, '');
-                //item[key] = item['itemName'].trim();
-                //console.log("After trim",item['itemName'].trim());
               }
-
-
-
-
             }
             if (key === 'categories') {
               item[key] =
@@ -162,25 +134,15 @@ function getCSVData(fillURL, callback) {
         console.log("Post---")
         console.log(populatedObject);
 
-
-
         setConnection(function (result) {
           callback(result)
         })
-
-
-
       }));
-
-
-
   } catch (e) {
     console.error("e2=" + e);
     mongoose.connection.close()
     callback(e)
   }
-
-
 }
 
 
@@ -188,20 +150,15 @@ function getCSVData(fillURL, callback) {
 
 
 function setConnection(callback) {
-
-
   console.log("hi form c2")
-
   var MongoClient = require('mongodb').MongoClient
     , assert = require('assert');
-
   // Connection URL
   var url = 'mongodb://cc:cc123@ds135800.mlab.com:35800/mydb';
   // Use connect method to connect to the server
   MongoClient.connect(url, function (err, db) {
     assert.equal(null, err);
     console.log("Connected successfully to server");
-
     if (mcode == 1) {
       insertDocuments(db, function (err, docs) {
         if (err)
@@ -209,65 +166,49 @@ function setConnection(callback) {
 
         else
           callback(docs)
-
       })
     }
     else if (mcode == 2) {
       findDocuments(db, function (err, docs) {
         if (err)
           callback(err)
-
         else
           callback(docs)
-
       })
     }
     else if (mcode == 3) {
       findSpecDocuments(db, function (err, docs) {
         if (err)
           callback(err)
-
         else
           callback(docs)
-
       })
     }
     else if (mcode == 4) {
       findSpecDocuments1(db, function (err, docs) {
         if (err)
           callback(err)
-
         else
           callback(docs)
-
       })
     }
     else if (mcode == 5) {
       findSpecDocuments2(db, function (err, docs) {
         if (err)
           callback(err)
-
         else
           callback(docs)
-
       })
     }
     else if (mcode == 6) {
       findSpecDocuments3(db, function (err, docs) {
         if (err)
           callback(err)
-
         else
           callback(docs)
-
       })
     }
-
-
-
   });
-
-
 }
 
 
@@ -299,11 +240,6 @@ function findDocuments(db, callback) {
     console.log("Find all doc from DB");
     db.close
     callback(null, docs);
-
-    // assert.equal(err, null);
-    // console.log("Found the following records");
-    // console.log(docs)
-    // callback(docs);
   });
 }
 

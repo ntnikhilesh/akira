@@ -1,90 +1,32 @@
-<!--<md-spinner></md-spinner>-->
-<!--<div class="ng-busy" [ngBusy]="{busy:busy, backdrop:true}" style="height:100%;position: absolute;z-index:1;">-->
+
 <div class="row" >
-
-
-
 	<div class="col-6 col-m-12">
-
-		
-
 		<md-sidenav-container fullscreen>
-
-
 			<md-sidenav #start>
 				<md-nav-list>
-
 					<app-side-nav></app-side-nav>
-
-					
 				</md-nav-list>
-
-
-
-
 			</md-sidenav>
-
 			<md-toolbar>
-
 				<div class="toolbar-icon">
 					<button md-icon-button (click)="start.open()">
-          <md-icon  >menu
-          </md-icon>
-       </button>
+          				<md-icon  >menu
+          				</md-icon>
+       				</button>
 				</div>
 
 				<div class="toolbar-heading">
 					Home
 				</div>
-
-
-
-
-
-
-
-
 			</md-toolbar>
-
-
-
-
 			<div  class="col-m-12 col-s-12" [ladda]="isLoading">
-
-			<h1> Sellect file </h1>
-<ul class="list-group">
-	<li class="list-group-item" *ngFor="let listing of mFileListings">
-			<a [routerLink]="['/filelisting/'+listing.$key]">{{listing.name}}</a>
-	</li>
-
-</ul>
-
-
-
-
-
-
+				<h1> Sellect file </h1>
+				<ul class="list-group">
+					<li class="list-group-item" *ngFor="let listing of mFileListings">
+						<a [routerLink]="['/filelisting/'+listing.$key]">{{listing.name}}</a>
+					</li>
+				</ul>
 			</div>
-
-
-
-
-			<!--<div class="col-m-5 col-s-11">
-
-
-			</div>-->
-
-
 		</md-sidenav-container>
-
-
-
 	</div>
-
-
-
-
-
 </div>
-<!--</div>-->
-<!-- End of action bar row -->

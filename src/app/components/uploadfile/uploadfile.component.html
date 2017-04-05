@@ -1,101 +1,39 @@
 <div class="row">
-
-
-
   <div class="col-6 col-m-12">
     <md-sidenav-container fullscreen>
-
-
       <md-sidenav #start>
         <md-nav-list>
-
           <app-side-nav></app-side-nav>
-
-      
         </md-nav-list>
-
-
-
-
       </md-sidenav>
-
       <md-toolbar>
-
         <div class="toolbar-icon">
           <button md-icon-button (click)="start.open()">
           <md-icon  >menu
           </md-icon>
        </button>
         </div>
-
         <div class="toolbar-heading">
           Upload File
         </div>
-
-
-
-
-
-
-
-
       </md-toolbar>
-
-
-
-
       <div class="col-3 col-m-3 menu">
-
       </div>
-
       <div class="col-6 col-m-6">
-
-
-
-
-
-
-
         <div class="login-form" align="center">
           <form (submit)="onAddSubmit()" class="example-form">
-
-
-
             <div class="form-group">
-
               <h1> Upload your file </h1>
               <input id="image1" name="image1" [(ngModel)]="image1" type="file">
             </div>
-
             <br><br>
-            <button class="bottom-btn" md-raised-button [ladda]="isLoading"  (click)="uploadFile()">Upload</button>
+            <button class="bottom-btn" md-raised-button [ladda]="isLoading" (click)="uploadFile()">Upload</button>
             <!--<a class="btn btn-info" [routerLink]="['/filelistings']" (click)="uploadFile()">Upload</a>-->
-
-
           </form>
         </div>
-
-
-
-
-
-
       </div>
-
-
-
-
       <div class="col-3 col-m-3">
-
       </div>
-
-
     </md-sidenav-container>
-
-
-
   </div>
-
-
-
 </div>

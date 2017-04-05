@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import {AngularFire} from 'angularfire2';
+import { AngularFire } from 'angularfire2';
 
-import {FirebaseService} from '../../services/firebase.service';
-import {Router} from "@angular/router";
+import { FirebaseService } from '../../services/firebase.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -15,47 +15,36 @@ export class LoginComponent implements OnInit {
   isLoading: boolean | number = false;
 
   public error: any;
-  constructor(public af:AngularFire,public afService: FirebaseService, private router: Router) {}
+  constructor(public af: AngularFire, public afService: FirebaseService, private router: Router) { }
 
-  ngOnInit() 
-  {
+  ngOnInit() {
     this.checkAuth();
   }
 
 
-  checkAuth()
-  {
-       this.af.auth.subscribe(auth => 
-       {
-        if(auth) 
-        {
-          //console.log('logged in');
-           this.router.navigate(['filelistings']);
-      
-
-        } else 
-        {
-          console.log('not logged in');
-        }
-      });
+  checkAuth() {
+    this.af.auth.subscribe(auth => {
+      if (auth) {
+        //console.log('logged in');
+        this.router.navigate(['filelistings']);
+      } else {
+        console.log('not logged in');
+      }
+    });
   }
- 
 
 
 
-  loginWithEmail(event, email, password)
-  {
-    this.isLoading=true;
+
+  loginWithEmail(event, email, password) {
+    this.isLoading = true;
     event.preventDefault();
-    this.afService.loginWithEmail(email, password).then(() => 
-    {
-      this.isLoading=false;
+    this.afService.loginWithEmail(email, password).then(() => {
+      this.isLoading = false;
       this.router.navigate(['filelistings']);
     })
-      .catch((error: any) => 
-      {
-        if (error) 
-        {
+      .catch((error: any) => {
+        if (error) {
           this.error = error;
           console.log(this.error);
         }

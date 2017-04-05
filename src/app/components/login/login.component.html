@@ -1,85 +1,48 @@
-
-
-
-
 <div class="row">
-
-<div class="col-3 col-m-3 menu">
- 
-</div>
-
-<div class="col-6 col-m-6">
-  
-
-  <div *ngIf="error" class="alert alert-warning" role="alert">
-  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  <span class="sr-only">Error:</span>
-  {{error}}
-</div>
-  
-
-   <div class="login-page">
+  <div class="col-3 col-m-3 menu">
+  </div>
+  <div class="col-6 col-m-6">
+    <div *ngIf="error" class="alert alert-warning" role="alert">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span> {{error}}
+    </div>
+    <div class="login-page">
       <div class="login-logo" align="center">
         <h1></h1>
-        <img src="http://i.imgur.com/p2QSBvY.jpg" width="100px" alt="shopgro" >
-      
+        <img src="http://i.imgur.com/p2QSBvY.jpg" width="100px" alt="shopgro">
       </div>
-
-      
       <div class="login-form" align="center">
         <form class="example-form" (submit)="loginWithEmail($event, email.value, password.value)">
-
           <table class="example-full-width" cellspacing="0">
             <tr>
               <td align="center">
-                
-                   
-                    <md-input-container class="example-full-width">
-                    <input  mdInput #email type="email" id="email" class="form-control" placeholder="Email address">
+                <md-input-container class="example-full-width">
+                  <input mdInput #email type="email" id="email" class="form-control" placeholder="Email address">
                 </md-input-container>
-                
               </td>
             </tr>
             <tr>
               <td align="center">
-                
-
-
-                    <md-input-container class="example-full-width">
-                    <input  mdInput #password type="password" id="password" class="form-control" placeholder="Password" required="">
+                <md-input-container class="example-full-width">
+                  <input mdInput #password type="password" id="password" class="form-control" placeholder="Password" required="">
                 </md-input-container>
-                
               </td>
             </tr>
             <tr>
               <td align="center ">
 
-                   <button class="bottom-btn" [ladda]="isLoading" (click)="loginWithEmail($event, email.value, password.value)" md-raised-button>Login</button>
-                    <!--<a (click)="loginWithEmail($event, email.value, password.value)" class="btn btn-primary">Login</a>-->
-                 <!--<a md-raised-button color=""  (click)="loginWithEmail($event, email.value, password.value)">Sign in</a>
-                 <br><br><br>-->
-
-              <!--  <a md-raised-button color="" routerLink="/register" routerLinkActive="active">Register Now!</a>  -->
-
-                
-                
+                <button class="bottom-btn" [ladda]="isLoading" (click)="loginWithEmail($event, email.value, password.value)" md-raised-button>Login</button>
               </td>
             </tr>
             <tr>
               <td>
-                 <ul > 
-           
-            
-           
-          </ul>
+                <ul>
+                </ul>
               </td>
             </tr>
           </table>
         </form>
-        
-
-      </div> 
-
+      </div>
       <div class="login-footer">
         <div class="login-footer-text">
           Trouble Loging in? Call our customer care for support.
@@ -87,25 +50,9 @@
         <div class="login-footer-number">
           +91 800 800 8008
         </div>
-        
-
       </div>
-
-   </div>
-
-          
-
+    </div>
+  </div>
+  <div class="col-3 col-m-3">
+  </div>
 </div>
-
-<div class="col-3 col-m-3">
-
-</div>
-
-</div>
-
-
-
-
-
-
-

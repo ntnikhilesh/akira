@@ -1,110 +1,44 @@
 <div class="row">
-
-
-
   <div class="col-6 col-m-12">
     <md-sidenav-container fullscreen>
-
-
       <md-sidenav #start>
         <md-nav-list>
-
           <app-side-nav></app-side-nav>
-
-
         </md-nav-list>
-
-
-
-
       </md-sidenav>
-
       <md-toolbar>
-
         <div class="toolbar-icon">
           <button md-icon-button (click)="start.open()">
-          <md-icon  >menu
-          </md-icon>
-       </button>
+              <md-icon  >menu
+              </md-icon>
+          </button>
         </div>
-
         <div class="toolbar-heading">
           Query Documents
         </div>
-
-
-
-
-
-
-
-
       </md-toolbar>
-
-
-
-
       <div class="col-m-7 col-s-12">
-
-
-
-
-
-
-
         <div class="login-form" align="left">
-
-
           <h1>Select Query</h1>
-
-
-
           <md-radio-group class="example-radio-group" [(ngModel)]="selectQuery">
             <md-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
               {{season}}
             </md-radio-button>
           </md-radio-group>
           <div class="example-selected-value">Your selected query is: {{selectQuery}}</div>
-
-          
-
-
         </div>
-
         <div align="center" class="query-list">
           <br><br>
           <button md-raised-button [ladda]="isLoading" (click)="hitCF()" class="bottom-btn">Process</button>
           <!--<a [ladda]="isLoading" class="btn btn-primary" (click)="hitCF()">Process</a>-->
-            
         </div>
         <div>
           <h1> DB Result</h1>
           <h5>{{result}}</h5>
         </div>
-
-
-
-
-
-
       </div>
-
-
-
-
       <div class="col-m-5 col-s-11">
-
-
       </div>
-
-
     </md-sidenav-container>
-
-
-
   </div>
-
-
-
 </div>
-<!-- End of action bar row -->

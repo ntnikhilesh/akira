@@ -21,13 +21,10 @@ export class FilelistingsComponent implements OnInit {
   busy: Promise<any>;
   nikil: any;
   mconfig = {};
-
-
   mFileListings: any;
   userToken: any;
   mflag: any;
   error: any;
-
   isLoading: boolean | number = false;
 
 
@@ -35,8 +32,6 @@ export class FilelistingsComponent implements OnInit {
   constructor(private firebaseService: FirebaseService, public af: AngularFire, private localStorageService: LocalStorageService, public router: Router) { }
 
   ngOnInit() {
-
-
     this.mflag = navigator.onLine;
     this.localStorageService.clearAll;
     if (this.mflag) {
@@ -49,20 +44,12 @@ export class FilelistingsComponent implements OnInit {
     }
 
     this.isLoading = true;
-   
     this.firebaseService.getFileListings().subscribe(filelistings => {
       this.isLoading = false;
       console.log(filelistings);
       this.mFileListings = filelistings;
 
-      this.busy = this.firebaseService.promiseDemo();
-      console.log(this.busy)
-      
-
     });
-
-
-  
   }
 
 
@@ -72,27 +59,21 @@ export class FilelistingsComponent implements OnInit {
     this.af.auth.subscribe(auth => {
       if (auth) {
         //console.log('logged in');
-
         firebase.auth().currentUser.getToken().then((idToken) => {
-
           //console.log("id token in BC1"+idToken);
           this.userToken = idToken;
-
         })
           .catch((error) => {
             //alert("Please check your internet connection..")
             this.error = error;
             console.log(this.error);
           });
-
       }
       else {
         console.log('not logged in');
         this.router.navigate(['login']);
       }
     });
-
-
   }
 
   logout() {

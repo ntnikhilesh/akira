@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Http, Response,URLSearchParams } from '@angular/http';
+import { Http, Response, URLSearchParams } from '@angular/http';
 
 import { LocalStorageService } from 'angular-2-local-storage';
 
@@ -40,31 +40,17 @@ export class FirebaseService {
 
   ngOnInit() {
 
-    //let mUploadFile;
-
   }
-
-
-
-
-
-
-
 
   myFirstPromise = new Promise((resolve, reject) => {
 
 
   });
-
-
-
-promiseDemo()
-{
-    return new Promise(function(resolve,reject)
-    {
+  promiseDemo() {
+    return new Promise(function (resolve, reject) {
       resolve(true)
     })
-}
+  }
 
   addInDB(listing) {
     console.log("Item added in BD as well")
@@ -72,20 +58,11 @@ promiseDemo()
 
   }
 
-
-
-
-
-
-
-
   getFileListings() {
     this.olistings = this.afo.database.list('/shopgro-DB') as AfoListObservable<Listings[]>
     return this.olistings
 
   }
-
-
 
   getFileDetails(id) {
 
@@ -96,48 +73,41 @@ promiseDemo()
 
   }
 
-  hitCF(mtoken,mfileURL,mcode) {
+  hitCF(mtoken, mfileURL, mcode) {
 
     //Code 1= Insertion
     //Code 2= 1st query
     //Code 3= 2nd query
-var mres:any;
-let data = new URLSearchParams();
-		data.append('mytoken', mtoken);
-		data.append('myurl', mfileURL);
+    var mres: any;
+    let data = new URLSearchParams();
+    data.append('mytoken', mtoken);
+    data.append('myurl', mfileURL);
     data.append('mcode', mcode);
-		console.log('token form service = ' + mtoken);
-		console.log('File URL form service = ' + mfileURL);
+    console.log('token form service = ' + mtoken);
+    console.log('File URL form service = ' + mfileURL);
     console.log('Code form service = ' + mcode);
 
 
-		
-    mres = this.http
-			.post('https://us-central1-td-demo-df34d.cloudfunctions.net/test', data)
 
+    mres = this.http
+      .post('https://us-central1-td-demo-df34d.cloudfunctions.net/test', data)
 
     return mres;
-
   }
 
   getJWTToken() {
     return new Promise(function (resolve, reject) {
-
       this.af.auth.subscribe(auth => {
         if (auth) {
           console.log('logged in');
-
           firebase.auth().currentUser.getToken(true).then((idToken) => {
-
-            console.log("id token in service",idToken);
+            console.log("id token in service", idToken);
             resolve(idToken)
-
           })
             .catch((error) => {
               this.error = error;
               console.log(this.error);
             });
-
         }
         else {
           console.log('not logged in');
@@ -145,53 +115,39 @@ let data = new URLSearchParams();
           reject("User not logged in")
         }
       });
-
     })
   }
 
 
   uploadCSV(listing) {
-    
-
     return new Promise(function (resolve, reject) {
       console.log("hi from oaddListing fun")
       let storageRef = firebase.storage().ref();
-
-
       //var self=this;
       for (let selectedFile of [(<HTMLInputElement>document.getElementById('image1')).files[0]]) {
         console.log("hi from inside for1")
-
         let path = '/shopgro-storage/' + Math.random();
         let iRef = storageRef.child(path);
         iRef.put(selectedFile).then((snapshot) => {
           console.log("hi from inside for2")
-
           listing.name = selectedFile.name;
           listing.path = path;
           listing.imageUrl = snapshot.downloadURL;
-
           console.log('offline adding done...');
-
           console.log(listing)
           console.log(snapshot.downloadURL);
           //this.listings.push(listing);
           if (snapshot['f'] === "success") {
             console.log("Sucess Upload Dude");
-
             resolve(listing)
           }
           else {
             console.log("Failure");
             reject(false)
           }
-
-
-
         }).catch(function (e) {
           console.log("merror=" + e);
         });
-
       }
 
     })

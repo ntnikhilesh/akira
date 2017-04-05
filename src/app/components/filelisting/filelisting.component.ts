@@ -27,7 +27,7 @@ export class FilelistingComponent implements OnInit {
   error: any;
   mflag: any;
 
-isLoading: boolean | number = false;
+  isLoading: boolean | number = false;
   constructor
     (
     private firebaseService: FirebaseService,
@@ -56,11 +56,7 @@ isLoading: boolean | number = false;
     this.id = this.route.snapshot.params['id'];
     this.firebaseService.getFileDetails(this.id).subscribe(listing => {
       this.listing = listing;
-
-
       console.log(listing);
-
-
     });
 
   }
@@ -83,15 +79,12 @@ isLoading: boolean | number = false;
             this.error = error;
             console.log(this.error);
           });
-
       }
       else {
         console.log('not logged in');
         this.router.navigate(['login']);
       }
     });
-
-
   }
 
 
@@ -118,7 +111,7 @@ isLoading: boolean | number = false;
               this.isLoading = false;
               console.log("Result in BC1221= " + res.text());
               this.result = res.text();
-              
+
             }
           )
             .subscribe
@@ -127,60 +120,25 @@ isLoading: boolean | number = false;
             err => console.log(err),
             () => console.log('Done')
             );
-
-
-
-
         }
-
-
-
-
       }).catch((error) => {
         this.error = error;
         console.log("Listing error :", this.error);
       });
-
-
     }
     else {
       console.log("User is offline...")
       alert("Please check you internet connection...")
     }
-
-
   }
 
 
-
-logout() {
+  logout() {
     //this.setFlag();
     this.af.auth.logout();
     console.log('Logout succ..');
     this.router.navigate(['login']);
   }
 
-
-
-
-
-// trigger-variable for Ladda
-    startLoading() {
-      this.isLoading = true;
-      //this.progress = false;
-        // this.progress = 0; // starts spinner
- 
-        // setTimeout(() => {
-        //     this.progress = 0.5; // sets progress bar to 50%
- 
-        //     setTimeout(() => {
-        //         this.progress = 1; // sets progress bar to 100%
- 
-        //         setTimeout(() => {
-        //             this.progress = false; // stops spinner
-        //         }, 200);
-        //     }, 500);
-        // }, 400);
-    }
 
 }

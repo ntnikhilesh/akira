@@ -16,7 +16,7 @@ import { LocalStorageService } from 'angular-2-local-storage';
   styleUrls: ['./query.component.css']
 })
 export class QueryComponent implements OnInit {
-//busy: Subscription;
+  //busy: Subscription;
   selectQuery: string;
   id: any;
   listing: any;
@@ -66,20 +66,13 @@ export class QueryComponent implements OnInit {
 
     this.af.auth.subscribe(auth => {
       if (auth) {
-        //console.log('logged in');
-
         firebase.auth().currentUser.getToken().then((idToken) => {
-
-          //console.log("id token in BC1"+idToken);
           this.userToken = idToken;
-
         })
           .catch((error) => {
-            //alert("Please check your internet connection..")
             this.error = error;
             console.log(this.error);
           });
-
       }
       else {
         console.log('not logged in');
@@ -95,20 +88,13 @@ export class QueryComponent implements OnInit {
     this.mflag = navigator.onLine;
     if (this.mflag) {
       console.log("User is online....")
-      this.isLoading=true;
-
-      // this.result="You are offline...pl check your nw conn...";
-      // console.log("item in BC636", this.listing.imageUrl)
-
+      this.isLoading = true;
       firebase.auth().currentUser.getToken().then((idToken) => {
-
         console.log("Token in Query =", idToken)
         console.log("Code in Query =", this.selectQuery)
-
-         if (!this.selectQuery) {
-           this.isLoading=false;
-          this.result="Please select any query"
-
+        if (!this.selectQuery) {
+          this.isLoading = false;
+          this.result = "Please select any query"
           return;
         }
         else if (this.selectQuery == "Select All Documents in a Collection") {
@@ -129,10 +115,9 @@ export class QueryComponent implements OnInit {
 
 
         if (idToken) {
-
           this.firebaseService.hitCF(idToken, "not require", this.mcode).map(
             res => {
-              this.isLoading=false;
+              this.isLoading = false;
               console.log("Result in BC1221= " + res.text());
               this.result = res.text();
               //this.busy=res.text();
@@ -144,28 +129,16 @@ export class QueryComponent implements OnInit {
             err => console.log(err),
             () => console.log('Done')
             );
-
-
-
-
         }
-
-
-
-
       }).catch((error) => {
         this.error = error;
         console.log("Listing error :", this.error);
       });
-
-
     }
     else {
       console.log("User is offline...")
       alert("Please check you internet connection...")
     }
-
-
   }
 
   logout() {

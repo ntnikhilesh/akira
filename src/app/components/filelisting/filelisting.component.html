@@ -1,112 +1,45 @@
 <!--<md-spinner></md-spinner>-->
 <div class="row" *ngIf="listing">
-
-
-
 	<div class="col-6 col-m-12">
 		<md-sidenav-container fullscreen>
-
-
-			<md-sidenav #start >
+			<md-sidenav #start>
 				<md-nav-list>
-
 					<app-side-nav></app-side-nav>
-
-				
 				</md-nav-list>
-
-
-
-
 			</md-sidenav>
-
 			<md-toolbar>
-
 				<div class="toolbar-icon">
 					<button md-icon-button (click)="start.open()">
-          <md-icon  >menu
-          </md-icon>
-       </button>
+          				<md-icon>menu
+          				</md-icon>
+       				</button>
 				</div>
-
 				<div class="toolbar-heading">
 					Home
 				</div>
-
-
-
-
-
-
-
-
 			</md-toolbar>
-
-
-
-
 			<div class="col-3 col-m-3 menu">
-
 			</div>
-
 			<div class="col-6 col-m-6">
-
 				<h1>File Detail</h1>
-
 				<a [routerLink]="['/filelistings']">Go Back</a>
-
 				<br>
-
 				<div>
 					<ul class="list-group">
 						<li class="list-group-item">File Name : {{listing.name}}</li>
-
-
 					</ul>
-
 				</div>
-
 				<div>
 					<a [ladda]="isLoading" class="btn btn-primary" (click)="hitCF()">Process</a>
-
 					<a class="btn btn-default">Edit</a>
 					<a class="btn btn-danger">Delete</a>
-					
-
 				</div>
 				<h1> DB Result </h1>
 				<h5>{{result}}</h5>
-
-
-
-
-
-
-
-
-
-
 			</div>
-
-
-
-
 			<div class="col-3 col-m-3">
-
 			</div>
-
-
-
-
-
-
 		</md-sidenav-container>
-
-
-
 	</div>
-
-
-
 </div>
 <!-- End of action bar row -->
