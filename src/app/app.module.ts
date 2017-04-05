@@ -53,7 +53,7 @@ import { QueryComponent } from './components/query/query.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { TestSedenavComponent } from './components/test-sedenav/test-sedenav.component';
 
-import {BusyModule} from 'angular2-busy';
+// import {BusyModule} from 'angular2-busy';
 import { LaddaModule } from 'angular2-ladda';
 
 const firebaseAuthConfig = {

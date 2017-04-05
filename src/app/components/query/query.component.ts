@@ -105,7 +105,13 @@ export class QueryComponent implements OnInit {
         console.log("Token in Query =", idToken)
         console.log("Code in Query =", this.selectQuery)
 
-        if (this.selectQuery == "Select All Documents in a Collection") {
+         if (!this.selectQuery) {
+           this.isLoading=false;
+          this.result="Please select any query"
+
+          return;
+        }
+        else if (this.selectQuery == "Select All Documents in a Collection") {
           this.mcode = 2;
         }
         else if (this.selectQuery == "Retrieves all documents from the inventory collection where the MRP equals 100") {

@@ -80,3 +80,15 @@
   font-size: 16px;
 } 
 
+.bottom-btn{
+
+    background-color: white;
+    color:#4caf50;
+    margin-left: 10PX;
+    height: 48px;
+    font-family: "Roboto-Medium";
+    font-size: 14px;
+
+   
+    
+}

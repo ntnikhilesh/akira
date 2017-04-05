@@ -177,7 +177,7 @@ md-toolbar{
 .bottom-btn{
 
     background-color: white;
-    color:#000000;
+    color:#4caf50;
     margin-left: 10PX;
     height: 48px;
     font-family: "Roboto-Medium";
@@ -209,3 +209,9 @@ h1 { color: 	#52BE80; font-family: 'Rouge Script', cursive; font-size: 40px; fon
 .example-selected-value {
   margin: 15px 0;
 }
+
+.query-list{
+  width: 100%;
+}
+
+
