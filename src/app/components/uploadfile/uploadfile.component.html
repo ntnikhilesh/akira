@@ -68,7 +68,8 @@
             </div>
 
             <br><br>
-            <a class="btn btn-info" [routerLink]="['/filelistings']" (click)="uploadFile()">Upload</a>
+            <button md-raised-button [ladda]="isLoading"  (click)="uploadFile()">Upload</button>
+            <!--<a class="btn btn-info" [routerLink]="['/filelistings']" (click)="uploadFile()">Upload</a>-->
 
 
           </form>

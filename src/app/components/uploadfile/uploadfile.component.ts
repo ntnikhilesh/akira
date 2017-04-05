@@ -107,10 +107,11 @@ getUserToken()
         else {
           // this.result="You are offline...pl check your nw conn...";
           console.log("item in 123", successMessage)
-          this.isLoading=false;
+          
           this.firebaseService.addInDB(successMessage)
           {
-
+            this.isLoading=false;
+            this.router.navigate(['filelistings']);
           }
 
 

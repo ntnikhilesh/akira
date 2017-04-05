@@ -12,6 +12,8 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
+  isLoading: boolean | number = false;
+
   public error: any;
   constructor(public af:AngularFire,public afService: FirebaseService, private router: Router) {}
 
@@ -43,9 +45,11 @@ export class LoginComponent implements OnInit {
 
   loginWithEmail(event, email, password)
   {
+    this.isLoading=true;
     event.preventDefault();
     this.afService.loginWithEmail(email, password).then(() => 
     {
+      this.isLoading=false;
       this.router.navigate(['filelistings']);
     })
       .catch((error: any) => 
